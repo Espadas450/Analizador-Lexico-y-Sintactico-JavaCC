@@ -29,6 +29,269 @@ TOKEN:{
     < #Arroba: ["@"]>
 }
 
+/** Pregunta*/
+Pregunta:{
+	<	if: (["i"]) (["f"])>
+}
+
+/** Entonces*/
+Entonces:{
+	<	then: (["t"]) (["h"]) (["e"]) (["n"])>
+}
+
+/** ParenIzq*/
+ParenIzq:{
+	<	ParenIzq: (["("])>
+}
+
+/** ParenDer*/
+ParenDer:{
+	<	ParenDer: ([")"])>
+}
+
+/** Comillas*/
+Comillas:{
+	<	Comillas: (["""])>
+	|
+	<	Apost: (["'"])>
+}
+
+/** TipoDato*/
+TipoDato:{
+	<	char: (["c"]) (["h"]) (["a"]) (["r"])>
+	|
+	<	int: (["i|I"]) (["n|N"]) (["t|T"])>
+	|
+	<	float: (["f|F"]) (["l|L"]) (["o|O"]) (["a|A"]) (["t|T"])>
+	|
+	<	double: (["d"]) (["o"]) (["u"]) (["b"]) (["l"]) (["e"])>
+	|
+	<	string: (["s"]) (["t"]) (["r"]) (["i"]) (["n"]) (["g"])>
+	|
+	<	bool: (["b"]) (["o"]) (["o"]) (["l"])>
+	|
+	<	var: (["v"]) (["a"]) (["r"])>
+	|
+	<	byte: (["b"]) (["y"]) (["t"]) (["e"])>
+	|
+	<	long: (["l"]) (["o"]) (["g"]) (["g"])>
+	|
+	<	short: (["s"]) (["h"]) (["o"]) (["r"]) (["t"])>
+	|
+	<	ulong: (["u"]) (["l"]) (["o"]) (["n"]) (["g"])>
+	|
+	<	uint: (["u"]) (["i"]) (["n"]) (["t"])>
+	|
+	<	sbyte: (["s"]) (["b"]) (["y"]) (["t"]) (["e"])>
+	|
+	<	ushort: (["u"]) (["s"]) (["h"]) (["o"]) (["r"]) (["t"])>
+	|
+	<	nchar: (["n|N"]) (["c|C"]) (["h|H"]) (["a|A"]) (["r|R"])>
+	|
+	<	varchar: (["v|V"]) (["a|A"]) (["r|R"]) (["c|C"]) (["h|H"]) (["a|A"]) (["r|R"])>
+	|
+	<	DATE: (["d|D"]) (["a|A"]) (["t|T"]) (["e|E"])>
+	|
+	<	DATETIME: (["d|D"]) (["a|A"]) (["t|T"]) (["e|E"]) (["t|T"]) (["i|I"]) (["m|M"]) (["e|E"])>
+	|
+	<	numeric: (["n|N"]) (["u|U"]) (["m|M"]) (["e|E"]) (["r|R"]) (["i|I"]) (["c|C"])>
+	|
+	<	NVARCHAR: (["n|N"]) (["v|V"]) (["a|A"]) ([""]) ([""]) ([""]) ([""]) ([""])>
+	|
+	<	bit: (["b|B"]) (["i|I"]) (["t|T"])>
+}
+
+/** LlaveIzq*/
+LlaveIzq:{
+	<	LlaveIzq: (["{"])>
+}
+
+/** LlaveDer*/
+LlaveDer:{
+	<	LlaveDer: (["}"])>
+}
+
+/** PuntoYComa*/
+PuntoYComa:{
+	<	PuntoYComa: ([";"])>
+}
+
+/** Comparar*/
+Comparar:{
+	<	IgualIgual: (["="]) (["="])>
+	|
+	<	MenorQue: (["<"])>
+	|
+	<	MayorQue: ([">"])>
+	|
+	<	DiferenteDe: (["!"]) (["="])>
+	|
+	<	MenorIgual: (["<"]) (["="])>
+	|
+	<	MayorIgual: ([">"]) (["="])>
+}
+
+/** AccesoMiembro*/
+AccesoMiembro:{
+	<	AccesoMiembro: (["."])>
+}
+
+/** Sustitución*/
+Sustitución:{
+	<	Sustitución: (["@"])>
+}
+
+/** TipoAcceso*/
+TipoAcceso:{
+	<	public: (["p"]) (["u"]) (["b"]) (["l"]) (["i"]) (["c"])>
+	|
+	<	static: (["s"]) (["t"]) (["a"]) (["t"]) (["i"]) (["c"])>
+	|
+	<	private: (["p"]) (["r"]) (["i"]) (["v"]) (["a"]) (["t"]) (["e"])>
+}
+
+/** Ciclo*/
+Ciclo:{
+	<	do: (["d"]) (["o"])>
+	|
+	<	for: (["f"]) (["o"]) (["r"])>
+	|
+	<	foreach: (["f"]) (["o"]) (["r"]) (["e"]) (["a"]) (["c"]) (["h"])>
+	|
+	<	while: (["w"]) (["h"]) (["i"]) (["l"]) (["e"])>
+}
+
+/** Selectiva*/
+Selectiva:{
+	<	switch: (["s"]) (["w"]) (["i"]) (["t"]) (["c"]) (["h"])>
+}
+
+/** Default*/
+Default:{
+
+}
+
+/** Asignar*/
+Asignar:{
+	<	Asignar: (["="])>
+}
+
+/** Caso*/
+Caso:{
+	<	caso: (["c"]) (["a"]) (["s"]) (["o"])>
+}
+
+/** Método*/
+Método:{
+	<	void: (["v"]) (["o"]) (["i"]) (["d"])>
+}
+
+/** ClaseConsole*/
+ClaseConsole:{
+	<	Console: (["c"]) (["o"]) (["n"]) (["s"]) (["o"]) (["l"]) (["e"])>
+}
+
+/** Sobrecargar*/
+Sobrecargar:{
+<	Override: (["o"]) (["v"]) (["e"]) (["r"]) (["r"]) (["i"]) (["d"]) (["e"])>
+}
+
+/** Función*/
+Función:{
+
+}
+
+/** Estructura*/
+Estructura:{
+	<	struct: (["s"]) (["t"]) (["r"]) (["u"]) (["c"]) (["t"])>
+}
+
+/** CapExcepción*/
+CapExcepción:{
+	<	catch: (["c"]) (["a"]) (["t"]) (["c"]) (["h"])>
+}
+
+/** Namespace*/
+Namespace:{
+	<	System: (["S"]) (["y"]) (["s"]) (["t"]) (["e"]) (["m"])>
+}
+
+/** Intenta*/
+Intenta:{
+	<	try: (["t"]) (["r"]) (["y"])>
+}
+
+/** Romper*/
+Romper:{
+	<	break: (["b"]) (["r"]) (["e"]) (["a"]) (["k"])>
+}
+
+/** Base*/
+Base:{
+	<	base: (["b"]) (["a"]) (["s"]) (["e"])>
+}
+
+/** Propiedad*/
+Propiedad:{
+
+}
+
+/** ResultadoLogico*/
+ResultadoLogico:{
+
+}
+
+/** Lista*/
+Lista:{
+
+}
+
+/** Retorno*/
+Retorno:{
+
+}
+
+/** Librería*/
+Librería:{
+
+}
+
+/** OperadorNew*/
+OperadorNew:{
+
+}
+
+/** OpAritmetico*/
+TOKOpAritmeticoEN:{
+
+}
+
+/** OpAritmeticoU*/
+OpAritmeticoU:{
+
+}
+/** OpAritmeticoB*/
+OpAritmeticoB:{
+
+}
+
+}
+
+/** OpLogicoBoolU*/
+OpLogicoBoolU:{
+
+}
+
+/** OpLogicoBoolB*/
+OpLogicoBoolB:{
+
+}
+
+/** OpLogicoBoolBCondicional*/
+OpLogicoBoolBCondicional:{
+
+}
+
 TOKEN:{
     <	Numeros: (<Numero>)+	>{
 		System.out.println("Se ingreso un numero: " + image);
