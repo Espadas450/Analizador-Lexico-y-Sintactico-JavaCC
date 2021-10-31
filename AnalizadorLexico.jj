@@ -18,11 +18,6 @@ class AnalizadorLexico
 }
 
 PARSER_END (AnalizadorLexico)
-
-SKIP:{
-    " " | "\t" | "\n" | "\r"
-}
-
 TOKEN:{
 	< #Letra: ["a"-"z","A"-"Z"]	> 
 	|
@@ -64,11 +59,11 @@ TOKEN:{
 	<	#Apost: ["'"]	>
 }
 
-TOKEN:{
-	<	Comillas: <Comilla> | <Apost>	>{
-		System.out.println("Comillas: " + image);
-	}
-}
+//TOKEN:{
+//	<	Comillas: <Comilla> | <Apost>	>{
+//		System.out.println("Comillas: " + image);
+//	}
+//}
 
 /** TipoDato*/
 TOKEN:{
@@ -115,52 +110,52 @@ TOKEN:{
 	<	Bit: (["b"]|["B"]) (["i"]|["I"]) (["t"]|["T"])	>
 }
 
-TOKEN:{
-	<	TipoDato: 
-	<Char>
-	|
-	<Int> 
-	| 
-	<Float> 
-	| 
-	<Double> 
-	| 
-	<String> 
-	| 
-	<Bool> 
-	| 
-	<Var> 
-	| 
-	<Byte> 
-	| 
-	<Long> 
-	| 
-	<Short> 
-	| 
-	<Ulong> 
-	| 
-	<Uint> 
-	| 
-	<Sbyte> 
-	| 
-	<Ushort> 
-	| 
-	<Nchar> 
-	| 
-	<Varchar>
-	| 
-	<DATE>
-	| 
-	<DATETIME>
-	| 
-	<Numeric>
-	| 
-	<NVARCHAR>
-	| 
-	<Bit>	>{
-		System.out.println("TipoDato: " + image);
-	}
-}
+//TOKEN:{
+//	<	TipoDato: 
+//	<Char>
+//	|
+//	<Int> 
+//	| 
+//	<Float> 
+//	| 
+//	<Double> 
+//	| 
+//	<String> 
+//	| 
+//	<Bool> 
+//	| 
+//	<Var> 
+//	| 
+//	<Byte> 
+//	| 
+//	<Long> 
+//	| 
+//	<Short> 
+//	| 
+//	<Ulong> 
+//	| 
+//	<Uint> 
+//	| 
+//	<Sbyte> 
+//	| 
+//	<Ushort> 
+//	| 
+//	<Nchar> 
+//	| 
+//	<Varchar>
+//	| 
+//	<DATE>
+//	| 
+//	<DATETIME>
+//	| 
+//	<Numeric>
+//	| 
+//	<NVARCHAR>
+//	| 
+//	<Bit>	>{
+//		System.out.println("TipoDato: " + image);
+//	}
+//}
 
 /** LlaveIzq*/
 TOKEN:{
@@ -198,22 +193,22 @@ TOKEN:{
 	<	MayorIgual: ([">"]) (["="])	>
 }
 
-TOKEN:{
-    <   Comparador: 
-	<IgualIgual> 
-	| 
-	<MenorQue> 
-	| 
-	<MayorQue> 
-	| 
-	<DiferenteDe> 
-	| 
-	<MenorIgual> 
-	| 
-	<MayorIgual>  >{
-        System.out.println("Comparador: " + image);
-    }
-}
+//TOKEN:{
+//    <   Comparador: 
+//	<IgualIgual> 
+//	| 
+//	<MenorQue> 
+//	| 
+//	<MayorQue> 
+//	| 
+//	<DiferenteDe> 
+//	| 
+//	<MenorIgual> 
+//	| 
+//	<MayorIgual>  >{
+//        System.out.println("Comparador: " + image);
+//    }
+//}
 
 /** AccesoMiembro*/
 TOKEN:{
@@ -238,16 +233,16 @@ TOKEN:{
 	<	Private: (["p"]) (["r"]) (["i"]) (["v"]) (["a"]) (["t"]) (["e"])	>
 }
 
-TOKEN:{
-	<	TipoAcceso: 
-	<Public>
-	|
-	<Static>
-	|
-	<Private>	>{
-		System.out.println("TipoDato: " + image);
-	}
-}
+//TOKEN:{
+//	<	TipoAcceso: 
+//	<Public>
+//	|
+//	<Static>
+//	|
+//	<Private>	>{
+//		System.out.println("TipoDato: " + image);
+//	}
+//}
 
 /** Ciclo*/
 TOKEN:{
@@ -260,18 +255,18 @@ TOKEN:{
 	<	While: (["w"]) (["h"]) (["i"]) (["l"]) (["e"])	>
 }
 
-TOKEN:{
-	<	Ciclo:
-	<Do>
-	|
-	<For>
-	|
-	<Foreach>
-	|
-	<While>	>{
-		System.out.println("Ciclo: " + image);
-	}
-}
+//TOKEN:{
+//	<	Ciclo:
+//	<Do>
+//	|
+//	<For>
+//	|
+//	<Foreach>
+//	|
+//	<While>	>{
+//		System.out.println("Ciclo: " + image);
+//	}
+//}
 
 /** SelectivaMultiple*/
 TOKEN:{
@@ -289,16 +284,16 @@ TOKEN:{
 	<	Default: (["D"]) (["e"]) (["f"]) (["a"]) (["u"]) (["l"]) (["d"])	>
 }
 
-TOKEN:{
-	< Defecto:
-	<Else>
-	|
-	<Finally>
-	|
-	<Default>	>{
-		System.out.println("Defecto: " + image);
-	}
-}
+//TOKEN:{
+//	< Defecto:
+//	<Else>
+//	|
+//	<Finally>
+//	|
+//	<Default>	>{
+//		System.out.println("Defecto: " + image);
+//	}
+//}
 
 /** Asignar*/
 TOKEN:{
@@ -337,7 +332,7 @@ TOKEN:{
 
 /** Función*/
 TOKEN:{
-	<	Concat: (["c"]|["C"]) (["o"]|["O"]) (["n"]|["N"]) (["c"]|["C"]) (["a"]|["A"]) (["t"]|["T"])	>
+	<	Concat: (["c"]|["C"]) (["o"]|["O"]) (["n"]|["N"]) (["c"]|["C"]) (["a"]|["A"]) (["t"]|["T"])	> {}
 	|
 	<	Length: (["L"]) (["e"]) (["n"]) (["g"]) (["t"]) (["h"])	>
 	|
@@ -372,44 +367,44 @@ TOKEN:{
 	<	Sum: (["s"]|["S"]) (["u"]|["U"]) (["m"]|["M"])>
 }
 
-TOKEN:{
-	<	Funcion:
-	<Concat>
-	|
-	<Length>
-	|
-	<Write>
-	|
-	<WriteLine>
-	|
-	<Delete>
-	|
-	<Include>
-	|
-	<Substring>
-	|
-	<ToChar>
-	|
-	<ToUpper>
-	|
-	<ToLower>
-	|
-	<ToString>
-	|
-	<Next>
-	|
-	<AVG>
-	|
-	<Count>
-	|
-	<Max>
-	|
-	<Min>
-	|
-	<Sum>	>{
-		System.out.println("Funcion: " + image);
-	}
-}
+//TOKEN:{
+//	<	Funcion:
+//	<Concat>
+//	|
+//	<Length>
+//	|
+//	<Write>
+//	|
+//	<WriteLine>
+//	|
+//	<Delete>
+//	|
+//	<Include>
+//	|
+//	<Substring>
+//	|
+//	<ToChar>
+//	|
+//	<ToUpper>
+//	|
+//	<ToLower>
+//	|
+//	<ToString>
+//	|
+//	<Next>
+//	|
+//	<AVG>
+//	|
+//	<Count>
+//	|
+//	<Max>
+//	|
+//	<Min>
+//	|
+//	<Sum>	>{
+//		System.out.println("Funcion: " + image);
+//	}
+//}
 
 /** Estructura*/
 TOKEN:{
@@ -468,22 +463,22 @@ TOKEN:{
 	<	TextAling: (["T"]) (["e"]) (["x"]) (["t"]) (["A"]) (["l"]) (["i"]) (["g"]) (["n"])	>
 }
 
-TOKEN:{
-	<	Propiedad:
-	<Checked>
-	|
-	<BackColor>
-	|
-	<Font>
-	|
-	<Text>
-	|
-	<Enabled>
-	|
-	<TextAling>	>{
-		System.out.println("Propiedad: " + image);
-	}
-}
+//TOKEN:{
+//	<	Propiedad:
+//	<Checked>
+//	|
+//	<BackColor>
+//	|
+//	<Font>
+//	|
+//	<Text>
+//	|
+//	<Enabled>
+//	|
+//	<TextAling>	>{
+//		System.out.println("Propiedad: " + image);
+//	}
+//}
 
 /** ResultadoLogico*/
 TOKEN:{
@@ -492,14 +487,14 @@ TOKEN:{
 	<	False: (["f"]|["F"]) (["a"]|["A"]) (["l"]|["L"]) (["s"]|["S"]) (["e"]|["E"])	>
 }
 
-TOKEN:{
-	<	ResultadoLogico:
-	<True>
-	|
-	<False>	>{
-		System.out.println("ResultadoLogico: " + image);
-	}
-}
+//TOKEN:{
+//	<	ResultadoLogico:
+//	<True>
+//	|
+//	<False>	>{
+//		System.out.println("ResultadoLogico: " + image);
+//	}
+//}
 
 /** Lista*/
 TOKEN:{
@@ -510,16 +505,16 @@ TOKEN:{
 	<	Queue: (["Q"]) (["u"]) (["e"]) (["u"]) (["e"])	>
 }
 
-TOKEN:{
-	<	Lista:
-	<List>
-	|
-	<Stack>
-	|
-	<Queue>	>{
-		System.out.println("Lista: " + image);
-	}
-}
+//TOKEN:{
+//	<	Lista:
+//	<List>
+//	|
+//	<Stack>
+//	|
+//	<Queue>	>{
+//		System.out.println("Lista: " + image);
+//	}
+//}
 
 /** Retorno*/
 TOKEN:{
@@ -549,14 +544,14 @@ TOKEN:{
 	<	Menos: ["-"]	>
 }
 
-TOKEN:{
-	<	OpAritmetico:
-	<Mas>
-	|
-	<Menos>	>{
-		System.out.println("OpAritmetico: " + image);
-	}
-}
+//TOKEN:{
+//	<	OpAritmetico:
+//	<Mas>
+//	|
+//	<Menos>	>{
+//		System.out.println("OpAritmetico: " + image);
+//	}
+//}
 
 /** OpAritmeticoUnitario*/
 TOKEN:{
@@ -565,14 +560,14 @@ TOKEN:{
 	<	Decremento: (["-"]) (["-"])	>
 }
 
-TOKEN:{
-	<	OpAritmeticoUnitario:
-	<Incremento>
-	|
-	<Decremento>	>{
-		System.out.println("OpAritmeticoUnitario: " + image);
-	}
-}
+//TOKEN:{
+//	<	OpAritmeticoUnitario:
+//	<Incremento>
+//	|
+//	<Decremento>	>{
+//		System.out.println("OpAritmeticoUnitario: " + image);
+//	}
+//}
 
 /** OpAritmeticoBinario*/
 TOKEN:{
@@ -583,16 +578,16 @@ TOKEN:{
 	<	Modulo: ["%"]	>
 }
 
-TOKEN:{
-	<	OpAritmeticoBinario:
-	<Multiplicacion>
-	|
-	<Divison>
-	|
-	<Modulo>	>{
-		System.out.println("OpAritmeticoBinario: " + image);
-	}
-}
+//TOKEN:{
+//	<	OpAritmeticoBinario:
+//	<Multiplicacion>
+//	|
+//	<Divison>
+//	|
+//	<Modulo>	>{
+//		System.out.println("OpAritmeticoBinario: " + image);
+//	}
+//}
 
 /** OpLogicoBoolUnitario*/
 TOKEN:{
@@ -614,20 +609,20 @@ TOKEN:{
 	<	OR: (["o"]|["O"]) (["r"]|["R"])	>	
 }
 
-TOKEN:{
-	<	OpLogicoBoolBinario:
-	<OrLogico>
-	|
-	<AndLogico>
-	|
-	<ExclusivoOrLogico>
-	|
-	<AND>
-	|
-	<OR>	>{
-		System.out.println("OpLogicoBoolBinario: " + image);
-	}
-}
+//TOKEN:{
+//	<	OpLogicoBoolBinario:
+//	<OrLogico>
+//	|
+//	<AndLogico>
+//	|
+//	<ExclusivoOrLogico>
+//	|
+//	<AND>
+//	|
+//	<OR>	>{
+//		System.out.println("OpLogicoBoolBinario: " + image);
+//	}
+//}
 
 /** OpLogicoBoolBinarioCondicional*/
 TOKEN:{
@@ -636,71 +631,26 @@ TOKEN:{
 	<	OrCondicional: (["|"]) (["|"])	>
 }
 
-TOKEN:{
-	<	OpLogicoBoolBinarioCondicional:
-	<AndCondicional>
-	|
-	<OrCondicional>	>{
-		System.out.println("OpLogicoBoolBinarioCondicional: " + image);
+//TOKEN:{
+//	<	OpLogicoBoolBinarioCondicional:
+//	<AndCondicional>
+//	|
+//	<OrCondicional>	>{
+//		System.out.println("OpLogicoBoolBinarioCondicional: " + image);
+//	}
+//}
+
+SKIP : 
+{ 
+	" "|"\n" | "\r" | "\r\n" | "\t"
 	}
-}
 
-
-
-
-
-
-
-TOKEN:{
-    <	Numeros: (<Numero>)+	>{
-		System.out.println("Se ingreso un numero: " + image);
-	}
-    |
-	<	Decimal: (<Numero>)+ (["."]) (<Numero>)+ >{
-		System.out.println("Se ingreso un numero decimal: " + image);
-	}
-    |
-    <   Protocolo: (<Letra>)+ (["s"])* ([":"]) (["/"]) (["/"]) >
-    |
-	  <   Subdominio: (<Letra>)+ (["."])	>
-    |
-	  <	  Extension: (["."]) (<Letra>)+ (["."])* ((<Letra>)+)*>
-}
-
-TOKEN:{
-        <   Dominio: (<Letra>)+ (<Extension>) > 
-}
-
-// Expresiones Regulares Finales!
-TOKEN:{
-    <	Variables: (<Letra>) (<Numero> | <Letra>)*	>{
-		    System.out.println("Se ingreso una variable: " + image);
-	    } 
-    |
-    <   URL: (<Protocolo>) (<Subdominio>) (<Dominio>)>{
-            System.out.println("Se ingreso un URL: " + image);
-        }
-    |
-    <   CorreoElec: (<Letra>) (<Letra> | "_" | "." | "-" | <Numeros>)* (["@"]) (<Dominio>) >{
-            System.out.println("Se ingreso un correo: " + image);
-    }
-}
 
 void Iniciar():
 {}
 
 {
     (
-		<Numeros>
-		| 
-		<Variables> 
-		| 
-		<Decimal> 
-		| 
-		<URL> 
-		| 
-		<CorreoElec> 
-		| 
 		<Pregunta> 
 		| 
 		<Entonces>
@@ -709,29 +659,17 @@ void Iniciar():
 		| 
 		<ParenDer>
 		| 
-		<Comillas>
-		| 
-		<TipoDato>
-		| 
 		<LlaveIzq>
 		| 
 		<LlaveDer>
 		| 
 		<PuntoYComa>
 		| 
-		<Comparador>
-		| 
 		<AccesoMiembro>
 		| 
 		<Sustitucion>
 		| 
-		<TipoAcceso>
-		| 
-		<Ciclo>
-		| 
 		<SelectivaMultiple>
-		| 
-		<Defecto>
 		| 
 		<Asignar>
 		| 
@@ -742,8 +680,6 @@ void Iniciar():
 		<ClaseConsole>
 		| 
 		<Sobrecargar>
-		| 
-		<Funcion>
 		| 
 		<Estructura>
 		| 
@@ -757,28 +693,10 @@ void Iniciar():
 		| 
 		<Base>
 		| 
-		<Propiedad>
-		| 
-		<ResultadoLogico>
-		| 
-		<Lista>
-		| 
 		<Retorno>
 		| 
 		<Libreria>
 		| 
 		<OperadorNew>
-		| 
-		<OpAritmetico>
-		| 
-		<OpAritmeticoUnitario>
-		| 
-		<OpAritmeticoBinario>
-		| 
-		<OpLogicoBoolUnitario>
-		| 
-		<OpLogicoBoolBinario>
-		| 
-		<OpLogicoBoolBinarioCondicional>
 		)* <EOF>
 }
