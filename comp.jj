@@ -24,21 +24,43 @@ class comp
 PARSER_END(comp)
 
 TOKEN:{
-	< #Letra: ["a"-"z","A"-"Z"]	> 
+	<	#Letra: ["a"-"z","A"-"Z"]	> 
 	|
-	< #Numero: ["0" - "9"]	>
+	<	Numero: ["0" - "9"]	>{
+		System.out.println("Numero");
+	}
+}
+
+/** Comentario*/
+TOKEN:{
+	<	#ComentC: (["/"]) (["/"])	>
+	|
+	<	#ComentSQLInicio: (["/"]) (["*"])	>
+	|
+	<	#ComentSQLFin: (["*"]) (["/"])	>
+}
+
+TOKEN:{
+	<	Comentario:
+	<ComentC>
+	|
+	<ComentSQLInicio>
+	|
+	<ComentSQLFin>	>{
+		System.out.println("Comentario: " + image);
+	}
 }
 
 /** Pregunta*/
 TOKEN:{
-	<	Pregunta: (["i"]) (["f"])>{
+	<	Pregunta: (["i"]|["I"]) (["f"]|["F"])>{
 		System.out.println("Pregunta");
 	}
 }
 
 /** Entonces*/
 TOKEN:{
-	<	Entonces: (["t"]) (["h"]) (["e"]) (["n"])	>{
+	<	Entonces: (["t"]|["T"]) (["h"]|["H"]) (["e"]|["E"]) (["n"]|["N"])	>{
 		System.out.println("Entonces");
 	}
 }
@@ -57,11 +79,23 @@ TOKEN:{
 	}
 }
 
-/** Comillas*/
+/** CorIzq*/
 TOKEN:{
-	<	#Comilla: ["\""]	>
-	|
-	<	#Apost: ["'"]	>
+	<	CorIzq: ["["]	>{
+		System.out.println("CorIzq");
+	}
+}
+
+/** CorDer*/
+TOKEN:{
+	<	CorDer: ["]"]	>{
+		System.out.println("CorDer");
+	}
+}
+
+/** Comillas*/
+TOKEN:{ 
+	<#Comilla: ["\""]>|<#Apost: ["'"]>
 }
 
 TOKEN:{
@@ -72,19 +106,19 @@ TOKEN:{
 
 /** TipoDato*/
 TOKEN:{
-	<	#Char: (["c"]) (["h"]) (["a"]) (["r"])	>
+	<	#Char: (["c"]|["C"]) (["h"]|["H"]) (["a"]|["A"]) (["r"]|["R"])	>
 	|
 	<	#Int: (["i"]|["I"]) (["n"]|["N"]) (["t"]|["T"])	>
 	|
 	<	#Float: (["f"]|["F"]) (["l"]|["L"]) (["o"]|["O"]) (["a"]|["A"]) (["t"]|["T"])	>
 	|
-	<	#Double: (["d"]) (["o"]) (["u"]) (["b"]) (["l"]) (["e"])	>
+	<	#Double: (["d"]|["D"]) (["o"]|["O"]) (["u"]|["U"]) (["b"]|["B"]) (["l"]|["L"]) (["e"]|["E"])	>
 	|
 	<	#String: (["s"]) (["t"]) (["r"]) (["i"]) (["n"]) (["g"])	>
 	|
 	<	#Bool: (["b"]) (["o"]) (["o"]) (["l"])	>
 	|
-	<	#Var: (["v"]) (["a"]) (["r"])	>
+	<	#Var: (["v"]|["V"]) (["a"]|["A"]) (["r"]|["R"])	>
 	|
 	<	#Byte: (["b"]) (["y"]) (["t"]) (["e"])	>
 	|
@@ -113,6 +147,10 @@ TOKEN:{
 	<	#NVARCHAR: (["n"]|["N"]) (["v"]|["V"]) (["a"]|["A"]) (["r"]|["R"]) (["c"]|["C"]) (["h"]|["H"]) (["a"]|["A"]) (["r"]|["R"])	>
 	|
 	<	#Bit: (["b"]|["B"]) (["i"]|["I"]) (["t"]|["T"])	>
+	|
+	<	#Money: (["m"]|["M"]) (["o"]|["O"]) (["n"]|["N"]) (["e"]|["E"]) (["y"]|["Y"])	>
+	|
+	<	#Str: (["S"]) (["t"]) (["r"])	>
 }
 
 TOKEN:{
@@ -157,7 +195,11 @@ TOKEN:{
 	| 
 	<NVARCHAR>
 	| 
-	<Bit>	>{
+	<Bit>
+	|
+	<Money>
+	|
+	<Str>	>{
 		System.out.println("TipoDato: " + image);
 	}
 }
@@ -176,10 +218,19 @@ TOKEN:{
 	}
 }
 
-/** PuntoYComa*/
+/** Puntuacion*/
 TOKEN:{
-	<	PuntoYComa: [";"]	>{
-		System.out.println("PuntoYComa");
+	<	#PuntoYComa: [";"]	>
+	|
+	<	#Coma: [","]	>
+}
+
+TOKEN:{
+	<	Puntuacion:
+	<PuntoYComa>
+	|
+	<Coma>	>{
+		System.out.println("Puntuacion: " + image);
 	}
 }
 
@@ -231,21 +282,25 @@ TOKEN:{
 
 /** TipoAcceso*/
 TOKEN:{
-	<	#Public: (["p"]) (["u"]) (["b"]) (["l"]) (["i"]) (["c"])	>
+	<	#Public: (["p"]|["P"]) (["u"]|["U"]) (["b"]|["B"]) (["l"]|["L"]) (["i"]|["I"]) (["c"]|["C"])	>
 	|
-	<	#Static: (["s"]) (["t"]) (["a"]) (["t"]) (["i"]) (["c"])	>
+	<	#Protected: (["p"]|["P"]) (["r"]|["R"]) (["o"]|["O"]) (["t"]|["T"]) (["e"]|["E"]) (["c"]|["C"]) (["t"]|["T"]) (["e"]|["E"]) (["d"]|["D"])	>
 	|
-	<	#Private: (["p"]) (["r"]) (["i"]) (["v"]) (["a"]) (["t"]) (["e"])	>
+	<	#Private: (["p"]|["P"]) (["r"]|["R"]) (["i"]|["I"]) (["v"]|["V"]) (["a"]|["A"]) (["t"]|["T"]) (["e"]|["E"])	>
+	|
+	<	#Internal: (["i"]) (["n"]) (["t"]) (["e"]) (["r"]) (["n"]) (["a"]) (["l"])	>
 }
 
 TOKEN:{
 	<	TipoAcceso: 
 	<Public>
 	|
-	<Static>
+	<Protected>
 	|
-	<Private>	>{
-		System.out.println("TipoDato: " + image);
+	<Private>
+	|
+	<Internal>	>{
+		System.out.println("TipoAcceso: " + image);
 	}
 }
 
@@ -253,11 +308,11 @@ TOKEN:{
 TOKEN:{
 	<	#Do: (["d"]) (["o"])	>
 	|
-	<	#For: (["f"]) (["o"]) (["r"])	>
+	<	#For: (["f"]|["F"]) (["o"]|["O"]) (["r"]|["R"])	>
 	|
 	<	#Foreach: (["f"]) (["o"]) (["r"]) (["e"]) (["a"]) (["c"]) (["h"])	>
 	|
-	<	#While: (["w"]) (["h"]) (["i"]) (["l"]) (["e"])	>
+	<	#While: (["w"]|["W"]) (["h"]|["H"]) (["i"]|["I"]) (["l"]|["L"]) (["e"]|["E"])	>
 }
 
 TOKEN:{
@@ -282,11 +337,11 @@ TOKEN:{
 
 /** Default*/
 TOKEN:{
-	<	#Else: (["e"]) (["l"]) (["s"]) (["e"])	>
+	<	#Else: (["e"]|["E"]) (["l"]|["L"]) (["s"]|["S"]) (["e"]|["E"])	>
 	|
 	<	#Finally: (["f"]) (["i"]) (["n"]) (["a"]) (["l"]) (["l"]) (["y"])	>
 	|
-	<	#Default: (["D"]) (["e"]) (["f"]) (["a"]) (["u"]) (["l"]) (["d"])	>
+	<	#Default: (["d"]|["D"]) (["e"]|["E"]) (["f"]|["F"]) (["a"]|["A"]) (["u"]|["U"]) (["l"]|["L"]) (["t"]|["T"])	>
 }
 
 TOKEN:{
@@ -309,7 +364,7 @@ TOKEN:{
 
 /** Case*/
 TOKEN:{
-	<	Case: (["c"]) (["a"]) (["s"]) (["e"])	>{
+	<	Case: (["c"]|["C"]) (["a"]|["A"]) (["s"]|["S"]) (["e"]|["E"])	>{
 		System.out.println("Case");
 	}
 }
@@ -335,7 +390,7 @@ TOKEN:{
 	}
 }
 
-/** Función*/
+/** FuncionString*/
 TOKEN:{
 	<	#Concat: (["c"]|["C"]) (["o"]|["O"]) (["n"]|["N"]) (["c"]|["C"]) (["a"]|["A"]) (["t"]|["T"])	>
 	|
@@ -361,19 +416,11 @@ TOKEN:{
 	|
 	<	#Next: (["N"]) (["e"]) (["x"]) (["t"])	>
 	|
-	<	#AVG: (["a"]|["A"]) (["v"]|["V"]) (["g"]|["G"])	>
-	|
-	<	#Count: (["c"]|["C"]) (["o"]|["O"]) (["u"]|["U"]) (["n"]|["N"]) (["t"]|["T"])>
-	|
-	<	#Max: (["m"]|["M"]) (["a"]|["A"]) (["x"]|["X"])>
-	|
-	<	#Min: (["m"]|["M"]) (["i"]|["I"]) (["n"]|["N"])>
-	|
-	<	#Sum: (["s"]|["S"]) (["u"]|["U"]) (["m"]|["M"])>
+	<	#Replace: (["r"]|["R"]) (["e"]|["E"]) (["p"]|["P"]) (["l"]|["L"]) (["a"]|["A"]) (["c"]|["C"]) (["e"]|["E"])	>
 }
 
 TOKEN:{
-	<	Funcion:
+	<	FuncionString:
 	<Concat>
 	|
 	<Length>
@@ -398,6 +445,26 @@ TOKEN:{
 	|
 	<Next>
 	|
+	<Replace>	>{
+		System.out.println("FuncionString: " + image);
+	}
+}
+
+/** FuncionAgregar*/
+TOKEN:{
+	<	#AVG: (["a"]|["A"]) (["v"]|["V"]) (["g"]|["G"])	>
+	|
+	<	#Count: (["c"]|["C"]) (["o"]|["O"]) (["u"]|["U"]) (["n"]|["N"]) (["t"]|["T"])>
+	|
+	<	#Max: (["m"]|["M"]) (["a"]|["A"]) (["x"]|["X"])>
+	|
+	<	#Min: (["m"]|["M"]) (["i"]|["I"]) (["n"]|["N"])>
+	|
+	<	#Sum: (["s"]|["S"]) (["u"]|["U"]) (["m"]|["M"])>
+}
+
+TOKEN:{
+	<	FuncionAgregar:
 	<AVG>
 	|
 	<Count>
@@ -406,9 +473,120 @@ TOKEN:{
 	|
 	<Min>
 	|
-	<Sum>
-	>{
-		System.out.println("Funcion: " + image);
+	<Sum>	>{
+		System.out.println("FuncionAgregar: " + image);
+	}
+}
+
+/** FuncionDate*/
+TOKEN:{
+	<	#DateDiff: (["d"]|["D"]) (["a"]|["A"]) (["t"]|["T"]) (["e"]|["E"]) (["d"]|["D"]) (["i"]|["I"]) (["f"]|["F"]) (["f"]|["F"])	>
+	|
+	<	#DateAdd: (["d"]|["D"]) (["a"]|["A"]) (["t"]|["T"]) (["e"]|["E"]) (["a"]|["A"]) (["d"]|["D"]) (["d"]|["D"])	>
+	|
+	<	#DateName: (["d"]|["D"]) (["a"]|["A"]) (["t"]|["T"]) (["e"]|["E"]) (["n"]|["N"]) (["a"]|["A"]) (["m"]|["M"]) (["e"]|["E"])>
+	|
+	<	#Day: (["d"]|["D"]) (["a"]|["A"]) (["y"]|["Y"])	>
+	|
+	<	#GetDate: (["g"]|["G"]) (["e"]|["E"]) (["t"]|["T"]) (["d"]|["D"]) (["a"]|["A"]) (["t"]|["T"]) (["e"]|["E"])	>
+	|
+	<	#Month: (["m"]|["M"]) (["o"]|["O"]) (["n"]|["N"]) (["t"]|["T"]) (["h"]|["H"])	>
+	|
+	<	#Year: (["y"]|["Y"]) (["e"]|["E"]) (["a"]|["A"]) (["r"]|["R"])	>
+}
+
+TOKEN:{
+	<	FuncionDate:
+	<DateDiff>
+	|
+	<DateAdd>
+	|
+	<DateName>
+	|
+	<Day>
+	|
+	<GetDate>
+	|
+	<Month>
+	|
+	<Year>	>{
+		System.out.println("FuncionDate: " + image);
+	}
+}
+
+/** FuncionMath*/
+TOKEN:{
+	<	#Abs: (["a"]|["A"]) (["b"]|["B"]) (["s"]|["S"])	>
+	|
+	<	#Acos: (["a"]|["A"]) (["c"]|["C"]) (["o"]|["O"]) (["s"]|["S"])	>
+	|
+	<	#Asin: (["a"]|["A"]) (["s"]|["S"]) (["i"]|["I"]) (["n"]|["N"])	>
+	|
+	<	#Atan: (["a"]|["A"]) (["t"]|["T"]) (["a"]|["A"]) (["n"]|["N"])	>
+	|
+	<	#Cos: (["c"]|["C"]) (["o"]|["O"]) (["s"]|["S"])	>
+	|
+	<	#Cot: (["c"]|["C"]) (["o"]|["O"]) (["t"]|["T"])	>
+	|
+	<	#Floor: (["f"]|["F"]) (["l"]|["L"]) (["o"]|["O"]) (["o"]|["O"]) (["r"]|["R"])	>
+	|
+	<	#Log: (["l"]|["L"]) (["o"]|["O"]) (["g"]|["G"])	>
+	|
+	<	#LogDiez: (["l"]|["L"]) (["o"]|["O"]) (["g"]|["G"]) (["1"]) (["0"])	>
+	|
+	<	#Pi: (["p"]|["P"]) (["i"]|["I"])	>
+	|
+	<	#Power: (["p"]|["P"]) (["o"]|["O"]) (["w"]|["W"]) (["e"]|["E"]) (["r"]|["R"])	>
+	|
+	<	#Radians: (["r"]|["R"]) (["a"]|["A"]) (["d"]|["D"]) (["i"]|["I"]) (["a"]|["A"]) (["n"]|["N"]) (["s"]|["S"])	>
+	|
+	<	#Round: (["r"]|["R"]) (["o"]|["O"]) (["u"]|["U"]) (["n"]|["N"]) (["d"]|["D"])	>
+	|
+	<	#Sin: (["s"]|["S"]) (["i"]|["I"]) (["n"]|["N"])	>
+	|
+	<	#Sqrt: (["s"]|["S"]) (["q"]|["Q"]) (["r"]|["R"]) (["t"]|["T"])	>
+	|
+	<	#Square: (["s"]|["S"]) (["q"]|["Q"]) (["u"]|["U"]) (["a"]|["A"]) (["r"]|["R"]) (["e"]|["E"])	>
+	|
+	<	#Tan: (["t"]|["T"]) (["a"]|["A"]) (["n"]|["N"])	>
+}
+
+TOKEN:{
+	<	FuncionMath:
+	<Abs>
+	|
+	<Acos>
+	|
+	<Asin>
+	|
+	<Atan>
+	|
+	<Cos>
+	|
+	<Cot>
+	|
+	<Floor>
+	|
+	<Log>
+	|
+	<LogDiez>
+	|
+	<Pi>
+	|
+	<Power>
+	|
+	<Radians>
+	|
+	<Round>
+	|
+	<Sin>
+	|
+	<Sqrt>
+	|
+	<Square>
+	|
+	<Tan>	>{
+		System.out.println("FuncionMath: "+ image);
 	}
 }
 
@@ -422,7 +600,7 @@ TOKEN:{
 /** CapExcepcion*/
 TOKEN:{
 	<	CapExcepcion: (["c"]) (["a"]) (["t"]) (["c"]) (["h"])	>{
-		System.out.println("CapExcepción");
+		System.out.println("CapExcepcion");
 	}
 }
 
@@ -435,7 +613,7 @@ TOKEN:{
 
 /** Intenta*/
 TOKEN:{
-	<	Intenta: (["t"]) (["r"]) (["y"])	>{
+	<	Intenta: (["t"]|["T"]) (["r"]|["R"]) (["y"]|["Y"])	>{
 		System.out.println("Intenta");
 	}
 }
@@ -524,14 +702,14 @@ TOKEN:{
 
 /** Retorno*/
 TOKEN:{
-	<	Retorno: (["r"]) (["e"]) (["t"]) (["u"]) (["r"]) (["n"])	>{
+	<	Retorno: (["r"]|["R"]) (["e"]|["E"]) (["t"]|["T"]) (["u"]|["U"]) (["r"]|["R"]) (["n"]|["N"])	>{
 		System.out.println("Retorno");
 	}
 }
 
 /** Libreria*/
 TOKEN:{
-	<	Libreria: (["u"]) (["s"]) (["i"]) (["n"]) (["g"])	>{
+	<	Libreria: (["u"]|["U"]) (["s"]|["S"]) (["i"]|["I"]) (["n"]|["N"]) (["g"]|["G"])	>{
 		System.out.println("Libreria");
 	}
 }
@@ -645,19 +823,169 @@ TOKEN:{
 		System.out.println("OpLogicoBoolBinarioCondicional: " + image);
 	}
 }
-SKIP : 
-{ 
-	" "|"\n" | "\r" | "\r\n" | "\t"
+
+/** Consulta*/
+TOKEN:{
+	<	#Select: (["s"]|["S"]) (["e"]|["E"]) (["l"]|["L"]) (["e"]|["E"]) (["c"]|["C"]) (["t"]|["T"])	>
+	|
+	<	#From: (["f"]|["F"]) (["r"]|["R"]) (["o"]|["O"]) (["m"]|["M"])	>
+	|
+	<	#Where: (["w"]|["W"]) (["h"]|["H"]) (["e"]|["E"]) (["r"]|["R"]) (["e"]|["E"])	>
+}
+
+TOKEN:{
+	<	Consulta:
+	<Select>
+	|
+	<From>
+	|
+	<Where>	>{
+		System.out.println("Consulta: " + image);
 	}
+}
+
+/** TipoSelect*/
+TOKEN:{
+	<	#GroupBy: (["g"]|["G"]) (["r"]|["R"]) (["o"]|["O"]) (["u"]|["U"]) (["p"]|["P"]) ([" "]) (["b"]|["B"]) (["y"]|["Y"])	>
+	|
+	<	#Having: (["h"]|["H"]) (["a"]|["A"]) (["v"]|["V"]) (["i"]|["I"]) (["n"]|["N"]) (["g"]|["G"])	>
+	|
+	<	#OrderBy: (["o"]|["O"]) (["r"]|["R"]) (["d"]|["D"]) (["e"]|["E"]) (["r"]|["R"]) ([" "]) (["b"]|["B"]) (["y"]|["Y"])	>
+	|
+	<	#Into: (["i"]|["I"]) (["n"]|["N"]) (["t"]|["T"]) (["o"]|["O"])	>
+	|
+	<	#Over: (["o"]|["O"]) (["v"]|["V"]) (["e"]|["E"]) (["r"]|["R"])	>
+}
+
+TOKEN:{
+	< TipoSelect:
+	<GroupBy>
+	|
+	<Having>
+	|
+	<OrderBy>
+	|
+	<Into>
+	|
+	<Over>	>{
+		System.out.println("TipoSelect: " + image);
+	}
+}
+
+/** Declaracion*/
+TOKEN:{
+	<	#Alter: (["a"]|["A"]) (["l"]|["L"]) (["t"]|["T"]) (["e"]|["E"]) (["r"]|["R"])	>
+	|
+	<	#Create: (["c"]|["C"]) (["r"]|["R"]) (["e"]|["E"]) (["a"]|["A"]) (["t"]|["T"]) (["e"]|["E"])	>
+	|
+	<	#Drop: (["d"]|["D"]) (["r"]|["R"]) (["o"]|["O"]) (["p"]|["P"])	>
+	|
+	<	#Set: (["s"]|["S"]) (["e"]|["E"]) (["t"]|["T"])	>
+}
+
+TOKEN:{
+	<	Declaracion: 
+	<Alter>
+	|
+	<Create>
+	|
+	<Drop>
+	|
+	<Set>	>{
+		System.out.println("Declaracion: " + image);
+	}
+}
+
+/** BaseDeDatos*/
+TOKEN:{
+	<	BaseDeDatos: (["d"]|["D"]) (["a"]|["A"]) (["t"]|["T"]) (["a"]|["A"]) (["b"]|["B"]) (["a"]|["A"]) (["s"]|["S"]) (["e"]|["E"])	>{
+		System.out.println("Dase de Datos");
+	}
+}
+
+/** Tabla*/
+TOKEN:{
+	<	Tabla: (["t"]|["T"]) (["a"]|["A"]) (["b"]|["B"]) (["l"]|["L"]) (["a"]|["A"])	>{
+		System.out.println("Tabla");
+	}
+}
+
+/** Agregar*/
+TOKEN:{
+	<	Agregar: (["a"]|["A"]) (["d"]|["D"]) (["d"]|["D"])	>{
+		System.out.println("Agregar");
+	}
+}
+
+/** Check*/
+TOKEN:{
+	<	Check: (["c"]|["C"]) (["h"]|["H"]) (["e"]|["E"]) (["c"]|["C"]) (["k"]|["K"])	>{
+		System.out.println("Check");
+	}
+}
+
+/**Constraint*/
+TOKEN:{
+	<	Constraint: (["c"]|["C"]) (["o"]|["O"]) (["n"]|["N"]) (["s"]|["S"]) (["t"]|["T"]) (["r"]|["R"]) (["a"]|["A"]) (["i"]|["I"]) (["n"]|["N"]) (["t"]|["T"])	>{
+		System.out.println("Constraint");
+	}
+}
+
+/**Llave*/
+TOKEN:{
+	<	Llave: (["k"]|["K"]) (["e"]|["E"]) (["y"]|["Y"])	>{
+		System.out.println("Llave");
+	}
+}
+
+/**TipoLlave*/
+TOKEN:{
+	< #Primaria: (["p"]|["P"]) (["r"]|["R"]) (["i"]|["I"]) (["m"]|["M"]) (["a"]|["A"]) (["r"]|["R"]) (["y"]|["Y"])	>
+	|
+	< #Foranea: (["f"]|["F"]) (["o"]|["O"]) (["r"]|["R"]) (["a"]|["A"]) (["n"]|["N"]) (["e"]|["E"]) (["a"]|["A"])	>
+}
+
+TOKEN:{
+	< TipoLlave:
+	<Primaria>
+	|
+	<Foranea>	>{
+		System.out.println("TipoLlave: " + image);
+	}
+}
+
+TOKEN:{
+	<	Referencia: (["r"]|["R"]) (["e"]|["E"]) (["f"]|["F"]) (["e"]|["E"]) (["r"]|["R"]) (["e"]|["E"]) (["n"]|["N"]) (["c"]|["C"]) (["e"]|["E"]) (["s"]|["S"])	>{
+		System.out.println("Referencia");
+	}
+}
+
+TOKEN:{
+	<	Unique: (["u"]|["U"]) (["n"]|["N"]) (["i"]|["I"]) (["q"]|["Q"]) (["u"]|["U"]) (["e"]|["E"])	>{
+		System.out.println("Unico");
+	}
+}
+
+TOKEN:{
+	<	Insertar: (["i"]|["I"]) (["n"]|["N"]) (["s"]|["S"]) (["e"]|["E"]) (["r"]|["R"]) (["t"]|["T"])	>{
+		System.out.println("Insertar");
+	}
+}
+
+SKIP: { 
+	" "|"\n" | "\r" | "\r\n" | "\t"
+}
 
 void Program() :
 {}
 {
 	(<Comillas> | <TipoDato> | <Comparador> | <TipoAcceso> | <SelectivaMultiple> | <OpLogicoBoolBinario> |
 	 <OpLogicoBoolBinarioCondicional> | <OpAritmeticoBinario> | <OpAritmeticoUnitario> | <OpAritmetico> |
-	 <Lista> | <ResultadoLogico> | <Propiedad> | <Funcion> | <Defecto> | <Pregunta> | <Entonces> | <ParenIzq> |
-	 <LlaveIzq> | <LlaveDer> | <ParenDer> | <PuntoYComa> | <AccesoMiembro> | <Sustitucion> | 
+	 <Lista> | <ResultadoLogico> | <Propiedad> | <FuncionString> | <FuncionAgregar> | <FuncionDate> | <FuncionMath> | <Defecto> | <Pregunta> | <Entonces> | <ParenIzq> |
+	 <LlaveIzq> | <LlaveDer> | <ParenDer> | <Puntuacion> | <AccesoMiembro> | <Sustitucion> | 
 	 <Asignar> | <Case> | <Metodo> | <ClaseConsole> | <Sobrecargar> | <Estructura> | <CapExcepcion> | <Namespace> | 
-	 <Intenta> | <Romper> | <Base> | <Retorno> | <OpLogicoBoolUnitario>
+	 <Intenta> | <Romper> | <Base> | <Retorno> | <OpLogicoBoolUnitario> | <Numero> | <Consulta> | <Comentario> |
+	 <CorIzq> | <CorDer> | <Declaracion> | <BaseDeDatos> | <Agregar> | <Check> | <Constraint> | <Llave> | <TipoLlave> |
+	 <Referencia> | <Unique> | <Insertar> | <TipoSelect>
 	 )* <EOF>
 }

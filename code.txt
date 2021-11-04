@@ -1,3 +1,58 @@
 void (){
-    ()
+    int
 }
+Console.WriteLine("")
+ABS, abs, ACOS, acos, ASIN, asin, ATAN, atan, COS, cos, COT, cot, FLOOR, floor, LOG, log, LOG10, log10, PI, pi, POWER, power, RADIANS, radians, ROUND, round, SIN, sin, SQRT, sqrt, SQUARE, square, TAN, tan 
+char
+0
+Str
+,
+;
+Group by
+SeLeCT
+iF
+finally
+Console.WriteLine("")
+'
+"
+//
+/*
+*/
+++
+if
+varchar
+then
+(
+Stack
+)
+{
+}
+ToUpper
+.
+switch
+short
+=
+catch
+case
+ulong
+void
+nchar
+Console
+override
+struct
+Int
+FLOAT
+fLOaT
++
+System
+try
+break
+base
+return
+!
+double
+ToString
+ToChar
+int
+bool
+WriteLine
