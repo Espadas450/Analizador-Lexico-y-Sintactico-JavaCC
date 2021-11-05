@@ -1,4 +1,5 @@
 PARSER_BEGIN(comp)
+import java.util.*;
 class comp
 {
 	public static void main( String[] args )throws ParseException
@@ -29,6 +30,7 @@ TOKEN:{
 	<	Numero: ["0" - "9"]	>{
 		System.out.println("Numero");
 	}
+	| <IDENTIFICADOR : ["a"-"z","A"-"Z"](["a"-"z","A"-"Z","0"-"9","_"])*>  //49
 }
 
 /** Comentario*/
@@ -1404,15 +1406,33 @@ SKIP: {
 }
 
 void Program() :
-{}
+{
+	int Tid;
+	String Timage;
+	List<String> ID = new ArrayList<String>();
+}
 {
 	(<Comillas> | <TipoDato> | <Comparador> | <TipoAcceso> | <SelectivaMultiple> | <OpLogicoBoolBinario> |
 	 <OpLogicoBoolBinarioCondicional> | <OpAritmeticoBinario> | <OpAritmeticoUnitario> | <OpAritmetico> |
 	 <Lista> | <ResultadoLogico> | <Propiedad> | <FuncionString> | <FuncionAgregar> | <FuncionDate> | <FuncionMath> | <FuncionConvert> | <FuncionLogica> | <FuncionAnalitic> | <Defecto> | <Pregunta> | <Entonces> | <ParenIzq> |
 	 <LlaveIzq> | <LlaveDer> | <ParenDer> | <Puntuacion> | <AccesoMiembro> | <Clase> | <Sustitucion> | 
-	 <Asignar> | <Case> | <Metodo> | <ClaseConsole> | <Sobrecargar> | <Estructura> | <CapExcepcion> | <Namespace> | 
+	 <Asignar> | <Case> | <Metodo> | 
+	 <IDENTIFICADOR>
+	 {
+		Tid=token.kind;
+		Timage=token.image;
+		if(ID.indexOf(Timage)==-1){
+			ID.add(Timage);
+			System.out.println(Tid+ " " + Timage + " [" + ID.indexOf(Timage) + "]");
+			}
+		else{
+			System.out.println(Tid+ " " + Timage + " [" + ID.indexOf(Timage) + "]");
+		}
+		}| 
+	<ClaseConsole> | <Sobrecargar> | <Estructura> | <CapExcepcion> | <Namespace> | 
 	 <Intenta> | <Romper> | <Base> | <Retorno> | <OpLogicoBoolUnitario> | <Numero> | <Consulta> | <Comentario> |
 	 <CorIzq> | <CorDer> | <Declaracion> | <Agregar> | <Check> | <Constraint> | <Llave> | <TipoLlave> |
-	 <Referencia> | <Unique> | <Insertar> | <TipoSelect> | <TipoCreate> | <TipoFrom> | <TipoWhere> | <Add> | <DentroDe> | <Valores> | <Ejecutar> | <Etiqueta> | <TerminarEtiqueta>
+	 <Referencia> | <Unique> | <Insertar> | <TipoSelect> | <TipoCreate> | <TipoFrom> | <TipoWhere> | 
+	 <Add> | <DentroDe> | <Valores> | <Ejecutar> | <Etiqueta> | <TerminarEtiqueta>
 	 )* <EOF>
 }
