@@ -38,6 +38,8 @@ TOKEN:{
 	<	#ComentSQLInicio: (["/"]) (["*"])	>
 	|
 	<	#ComentSQLFin: (["*"]) (["/"])	>
+	|
+	<	#ComentHTML: (["!"]) (["-"]) (["-"]) >
 }
 
 TOKEN:{
@@ -53,7 +55,7 @@ TOKEN:{
 
 /** Pregunta*/
 TOKEN:{
-	<	Pregunta: (["i"]|["I"]) (["f"]|["F"])>{
+	<	Pregunta: (["i"]|["I"]) (["f"]|["F"])	>{
 		System.out.println("Pregunta");
 	}
 }
@@ -95,7 +97,9 @@ TOKEN:{
 
 /** Comillas*/
 TOKEN:{ 
-	<#Comilla: ["\""]>|<#Apost: ["'"]>
+	<#Comilla: ["\""]>
+	|
+	<#Apost: ["'"]>
 }
 
 TOKEN:{
@@ -273,10 +277,26 @@ TOKEN:{
 	}
 }
 
+/** Clase*/
+TOKEN:{
+	<	Clase: (["C"]) (["l"]) (["a"]) (["s"]) (["s"])	>{
+		System.out.println("Clase");
+	}
+}
+
 /** Sustitución*/
 TOKEN:{
-	<	Sustitucion: ["@"]	>{
-		System.out.println("Sustitucion");
+	<	#Arroba: ["@"]	>
+	|
+	<	#SignoDinero: ["$"]	>
+}
+
+TOKEN:{
+	<	Sustitucion:
+	<Arroba>
+	|
+	<SignoDinero>	>{
+		System.out.println("Sustitucion: " + image);
 	}
 }
 
@@ -394,11 +414,23 @@ TOKEN:{
 TOKEN:{
 	<	#Concat: (["c"]|["C"]) (["o"]|["O"]) (["n"]|["N"]) (["c"]|["C"]) (["a"]|["A"]) (["t"]|["T"])	>
 	|
+	<	#Concat_Ws: (["c"]|["C"]) (["o"]|["O"]) (["n"]|["N"]) (["c"]|["C"]) (["a"]|["A"]) (["t"]|["T"]) (["_"]) (["w"]|["W"]) (["s"]|["S"])>
+	|
 	<	#Length: (["L"]) (["e"]) (["n"]) (["g"]) (["t"]) (["h"])	>
 	|
 	<	#Write: (["W"]) (["r"]) (["i"]) (["t"]) (["e"])	>
 	|
 	<	#WriteLine: (["W"]) (["r"]) (["i"]) (["t"]) (["e"]) (["L"]) (["i"]) (["n"]) (["e"])	>
+	|
+	<	#Read: (["R"]) (["e"]) (["a"]) (["d"])	>
+	|
+	<	#ReadLine: (["R"]) (["e"]) (["a"]) (["d"]) (["L"]) (["i"]) (["n"]) (["e"])	>
+	|
+	<	#ReadKey: (["R"]) (["e"]) (["a"]) (["d"]) (["K"]) (["e"]) (["y"])	>
+	|
+	<	#Ascii: (["a"]|["A"]) (["s"]|["S"]) (["c"]|["C"]) (["i"]|["I"]) (["i"]|["I"])	>
+	|
+	<	#Clear: (["C"]) (["l"]) (["e"]) (["a"]) (["r"])	>
 	|
 	<	#Delete: (["D"]) (["e"]) (["l"]) (["e"]) (["t"]) (["e"])	>
 	|
@@ -408,7 +440,11 @@ TOKEN:{
 	|
 	<	#ToChar: (["T"]) (["o"]) (["C"]) (["h"]) (["a"]) (["r"])	>
 	|
+	<	#Upper: (["u"]|["U"]) (["p"]|["P"]) (["p"]|["P"]) (["e"]|["E"]) (["r"]|["R"])	>
+	|
 	<	#ToUpper: (["T"]) (["o"]) (["U"]) (["p"]) (["p"]) (["e"]) (["r"])	>
+	|
+	<	#Lower: (["l"]|["L"]) (["o"]|["O"]) (["w"]|["W"]) (["e"]|["E"]) (["r"]|["R"])	>
 	|
 	<	#ToLower: (["T"]) (["o"]) (["L"]) (["o"]) (["w"]) (["e"]) (["r"])	>
 	|
@@ -417,17 +453,37 @@ TOKEN:{
 	<	#Next: (["N"]) (["e"]) (["x"]) (["t"])	>
 	|
 	<	#Replace: (["r"]|["R"]) (["e"]|["E"]) (["p"]|["P"]) (["l"]|["L"]) (["a"]|["A"]) (["c"]|["C"]) (["e"]|["E"])	>
+	|
+	<	#Len: (["l"]|["L"]) (["e"]|["E"]) (["n"]|["N"])	>
+	|
+	<	#Reverse: (["r"]|["R"]) (["e"]|["E"]) (["v"]|["V"]) (["e"]|["E"]) (["r"]|["R"]) (["s"]|["S"]) (["e"]|["E"])	>
+	|
+	<	#Format: (["f"]|["F"]) (["o"]|["O"]) (["r"]|["R"]) (["m"]|["M"]) (["a"]|["A"]) (["t"]|["T"])	>
 }
 
 TOKEN:{
 	<	FuncionString:
 	<Concat>
 	|
+	<Concat_Ws>
+	|
 	<Length>
 	|
 	<Write>
 	|
 	<WriteLine>
+	|
+	<Read>
+	|
+	<ReadLine>
+	|
+	<ReadKey>
+	|
+	<Parse>
+	|
+	<Ascii>
+	|
+	<Clear>
 	|
 	<Delete>
 	|
@@ -437,7 +493,11 @@ TOKEN:{
 	|
 	<ToChar>
 	|
+	<Upper>
+	|
 	<ToUpper>
+	|
+	<Lower>
 	|
 	<ToLower>
 	|
@@ -445,7 +505,13 @@ TOKEN:{
 	|
 	<Next>
 	|
-	<Replace>	>{
+	<Replace>
+	|
+	<Len>
+	|
+	<Reverse>
+	|
+	<Format>	>{
 		System.out.println("FuncionString: " + image);
 	}
 }
@@ -590,6 +656,79 @@ TOKEN:{
 	}
 }
 
+/** FuncionConvert*/
+TOKEN:{
+	<	#Parse: (["p"]|["P"]) (["a"]|["A"]) (["r"]|["R"]) (["s"]|["S"]) (["e"]|["E"])	>
+	|
+	<	#Try_Cast: (["t"]|["T"]) (["r"]|["R"]) (["y"]|["Y"]) (["_"]) (["c"]|["C"]) (["a"]|["A"]) (["s"]|["S"]) (["t"]|["T"])	>
+	|
+	<	#Try_Convert: (["t"]|["T"]) (["r"]|["R"]) (["y"]|["Y"]) (["_"]) (["c"]|["C"]) (["o"]|["O"]) (["n"]|["N"]) (["v"]|["V"]) (["e"]|["E"]) (["r"]|["R"]) (["t"]|["T"])	>
+	|
+	<	#Try_Parse: (["t"]|["T"]) (["r"]|["R"]) (["y"]|["Y"]) (["_"]) (["p"]|["P"]) (["a"]|["A"]) (["r"]|["R"]) (["s"]|["S"]) (["e"]|["E"])	>
+}
+
+TOKEN:{
+	<	FuncionConvert:
+	<Parse>
+	|
+	<Try_Cast>
+	|
+	<Try_Convert>
+	|
+	<Try_Parse>	>{
+		System.out.println("FuncionConvert" + image);
+	}
+}
+
+/** FuncionLogica*/
+TOKEN:{
+	<	#Choose: (["c"]|["C"]) (["h"]|["H"]) (["o"]|["O"]) (["o"]|["O"]) (["s"]|["S"]) (["e"]|["E"])	>
+	|
+	<	#Greatest: (["g"]|["G"]) (["r"]|["R"]) (["e"]|["E"]) (["a"]|["A"]) (["t"]|["T"]) (["e"]|["E"]) (["s"]|["S"]) (["t"]|["T"])	>
+	|
+	<	#Iif: (["i"]|["I"]) (["i"]|["I"]) (["f"]|["F"])	>
+	|
+	<	#Least: (["l"]|["L"]) (["e"]|["E"]) (["a"]|["A"]) (["s"]|["S"]) (["t"]|["T"])	>
+}
+
+TOKEN:{
+	<	FuncionLogica:
+	<Choose>
+	|
+	<Greatest>
+	|
+	<Iif>
+	|
+	<Least>	>{
+		System.out.println("FuncionLogica: " + image);
+	}
+}
+
+/** FuncionAnalitic*/
+TOKEN:{
+	<	#First_Value: (["f"]|["F"]) (["i"]|["I"]) (["r"]|["R"]) (["s"]|["S"]) (["t"]|["T"]) (["_"]) (["v"]|["V"]) (["a"]|["A"]) (["l"]|["L"]) (["u"]|["U"]) (["e"]|["E"])	>
+	|
+	<	#Last_Value: (["l"]|["L"]) (["a"]|["A"]) (["s"]|["S"]) (["t"]|["T"]) (["_"]) (["v"]|["V"]) (["a"]|["A"]) (["l"]|["L"]) (["u"]|["U"]) (["e"]|["E"])	>
+	|
+	<	#Lag: (["l"]|["L"]) (["a"]|["A"]) (["g"]|["G"])	>
+	|
+	<	#Lead: (["l"]|["L"]) (["e"]|["E"]) (["a"]|["A"]) (["d"]|["D"])	>
+}
+
+TOKEN:{
+	<	FuncionAnalitic:
+	<First_Value>
+	|
+	<Last_Value>
+	|
+	<Lag>
+	|
+	<Lead>	>{
+		System.out.println("FuncionAnalitic: " + image);
+	}
+}
+
+
 /** Estructura*/
 TOKEN:{
 	<	Estructura: (["s"]) (["t"]) (["r"]) (["u"]) (["c"]) (["t"])	>{
@@ -645,6 +784,28 @@ TOKEN:{
 	<	#Enabled: (["E"]) (["n"]) (["a"]) (["b"]) (["l"]) (["e"]) (["d"])	>
 	|
 	<	#TextAling: (["T"]) (["e"]) (["x"]) (["t"]) (["A"]) (["l"]) (["i"]) (["g"]) (["n"])	>
+	|
+	<	#ReadOnly: (["R"]) (["e"]) (["a"]) (["d"]) (["O"]) (["n"]) (["l"]) (["y"])	>
+	|
+	<	#Cursor: (["C"]) (["u"]) (["r"]) (["s"]) (["o"]) (["r"])	>
+	|
+	<	#TabIndex: (["T"]) (["a"]) (["b"]) (["I"]) (["n"]) (["d"]) (["e"]) (["x"])>
+	|
+	<	#Visible: (["V"]) (["i"]) (["s"]) (["i"]) (["b"]) (["l"]) (["e"])	>
+	|
+	<	#Locked: (["L"]) (["o"]) (["c"]) (["k"]) (["e"]) (["d"])	>
+	|
+	<	#Size: (["S"]) (["i"]) (["z"]) (["e"])	>
+	|
+	<	#Opacity: (["O"]) (["p"]) (["a"]) (["c"]) (["i"]) (["t"]) (["y"])	>
+	|
+	<	#Icon: (["I"]) (["c"]) (["o"]) (["n"])	>
+	|
+	<	#AcceptButton: 	(["A"]) (["c"]) (["c"]) (["e"]) (["p"]) (["t"]) (["B"]) (["u"]) (["t"]) (["t"]) (["o"]) (["n"])	>
+	|
+	<	#CancelButton: (["C"]) (["a"]) (["n"]) (["c"]) (["e"]) (["l"]) (["B"]) (["u"]) (["t"]) (["t"]) (["o"]) (["n"])	>
+	|
+	<	#DialogResult: (["D"]) (["i"]) (["a"]) (["l"]) (["o"]) (["g"]) (["R"]) (["e"]) (["s"]) (["u"]) (["l"]) (["t"])	>
 }
 
 TOKEN:{
@@ -659,7 +820,29 @@ TOKEN:{
 	|
 	<Enabled>
 	|
-	<TextAling>	>{
+	<TextAling>
+	|
+	<ReadOnly>
+	|
+	<Cursor>
+	|
+	<TabIndex>
+	|
+	<Visible>
+	|
+	<Locked>
+	|
+	<Size>
+	|
+	<Opacity>
+	|
+	<Icon>
+	|
+	<AcceptButton>
+	|
+	<CancelButton>
+	|
+	<DialogResult>	>{
 		System.out.println("Propiedad: " + image);
 	}
 }
@@ -711,6 +894,52 @@ TOKEN:{
 TOKEN:{
 	<	Libreria: (["u"]|["U"]) (["s"]|["S"]) (["i"]|["I"]) (["n"]|["N"]) (["g"]|["G"])	>{
 		System.out.println("Libreria");
+	}
+}
+
+/** TipoLibreria*/
+TOKEN:{
+	<	#Colletions: (["C"]) (["o"]) (["l"]) (["l"]) (["e"]) (["c"]) (["t"]) (["i"]) (["o"]) (["n"]) (["s"])	>
+	|
+	<	#Dynamic: (["D"]) (["y"]) (["n"]) (["a"]) (["m"]) (["i"]) (["c"])	>
+	|
+	<	#IO: (["I"]) (["O"])	>
+	|
+	<	#Linq: (["L"]) (["i"]) (["n"]) (["q"])	>
+	|
+	<	#Resources: (["R"]) (["e"]) (["s"]) (["o"]) (["u"]) (["r"]) (["c"]) (["e"]) (["s"])	>
+	|
+	<	#Security: (["S"]) (["e"]) (["c"]) (["u"]) (["r"]) (["i"]) (["t"]) (["y"])	>
+	|
+	<	#Threading: (["T"]) (["h"]) (["r"]) (["e"]) (["a"]) (["d"]) (["i"]) (["n"]) (["g"])	>
+	|
+	<	#Diagnostic: (["D"]) (["i"]) (["a"]) (["g"]) (["n"]) (["o"]) (["s"]) (["t"]) (["i"]) (["c"])	>
+	|
+	<	#Drawing: (["D"]) (["r"]) (["a"]) (["w"]) (["i"]) (["n"]) (["g"])	>
+}
+
+TOKEN:{
+	<	TipoLibreria:
+	<Colletions>
+	|
+	<Dynamic>
+	|
+	<IO>
+	|
+	<Linq>
+	|
+	<Text>
+	|
+	<Resources>
+	|
+	<Security>
+	|
+	<Threading>
+	|
+	<Diagnostic>
+	|
+	<Drawing>	>{
+		System.out.println("TipoLibreria: "+ image);
 	}
 }
 
@@ -852,8 +1081,6 @@ TOKEN:{
 	|
 	<	#OrderBy: (["o"]|["O"]) (["r"]|["R"]) (["d"]|["D"]) (["e"]|["E"]) (["r"]|["R"]) ([" "]) (["b"]|["B"]) (["y"]|["Y"])	>
 	|
-	<	#Into: (["i"]|["I"]) (["n"]|["N"]) (["t"]|["T"]) (["o"]|["O"])	>
-	|
 	<	#Over: (["o"]|["O"]) (["v"]|["V"]) (["e"]|["E"]) (["r"]|["R"])	>
 }
 
@@ -865,10 +1092,119 @@ TOKEN:{
 	|
 	<OrderBy>
 	|
-	<Into>
-	|
 	<Over>	>{
 		System.out.println("TipoSelect: " + image);
+	}
+}
+
+/** TipoFrom*/
+TOKEN:{
+	<	#Inner: (["i"]|["I"]) (["n"]|["N"]) (["n"]|["N"]) (["e"]|["E"]) (["r"]|["R"])	>
+	|
+	<	#Join: (["j"]|["J"]) (["o"]|["O"]) (["i"]|["I"]) (["n"]|["N"])	>
+	|
+	<	#Left: (["l"]|["L"]) (["e"]|["E"]) (["f"]|["F"]) (["t"]|["T"])	>
+	|
+	<	#Outer: (["o"]|["O"]) (["u"]|["U"]) (["t"]|["T"]) (["e"]|["E"]) (["r"]|["R"])	>
+	|
+	<	#Right: (["r"]|["R"]) (["i"]|["I"]) (["g"]|["G"]) (["h"]|["H"]) (["t"]|["T"])	>
+	|
+	<	#Full: (["f"]|["F"]) (["u"]|["U"]) (["l"]|["L"]) (["l"]|["L"])	>
+	|
+	<	#Cross: (["c"]|["C"]) (["r"]|["R"]) (["o"]|["O"]) (["s"]|["S"]) (["s"]|["S"])	>
+	|
+	<	#Apply: (["a"]|["A"]) (["p"]|["P"]) (["p"]|["P"]) (["l"]|["L"]) (["y"]|["Y"])	>
+	|
+	<	#Pivot: (["p"]|["P"]) (["i"]|["I"]) (["v"]|["V"]) (["o"]|["O"]) (["t"]|["T"])	>
+	|
+	<	#Unpivot: (["u"]|["U"]) (["n"]|["N"]) (["p"]|["P"]) (["i"]|["I"]) (["v"]|["V"]) (["o"]|["O"]) (["t"]|["T"])>
+}
+
+TOKEN:{
+	<	TipoFrom:
+	<Inner>
+	|
+	<Join>
+	|
+	<Left>
+	|
+	<Outer>
+	|
+	<Right>
+	|
+	<Full>
+	|
+	<Cross>
+	|
+	<Apply>
+	|
+	<Pivot>
+	|
+	<Unpivot>	>{
+		System.out.println("TipoFrom: " + image);
+	}
+}
+
+/** TipoWhere*/
+TOKEN:{
+	<	TipoWhere: (["m"]|["M"]) (["a"]|["A"]) (["t"]|["T"]) (["c"]|["C"]) (["h"]|["H"])	>{
+		System.out.println("TipoWhere");
+	}
+}
+
+/** TipoCreate*/
+TOKEN:{
+	<	#BaseDatos: (["d"]|["D"]) (["a"]|["A"]) (["t"]|["T"]) (["a"]|["A"]) (["b"]|["B"]) (["a"]|["A"]) (["s"]|["S"]) (["e"]|["E"])	>
+	|
+	<	#Procedimiento: (["p"]|["P"]) (["r"]|["R"]) (["o"]|["O"]) (["c"]|["C"]) (["e"]|["E"]) (["d"]|["D"]) (["u"]|["U"]) (["r"]|["R"]) (["e"]|["E"])	>
+	|
+	<	#Table: (["t"]|["T"]) (["a"]|["A"]) (["b"]|["B"]) (["l"]|["L"]) (["e"]|["E"])	>
+	|
+	<	#User: (["u"]|["U"]) (["s"]|["S"]) (["e"]|["E"]) (["r"]|["R"])	>
+	|
+	<	#View: (["v"]|["V"]) (["i"]|["I"]) (["e"]|["E"]) (["w"]|["W"])	>
+}
+
+TOKEN:{
+	<	TipoCreate:
+	<BaseDatos>
+	|
+	<Procedimiento>
+	|
+	<Table>
+	|
+	<User>
+	|
+	<View>	>{
+		System.out.println("TipoCreate: " + image);
+	}
+}
+
+/** Add*/
+TOKEN:{
+	<	Add: (["a"]|["A"]) (["d"]|["D"]) (["d"]|["D"])	>{
+		System.out.println("Add");
+	}
+}
+
+/** DentroDe*/
+TOKEN:{
+	<	DentroDe: (["i"]|["I"]) (["n"]|["N"]) (["t"]|["T"]) (["o"]|["O"])	>{
+		System.out.println("DentroDe");
+	}
+}
+
+/** Valores*/
+TOKEN:{
+	<	Valores: (["v"]|["V"]) (["a"]|["A"]) (["l"]|["L"]) (["u"]|["U"]) (["e"]|["E"]) (["s"]|["S"])	>{
+		System.out.println("Valores");
+	}
+}
+
+/** Ejecutar*/
+TOKEN:{
+	<	Ejecutar: (["e"]|["E"]) (["x"]|["X"]) (["e"]|["E"]) (["c"]|["C"])	>{
+		System.out.println("Exec");
 	}
 }
 
@@ -881,6 +1217,8 @@ TOKEN:{
 	<	#Drop: (["d"]|["D"]) (["r"]|["R"]) (["o"]|["O"]) (["p"]|["P"])	>
 	|
 	<	#Set: (["s"]|["S"]) (["e"]|["E"]) (["t"]|["T"])	>
+	|
+	<	#Use: (["u"]|["U"]) (["s"]|["S"]) (["e"]|["E"])	>
 }
 
 TOKEN:{
@@ -891,22 +1229,10 @@ TOKEN:{
 	|
 	<Drop>
 	|
-	<Set>	>{
+	<Set>
+	|
+	<Use>	>{
 		System.out.println("Declaracion: " + image);
-	}
-}
-
-/** BaseDeDatos*/
-TOKEN:{
-	<	BaseDeDatos: (["d"]|["D"]) (["a"]|["A"]) (["t"]|["T"]) (["a"]|["A"]) (["b"]|["B"]) (["a"]|["A"]) (["s"]|["S"]) (["e"]|["E"])	>{
-		System.out.println("Dase de Datos");
-	}
-}
-
-/** Tabla*/
-TOKEN:{
-	<	Tabla: (["t"]|["T"]) (["a"]|["A"]) (["b"]|["B"]) (["l"]|["L"]) (["a"]|["A"])	>{
-		System.out.println("Tabla");
 	}
 }
 
@@ -954,21 +1280,122 @@ TOKEN:{
 	}
 }
 
+/**Referencia*/
 TOKEN:{
 	<	Referencia: (["r"]|["R"]) (["e"]|["E"]) (["f"]|["F"]) (["e"]|["E"]) (["r"]|["R"]) (["e"]|["E"]) (["n"]|["N"]) (["c"]|["C"]) (["e"]|["E"]) (["s"]|["S"])	>{
 		System.out.println("Referencia");
 	}
 }
 
+/**Unique*/
 TOKEN:{
 	<	Unique: (["u"]|["U"]) (["n"]|["N"]) (["i"]|["I"]) (["q"]|["Q"]) (["u"]|["U"]) (["e"]|["E"])	>{
 		System.out.println("Unico");
 	}
 }
 
+/**Insertar*/
 TOKEN:{
 	<	Insertar: (["i"]|["I"]) (["n"]|["N"]) (["s"]|["S"]) (["e"]|["E"]) (["r"]|["R"]) (["t"]|["T"])	>{
 		System.out.println("Insertar");
+	}
+}
+
+/**Etiqueta*/
+TOKEN:{
+	<	#Doctype: (["D"]) (["O"]) (["C"]) (["T"]) (["Y"]) (["P"]) (["E"])	>
+	|
+	<	#Body:  (["b"]) (["o"]) (["d"]) (["y"])	>
+	|
+	<	#Br: (["b"]) (["r"])	>
+	|
+	<	#Button: (["b"]) (["u"]) (["t"]) (["t"]) (["o"]) (["n"])	>
+	|
+	<	#Center: (["c"]) (["e"]) (["n"]) (["t"]) (["e"]) (["r"])	>
+	|
+	<	#Col: (["c"]) (["o"]) (["l"])	>
+	|
+	<	#Footer: (["f"]) (["o"]) (["o"]) (["t"]) (["e"]) (["r"])	>
+	|
+	<	#Frame: (["f"]) (["r"]) (["a"]) (["m"]) (["e"])	>
+	|
+	<	#H1: (["h"]) (["1"])	>
+	|
+	<	#H2: (["h"]) (["2"])	>
+	|
+	<	#H3: (["h"]) (["3"])	>
+	|
+	<	#H4: (["h"]) (["4"])	>
+	|
+	<	#H5: (["h"]) (["5"])	>
+	|
+	<	#H6: (["h"]) (["6"])	>
+	|
+	<	#Head: (["h"]) (["e"]) (["a"]) (["d"])	>
+	|
+	<	#Header: (["h"]) (["e"]) (["a"]) (["d"]) (["e"]) (["r"])	>
+	|
+	<	#Ht: (["h"]) (["t"])	>
+	|
+	<	#Html: (["h"]) (["t"]) (["m"]) (["l"])	>
+	|
+	<	#Img: (["i"]) (["m"]) (["g"])	>
+	|
+	<	#Input: (["i"]) (["n"]) (["p"]) (["u"]) (["t"])	>
+	|
+	<	#Label: (["l"]) (["a"]) (["b"]) (["e"]) (["l"])	>
+}
+
+TOKEN:{
+	<	Etiqueta:
+	<Doctype>
+	|
+	<Body>
+	|
+	<Br>
+	|
+	<Button>
+	|
+	<Center>
+	|
+	<Col>
+	|
+	<Footer>
+	|
+	<Frame>
+	|
+	<H1>
+	|
+	<H2>
+	|
+	<H3>
+	|
+	<H4>
+	|
+	<H5>
+	|
+	<H6>
+	|
+	<Head>
+	|
+	<Header>
+	|
+	<Ht>
+	|
+	<Html>
+	|
+	<Img>
+	|
+	<Input>
+	|
+	<Label>	>{
+		System.out.println("Etiqueta: " + image);
+	}
+}
+
+TOKEN:{
+	<	TerminarEtiqueta: (["<"]) (["/"])	>{
+		System.out.println("TerminarEtiqueta");
 	}
 }
 
@@ -981,11 +1408,11 @@ void Program() :
 {
 	(<Comillas> | <TipoDato> | <Comparador> | <TipoAcceso> | <SelectivaMultiple> | <OpLogicoBoolBinario> |
 	 <OpLogicoBoolBinarioCondicional> | <OpAritmeticoBinario> | <OpAritmeticoUnitario> | <OpAritmetico> |
-	 <Lista> | <ResultadoLogico> | <Propiedad> | <FuncionString> | <FuncionAgregar> | <FuncionDate> | <FuncionMath> | <Defecto> | <Pregunta> | <Entonces> | <ParenIzq> |
-	 <LlaveIzq> | <LlaveDer> | <ParenDer> | <Puntuacion> | <AccesoMiembro> | <Sustitucion> | 
+	 <Lista> | <ResultadoLogico> | <Propiedad> | <FuncionString> | <FuncionAgregar> | <FuncionDate> | <FuncionMath> | <FuncionConvert> | <FuncionLogica> | <FuncionAnalitic> | <Defecto> | <Pregunta> | <Entonces> | <ParenIzq> |
+	 <LlaveIzq> | <LlaveDer> | <ParenDer> | <Puntuacion> | <AccesoMiembro> | <Clase> | <Sustitucion> | 
 	 <Asignar> | <Case> | <Metodo> | <ClaseConsole> | <Sobrecargar> | <Estructura> | <CapExcepcion> | <Namespace> | 
 	 <Intenta> | <Romper> | <Base> | <Retorno> | <OpLogicoBoolUnitario> | <Numero> | <Consulta> | <Comentario> |
-	 <CorIzq> | <CorDer> | <Declaracion> | <BaseDeDatos> | <Agregar> | <Check> | <Constraint> | <Llave> | <TipoLlave> |
-	 <Referencia> | <Unique> | <Insertar> | <TipoSelect>
+	 <CorIzq> | <CorDer> | <Declaracion> | <Agregar> | <Check> | <Constraint> | <Llave> | <TipoLlave> |
+	 <Referencia> | <Unique> | <Insertar> | <TipoSelect> | <TipoCreate> | <TipoFrom> | <TipoWhere> | <Add> | <DentroDe> | <Valores> | <Ejecutar> | <Etiqueta> | <TerminarEtiqueta>
 	 )* <EOF>
 }

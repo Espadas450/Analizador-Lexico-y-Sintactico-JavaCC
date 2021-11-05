@@ -1,16 +1,29 @@
 void (){
     int
 }
+GROUP BY, group by, HAVING, having, ORDER BY, order by, OVER, over, alter, ALTER, create, CREATE, drop, DROP, set, SET 
 Console.WriteLine("")
 ABS, abs, ACOS, acos, ASIN, asin, ATAN, atan, COS, cos, COT, cot, FLOOR, floor, LOG, log, LOG10, log10, PI, pi, POWER, power, RADIANS, radians, ROUND, round, SIN, sin, SQRT, sqrt, SQUARE, square, TAN, tan 
 char
 0
+Length, Write, WriteLine, ToChar, ToString, Read,  ReadLine, Clear, ReadKey, Parse, ASCII, ascii, CHAR, char, CONCAT, concat, FORMAT, format, LEN, len, LOWER, lower, REPLACE, replace, REVERSE, reverse, SUBSTRING, substring, UPPER, upper 
 Str
 ,
+EXEC, exec
+VALUES, values 
+INTO, into 
+INSERT, insert 
+add, ADD 
+database, DATABASE , PROCEDURE , procedure , table , TABLE , USER , user , VIEW , view 
+alter, ALTER, create, CREATE, drop, DROP, set, SET, use, USE 
+MATCH, match 
+INNER, inner , JOIN , join , LEFT , left , OUTER , outer , RIGHT , right , FULL , full , CROSS , cross , APPLY , apply , PIVOT , pivot , UNPIVOT , unpivot 
 ;
 Group by
+AVG, avg, COUNT, count, max, MAX, min, MIN , sum, SUM
 SeLeCT
 iF
+DATEDIFF, datediff, DATEADD, dateadd, DATENAME, datename, DAY, day, GETDATE, getdate, MONTH, month, YEAR, year
 finally
 Console.WriteLine("")
 '
