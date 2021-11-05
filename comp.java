@@ -11,25 +11,27 @@ class comp implements compConstants {
                 }
                 catch(ParseException e)
                 {
-                        System.err.println(e.getMessage());
+                        System.err.print(e.getMessage());
                         System.out.println("\tChecker ha terminado.");
                 }
                 catch(TokenMgrError e)
                 {
-                        System.err.println(e.getMessage());
+                        System.err.print(e.getMessage());
                         System.out.println("\tChecker ha terminado.");
                 }
         }
 
   static final public void Program() throws ParseException {
+        System.out.println("+==========================================+");
+        System.out.println("|     Token      |=====|    Atributo       |");
+        System.out.println("+==========================================+");
+        boolean flag = true;
         int Tid;
         String Timage;
         List<String> ID = new ArrayList<String>();
     label_1:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case Numero:
-      case IDENTIFICADOR:
       case Comentario:
       case Pregunta:
       case Entonces:
@@ -47,6 +49,7 @@ class comp implements compConstants {
       case Clase:
       case Sustitucion:
       case TipoAcceso:
+      case Ciclo:
       case SelectivaMultiple:
       case Defecto:
       case Asignar:
@@ -67,10 +70,17 @@ class comp implements compConstants {
       case Intenta:
       case Romper:
       case Base:
+      case AtributosEtiqueta:
       case Propiedad:
       case ResultadoLogico:
       case Lista:
       case Retorno:
+      case Libreria:
+      case TipoLibreria:
+      case Nulo:
+      case Not:
+      case Like:
+      case OperadorNew:
       case OpAritmetico:
       case OpAritmeticoUnitario:
       case OpAritmeticoBinario:
@@ -96,7 +106,18 @@ class comp implements compConstants {
       case Unique:
       case Insertar:
       case Etiqueta:
+      case Estatico:
+      case Main:
+      case Args:
+      case EventsArgs:
+      case Object:
+      case Sender:
       case TerminarEtiqueta:
+      case Herencia:
+      case On:
+      case Dbo:
+      case Numero:
+      case IDENTIFICADOR:
         ;
         break;
       default:
@@ -104,221 +125,438 @@ class comp implements compConstants {
         break label_1;
       }
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case Comillas:
-        jj_consume_token(Comillas);
+      case Estatico:
+        jj_consume_token(Estatico);
+                System.out.println("  Estatico" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
-      case TipoDato:
-        jj_consume_token(TipoDato);
+      case Main:
+        jj_consume_token(Main);
+                System.out.println("  Main" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
-      case Comparador:
-        jj_consume_token(Comparador);
+      case Herencia:
+        jj_consume_token(Herencia);
+                System.out.println("  Herencia" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
-      case TipoAcceso:
-        jj_consume_token(TipoAcceso);
+      case Args:
+        jj_consume_token(Args);
+                System.out.println("  Args" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
-      case SelectivaMultiple:
-        jj_consume_token(SelectivaMultiple);
+      case EventsArgs:
+        jj_consume_token(EventsArgs);
+                System.out.println("  EventsArgs" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
-      case OpLogicoBoolBinario:
-        jj_consume_token(OpLogicoBoolBinario);
+      case Object:
+        jj_consume_token(Object);
+                System.out.println("  Object" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
-      case OpLogicoBoolBinarioCondicional:
-        jj_consume_token(OpLogicoBoolBinarioCondicional);
-        break;
-      case OpAritmeticoBinario:
-        jj_consume_token(OpAritmeticoBinario);
-        break;
-      case OpAritmeticoUnitario:
-        jj_consume_token(OpAritmeticoUnitario);
-        break;
-      case OpAritmetico:
-        jj_consume_token(OpAritmetico);
-        break;
-      case Lista:
-        jj_consume_token(Lista);
-        break;
-      case ResultadoLogico:
-        jj_consume_token(ResultadoLogico);
-        break;
-      case Propiedad:
-        jj_consume_token(Propiedad);
-        break;
-      case FuncionString:
-        jj_consume_token(FuncionString);
-        break;
-      case FuncionAgregar:
-        jj_consume_token(FuncionAgregar);
-        break;
-      case FuncionDate:
-        jj_consume_token(FuncionDate);
-        break;
-      case FuncionMath:
-        jj_consume_token(FuncionMath);
-        break;
-      case FuncionConvert:
-        jj_consume_token(FuncionConvert);
-        break;
-      case FuncionLogica:
-        jj_consume_token(FuncionLogica);
-        break;
-      case FuncionAnalitic:
-        jj_consume_token(FuncionAnalitic);
-        break;
-      case Defecto:
-        jj_consume_token(Defecto);
-        break;
-      case Pregunta:
-        jj_consume_token(Pregunta);
-        break;
-      case Entonces:
-        jj_consume_token(Entonces);
-        break;
-      case ParenIzq:
-        jj_consume_token(ParenIzq);
-        break;
-      case LlaveIzq:
-        jj_consume_token(LlaveIzq);
-        break;
-      case LlaveDer:
-        jj_consume_token(LlaveDer);
-        break;
-      case ParenDer:
-        jj_consume_token(ParenDer);
-        break;
-      case Puntuacion:
-        jj_consume_token(Puntuacion);
-        break;
-      case AccesoMiembro:
-        jj_consume_token(AccesoMiembro);
-        break;
-      case Clase:
-        jj_consume_token(Clase);
-        break;
-      case Sustitucion:
-        jj_consume_token(Sustitucion);
-        break;
-      case Asignar:
-        jj_consume_token(Asignar);
-        break;
-      case Case:
-        jj_consume_token(Case);
-        break;
-      case Metodo:
-        jj_consume_token(Metodo);
+      case Sender:
+        jj_consume_token(Sender);
+                System.out.println("  Sender" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case IDENTIFICADOR:
         jj_consume_token(IDENTIFICADOR);
                 Tid=token.kind;
                 Timage=token.image;
-                if(ID.indexOf(Timage)==-1){
+                if(ID.indexOf(Timage)==-1)
                         ID.add(Timage);
-                        System.out.println(Tid+ " " + Timage + " [" + ID.indexOf(Timage) + "]");
-                        }
-                else{
-                        System.out.println(Tid+ " " + Timage + " [" + ID.indexOf(Timage) + "]");
-                }
+                System.out.println("  Identificador   \t\t[" + ID.indexOf(Timage) + "]("+Timage+")\t     ");
+        break;
+      case Comillas:
+        jj_consume_token(Comillas);
+                System.out.println("  Comillas" + "   \t\t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case TipoDato:
+        jj_consume_token(TipoDato);
+                System.out.println("  TipoDato" + "   \t\t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case Comparador:
+        jj_consume_token(Comparador);
+                System.out.println("  Comparador" + "   \t\t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case TipoAcceso:
+        jj_consume_token(TipoAcceso);
+                System.out.println("  TipoAcceso" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case SelectivaMultiple:
+        jj_consume_token(SelectivaMultiple);
+                System.out.println("  SelectivaMultiple" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case OpLogicoBoolBinario:
+        jj_consume_token(OpLogicoBoolBinario);
+                System.out.println("  OpLogicoBoolBinario" + "   \t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case OpLogicoBoolBinarioCondicional:
+        jj_consume_token(OpLogicoBoolBinarioCondicional);
+                System.out.println("  OpLogicoBoolBinarioCondicional" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case OpAritmeticoBinario:
+        jj_consume_token(OpAritmeticoBinario);
+                System.out.println("  OpAritmeticoBinario" + "   \t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case OpAritmeticoUnitario:
+        jj_consume_token(OpAritmeticoUnitario);
+                System.out.println("  OpAritmeticoUnitario" + "   \t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case OpAritmetico:
+        jj_consume_token(OpAritmetico);
+                System.out.println("  OpAritmetico" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case Lista:
+        jj_consume_token(Lista);
+                System.out.println("  Lista" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case ResultadoLogico:
+        jj_consume_token(ResultadoLogico);
+                System.out.println("  ResultadoLogico" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case Propiedad:
+        jj_consume_token(Propiedad);
+                System.out.println("  Propiedad" + "   \t\t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case FuncionString:
+        jj_consume_token(FuncionString);
+                System.out.println("  FuncionString" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case FuncionAgregar:
+        jj_consume_token(FuncionAgregar);
+                System.out.println("  FuncionAgregar" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case FuncionDate:
+        jj_consume_token(FuncionDate);
+                System.out.println("  FuncionDate" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case FuncionMath:
+        jj_consume_token(FuncionMath);
+                System.out.println("  FuncionMath" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case FuncionConvert:
+        jj_consume_token(FuncionConvert);
+                System.out.println("  FuncionConvert" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case FuncionLogica:
+        jj_consume_token(FuncionLogica);
+                System.out.println("  FuncionLogica" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case FuncionAnalitic:
+        jj_consume_token(FuncionAnalitic);
+                System.out.println("  FuncionAnalitic" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case Defecto:
+        jj_consume_token(Defecto);
+                System.out.println("  Defecto" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case Pregunta:
+        jj_consume_token(Pregunta);
+                System.out.println("  Pregunta" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case Entonces:
+        jj_consume_token(Entonces);
+                System.out.println("  Entonces" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case ParenIzq:
+        jj_consume_token(ParenIzq);
+                System.out.println("  ParenIzq" + "   \t\t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case LlaveIzq:
+        jj_consume_token(LlaveIzq);
+                System.out.println("  LlaveIzq" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case LlaveDer:
+        jj_consume_token(LlaveDer);
+                System.out.println("  LlaveDer" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case ParenDer:
+        jj_consume_token(ParenDer);
+                System.out.println("  ParenDer" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case Puntuacion:
+        jj_consume_token(Puntuacion);
+                System.out.println("  Puntuacion" + "   \t\t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case AccesoMiembro:
+        jj_consume_token(AccesoMiembro);
+                System.out.println("  AccesoMiembro" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case Clase:
+        jj_consume_token(Clase);
+                System.out.println("  Clase" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case Sustitucion:
+        jj_consume_token(Sustitucion);
+                System.out.println("  Sustitucion" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case Asignar:
+        jj_consume_token(Asignar);
+                System.out.println("  Asignar" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case Case:
+        jj_consume_token(Case);
+                System.out.println("  Case" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case Metodo:
+        jj_consume_token(Metodo);
+                System.out.println("  Metodo" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case ClaseConsole:
         jj_consume_token(ClaseConsole);
+                System.out.println("  ClaseConsole" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Sobrecargar:
         jj_consume_token(Sobrecargar);
+                System.out.println("  Sobrecargar" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Estructura:
         jj_consume_token(Estructura);
+                System.out.println("  Estructura" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case CapExcepcion:
         jj_consume_token(CapExcepcion);
+                System.out.println("  CapExcepcion" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Namespace:
         jj_consume_token(Namespace);
+                System.out.println("  Namespace" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Intenta:
         jj_consume_token(Intenta);
+                System.out.println("  Intenta" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Romper:
         jj_consume_token(Romper);
+                System.out.println("  Romper" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Base:
         jj_consume_token(Base);
+                System.out.println("  Base" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Retorno:
         jj_consume_token(Retorno);
+                System.out.println("  Retorno" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case OpLogicoBoolUnitario:
         jj_consume_token(OpLogicoBoolUnitario);
+                System.out.println("  OpLogicoBoolUnitario" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Numero:
         jj_consume_token(Numero);
+                System.out.println("  Numero" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Consulta:
         jj_consume_token(Consulta);
+                System.out.println("  Consulta" + "   \t\t\t" + token.image +  "\t\t     ");
+                flag=false;
         break;
       case Comentario:
         jj_consume_token(Comentario);
+                System.out.println("  Comentario" + "   \t\t\t" + token.image +  "\t\t     ");
+                flag=false;
         break;
       case CorIzq:
         jj_consume_token(CorIzq);
+                System.out.println("  Consulta" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case CorDer:
         jj_consume_token(CorDer);
+                System.out.println("  Consulta" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Declaracion:
         jj_consume_token(Declaracion);
+                System.out.println("  Declaracion" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
         break;
       case Agregar:
         jj_consume_token(Agregar);
+                System.out.println("  INSERT" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Check:
         jj_consume_token(Check);
+                System.out.println("  Check" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Constraint:
         jj_consume_token(Constraint);
+                System.out.println("  Constraint" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Llave:
         jj_consume_token(Llave);
+                System.out.println("  Key" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case TipoLlave:
         jj_consume_token(TipoLlave);
+                System.out.println("  LlaveTipo" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
         break;
       case Referencia:
         jj_consume_token(Referencia);
+                System.out.println("  Referencia" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Unique:
         jj_consume_token(Unique);
+                System.out.println("  Unique" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Insertar:
         jj_consume_token(Insertar);
+                System.out.println("  Insertar" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case TipoSelect:
         jj_consume_token(TipoSelect);
+                System.out.println("  TipoSelect" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
         break;
       case TipoCreate:
         jj_consume_token(TipoCreate);
+                System.out.println("  TipoCreate" + "   \t\t\t" + token.image +  "\t\t     ");
+                flag=false;
         break;
       case TipoFrom:
         jj_consume_token(TipoFrom);
+                System.out.println("  TipoFrom" + "   \t\t\t" + token.image +  "\t\t     ");
+                flag=false;
         break;
       case TipoWhere:
         jj_consume_token(TipoWhere);
+                System.out.println("  TipoWhere" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
         break;
       case Add:
         jj_consume_token(Add);
+                System.out.println("  ADD" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case DentroDe:
         jj_consume_token(DentroDe);
+                System.out.println("  INTO" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Valores:
         jj_consume_token(Valores);
+                System.out.println("  VALUES" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Ejecutar:
         jj_consume_token(Ejecutar);
+                System.out.println("  EXECT" + "   \t\t" +  "\t\t     ");
+                flag=false;
         break;
       case Etiqueta:
         jj_consume_token(Etiqueta);
+                System.out.println("  Etiqueta" + "   \t\t\t" + token.image +  "\t\t     ");
+                flag=false;
         break;
       case TerminarEtiqueta:
         jj_consume_token(TerminarEtiqueta);
+                System.out.println("  TerminarEtiqueta" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case TipoLibreria:
+        jj_consume_token(TipoLibreria);
+                System.out.println("  TipoLibreria" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case Libreria:
+        jj_consume_token(Libreria);
+                System.out.println("  Libreria" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case Ciclo:
+        jj_consume_token(Ciclo);
+                System.out.println("  Ciclo" + "   \t\t\t" + token.image +  "\t\t     ");
+                flag=false;
+        break;
+      case Nulo:
+        jj_consume_token(Nulo);
+                System.out.println("  Nulo" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case Not:
+        jj_consume_token(Not);
+                System.out.println("  Not" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case Like:
+        jj_consume_token(Like);
+                System.out.println("  Like" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case On:
+        jj_consume_token(On);
+                System.out.println("  ON" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case Dbo:
+        jj_consume_token(Dbo);
+                System.out.println("  Dbo" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case OperadorNew:
+        jj_consume_token(OperadorNew);
+                System.out.println("  OperadorNew" + "   \t\t" +  "\t\t     ");
+                flag=false;
+        break;
+      case AtributosEtiqueta:
+        jj_consume_token(AtributosEtiqueta);
+                System.out.println("  AtributosEtiqueta" + "   \t\t" + token.image +  "\t\t     ");
+                flag=false;
         break;
       default:
         jj_la1[1] = jj_gen;
@@ -327,6 +565,7 @@ class comp implements compConstants {
       }
     }
     jj_consume_token(0);
+                System.out.println("+===================================================+");
   }
 
   static private boolean jj_initialized_once = false;
@@ -363,34 +602,34 @@ class comp implements compConstants {
       jj_la1_init_9();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x27f0c,0x27f0c,};
+      jj_la1_0 = new int[] {0x9fc0,0x9fc0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x84e04e00,0x84e04e00,};
+      jj_la1_1 = new int[] {0x42702380,0x42702380,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x7e20,0x7e20,};
+      jj_la1_2 = new int[] {0x3f18,0x3f18,};
    }
    private static void jj_la1_init_3() {
-      jj_la1_3 = new int[] {0x202080,0x202080,};
+      jj_la1_3 = new int[] {0x808200,0x808200,};
    }
    private static void jj_la1_init_4() {
-      jj_la1_4 = new int[] {0x1fc21080,0x1fc21080,};
+      jj_la1_4 = new int[] {0x7f084200,0x7f084200,};
    }
    private static void jj_la1_init_5() {
-      jj_la1_5 = new int[] {0x624000,0x624000,};
+      jj_la1_5 = new int[] {0xc4c00000,0xc4c00000,};
    }
    private static void jj_la1_init_6() {
-      jj_la1_6 = new int[] {0x84483120,0x84483120,};
+      jj_la1_6 = new int[] {0x83127c01,0x83127c01,};
    }
    private static void jj_la1_init_7() {
-      jj_la1_7 = new int[] {0xf83e0c00,0xf83e0c00,};
+      jj_la1_7 = new int[] {0xe0c00844,0xe0c00844,};
    }
    private static void jj_la1_init_8() {
-      jj_la1_8 = new int[] {0x1800003c,0x1800003c,};
+      jj_la1_8 = new int[] {0x3cf83,0x3cf83,};
    }
    private static void jj_la1_init_9() {
-      jj_la1_9 = new int[] {0x0,0x0,};
+      jj_la1_9 = new int[] {0x6ffe00,0x6ffe00,};
    }
 
   /** Constructor with InputStream. */
@@ -528,7 +767,7 @@ class comp implements compConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[290];
+    boolean[] la1tokens = new boolean[316];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -569,7 +808,7 @@ class comp implements compConstants {
         }
       }
     }
-    for (int i = 0; i < 290; i++) {
+    for (int i = 0; i < 316; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

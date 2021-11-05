@@ -9,573 +9,625 @@ public interface compConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int Letra = 1;
+  int ComentC = 1;
   /** RegularExpression Id. */
-  int Numero = 2;
+  int ComentSQLInicio = 2;
   /** RegularExpression Id. */
-  int IDENTIFICADOR = 3;
+  int ComentSQLFin = 3;
   /** RegularExpression Id. */
-  int ComentC = 4;
+  int ComentHTML = 4;
   /** RegularExpression Id. */
-  int ComentSQLInicio = 5;
+  int ComentPy = 5;
   /** RegularExpression Id. */
-  int ComentSQLFin = 6;
+  int Comentario = 6;
   /** RegularExpression Id. */
-  int ComentHTML = 7;
+  int Pregunta = 7;
   /** RegularExpression Id. */
-  int Comentario = 8;
+  int Entonces = 8;
   /** RegularExpression Id. */
-  int Pregunta = 9;
+  int ParenIzq = 9;
   /** RegularExpression Id. */
-  int Entonces = 10;
+  int ParenDer = 10;
   /** RegularExpression Id. */
-  int ParenIzq = 11;
+  int CorIzq = 11;
   /** RegularExpression Id. */
-  int ParenDer = 12;
+  int CorDer = 12;
   /** RegularExpression Id. */
-  int CorIzq = 13;
+  int Comilla = 13;
   /** RegularExpression Id. */
-  int CorDer = 14;
+  int Apost = 14;
   /** RegularExpression Id. */
-  int Comilla = 15;
+  int Comillas = 15;
   /** RegularExpression Id. */
-  int Apost = 16;
+  int Char = 16;
   /** RegularExpression Id. */
-  int Comillas = 17;
+  int Int = 17;
   /** RegularExpression Id. */
-  int Char = 18;
+  int Float = 18;
   /** RegularExpression Id. */
-  int Int = 19;
+  int Double = 19;
   /** RegularExpression Id. */
-  int Float = 20;
+  int String = 20;
   /** RegularExpression Id. */
-  int Double = 21;
+  int Bool = 21;
   /** RegularExpression Id. */
-  int String = 22;
+  int Var = 22;
   /** RegularExpression Id. */
-  int Bool = 23;
+  int Byte = 23;
   /** RegularExpression Id. */
-  int Var = 24;
+  int Long = 24;
   /** RegularExpression Id. */
-  int Byte = 25;
+  int Short = 25;
   /** RegularExpression Id. */
-  int Long = 26;
+  int Ulong = 26;
   /** RegularExpression Id. */
-  int Short = 27;
+  int UINT = 27;
   /** RegularExpression Id. */
-  int Ulong = 28;
+  int Sbyte = 28;
   /** RegularExpression Id. */
-  int UINT = 29;
+  int Ushort = 29;
   /** RegularExpression Id. */
-  int Sbyte = 30;
+  int Nchar = 30;
   /** RegularExpression Id. */
-  int Ushort = 31;
+  int Varchar = 31;
   /** RegularExpression Id. */
-  int Nchar = 32;
+  int DATE = 32;
   /** RegularExpression Id. */
-  int Varchar = 33;
+  int DATETIME = 33;
   /** RegularExpression Id. */
-  int DATE = 34;
+  int Numeric = 34;
   /** RegularExpression Id. */
-  int DATETIME = 35;
+  int NVARCHAR = 35;
   /** RegularExpression Id. */
-  int Numeric = 36;
+  int Bit = 36;
   /** RegularExpression Id. */
-  int NVARCHAR = 37;
+  int Money = 37;
   /** RegularExpression Id. */
-  int Bit = 38;
+  int Str = 38;
   /** RegularExpression Id. */
-  int Money = 39;
+  int TipoDato = 39;
   /** RegularExpression Id. */
-  int Str = 40;
+  int LlaveIzq = 40;
   /** RegularExpression Id. */
-  int TipoDato = 41;
+  int LlaveDer = 41;
   /** RegularExpression Id. */
-  int LlaveIzq = 42;
+  int PuntoYComa = 42;
   /** RegularExpression Id. */
-  int LlaveDer = 43;
+  int Gbajo = 43;
   /** RegularExpression Id. */
-  int PuntoYComa = 44;
+  int Coma = 44;
   /** RegularExpression Id. */
-  int Coma = 45;
+  int Puntuacion = 45;
   /** RegularExpression Id. */
-  int Puntuacion = 46;
+  int IgualIgual = 46;
   /** RegularExpression Id. */
-  int IgualIgual = 47;
+  int MenorQue = 47;
   /** RegularExpression Id. */
-  int MenorQue = 48;
+  int MayorQue = 48;
   /** RegularExpression Id. */
-  int MayorQue = 49;
+  int DiferenteDe = 49;
   /** RegularExpression Id. */
-  int DiferenteDe = 50;
+  int MenorIgual = 50;
   /** RegularExpression Id. */
-  int MenorIgual = 51;
+  int MayorIgual = 51;
   /** RegularExpression Id. */
-  int MayorIgual = 52;
+  int Comparador = 52;
   /** RegularExpression Id. */
-  int Comparador = 53;
+  int AccesoMiembro = 53;
   /** RegularExpression Id. */
-  int AccesoMiembro = 54;
+  int Clase = 54;
   /** RegularExpression Id. */
-  int Clase = 55;
+  int Arroba = 55;
   /** RegularExpression Id. */
-  int Arroba = 56;
+  int SignoDinero = 56;
   /** RegularExpression Id. */
-  int SignoDinero = 57;
+  int Sustitucion = 57;
   /** RegularExpression Id. */
-  int Sustitucion = 58;
+  int Public = 58;
   /** RegularExpression Id. */
-  int Public = 59;
+  int Protected = 59;
   /** RegularExpression Id. */
-  int Protected = 60;
+  int Private = 60;
   /** RegularExpression Id. */
-  int Private = 61;
+  int Internal = 61;
   /** RegularExpression Id. */
-  int Internal = 62;
+  int TipoAcceso = 62;
   /** RegularExpression Id. */
-  int TipoAcceso = 63;
+  int Do = 63;
   /** RegularExpression Id. */
-  int Do = 64;
+  int For = 64;
   /** RegularExpression Id. */
-  int For = 65;
+  int Foreach = 65;
   /** RegularExpression Id. */
-  int Foreach = 66;
+  int While = 66;
   /** RegularExpression Id. */
-  int While = 67;
+  int Ciclo = 67;
   /** RegularExpression Id. */
-  int Ciclo = 68;
+  int SelectivaMultiple = 68;
   /** RegularExpression Id. */
-  int SelectivaMultiple = 69;
+  int Else = 69;
   /** RegularExpression Id. */
-  int Else = 70;
+  int Finally = 70;
   /** RegularExpression Id. */
-  int Finally = 71;
+  int Default = 71;
   /** RegularExpression Id. */
-  int Default = 72;
+  int Defecto = 72;
   /** RegularExpression Id. */
-  int Defecto = 73;
+  int Asignar = 73;
   /** RegularExpression Id. */
-  int Asignar = 74;
+  int Case = 74;
   /** RegularExpression Id. */
-  int Case = 75;
+  int Metodo = 75;
   /** RegularExpression Id. */
-  int Metodo = 76;
+  int ClaseConsole = 76;
   /** RegularExpression Id. */
-  int ClaseConsole = 77;
+  int Sobrecargar = 77;
   /** RegularExpression Id. */
-  int Sobrecargar = 78;
+  int Concat = 78;
   /** RegularExpression Id. */
-  int Concat = 79;
+  int Concat_Ws = 79;
   /** RegularExpression Id. */
-  int Concat_Ws = 80;
+  int Length = 80;
   /** RegularExpression Id. */
-  int Length = 81;
+  int Write = 81;
   /** RegularExpression Id. */
-  int Write = 82;
+  int WriteLine = 82;
   /** RegularExpression Id. */
-  int WriteLine = 83;
+  int Read = 83;
   /** RegularExpression Id. */
-  int Read = 84;
+  int ReadLine = 84;
   /** RegularExpression Id. */
-  int ReadLine = 85;
+  int ReadKey = 85;
   /** RegularExpression Id. */
-  int ReadKey = 86;
+  int Ascii = 86;
   /** RegularExpression Id. */
-  int Ascii = 87;
+  int Clear = 87;
   /** RegularExpression Id. */
-  int Clear = 88;
+  int Delete = 88;
   /** RegularExpression Id. */
-  int Delete = 89;
+  int Include = 89;
   /** RegularExpression Id. */
-  int Include = 90;
+  int Substring = 90;
   /** RegularExpression Id. */
-  int Substring = 91;
+  int ToChar = 91;
   /** RegularExpression Id. */
-  int ToChar = 92;
+  int Upper = 92;
   /** RegularExpression Id. */
-  int Upper = 93;
+  int ToUpper = 93;
   /** RegularExpression Id. */
-  int ToUpper = 94;
+  int Lower = 94;
   /** RegularExpression Id. */
-  int Lower = 95;
+  int ToLower = 95;
   /** RegularExpression Id. */
-  int ToLower = 96;
+  int ToString = 96;
   /** RegularExpression Id. */
-  int ToString = 97;
+  int Next = 97;
   /** RegularExpression Id. */
-  int Next = 98;
+  int Replace = 98;
   /** RegularExpression Id. */
-  int Replace = 99;
+  int Len = 99;
   /** RegularExpression Id. */
-  int Len = 100;
+  int Imprimir = 100;
   /** RegularExpression Id. */
   int Reverse = 101;
   /** RegularExpression Id. */
-  int Format = 102;
+  int As = 102;
   /** RegularExpression Id. */
-  int FuncionString = 103;
+  int EchoPhp = 103;
   /** RegularExpression Id. */
-  int AVG = 104;
+  int Format = 104;
   /** RegularExpression Id. */
-  int Count = 105;
+  int FuncionString = 105;
   /** RegularExpression Id. */
-  int Max = 106;
+  int AVG = 106;
   /** RegularExpression Id. */
-  int Min = 107;
+  int Count = 107;
   /** RegularExpression Id. */
-  int Sum = 108;
+  int Max = 108;
   /** RegularExpression Id. */
-  int FuncionAgregar = 109;
+  int Min = 109;
   /** RegularExpression Id. */
-  int DateDiff = 110;
+  int Sum = 110;
   /** RegularExpression Id. */
-  int DateAdd = 111;
+  int FuncionAgregar = 111;
   /** RegularExpression Id. */
-  int DateName = 112;
+  int DateDiff = 112;
   /** RegularExpression Id. */
-  int Day = 113;
+  int DateAdd = 113;
   /** RegularExpression Id. */
-  int GetDate = 114;
+  int DateName = 114;
   /** RegularExpression Id. */
-  int Month = 115;
+  int Day = 115;
   /** RegularExpression Id. */
-  int Year = 116;
+  int GetDate = 116;
   /** RegularExpression Id. */
-  int FuncionDate = 117;
+  int Month = 117;
   /** RegularExpression Id. */
-  int Abs = 118;
+  int Year = 118;
   /** RegularExpression Id. */
-  int Acos = 119;
+  int FuncionDate = 119;
   /** RegularExpression Id. */
-  int Asin = 120;
+  int Abs = 120;
   /** RegularExpression Id. */
-  int Atan = 121;
+  int Acos = 121;
   /** RegularExpression Id. */
-  int Cos = 122;
+  int Asin = 122;
   /** RegularExpression Id. */
-  int Cot = 123;
+  int Atan = 123;
   /** RegularExpression Id. */
-  int Floor = 124;
+  int Cos = 124;
   /** RegularExpression Id. */
-  int Log = 125;
+  int Cot = 125;
   /** RegularExpression Id. */
-  int LogDiez = 126;
+  int Floor = 126;
   /** RegularExpression Id. */
-  int Pi = 127;
+  int Log = 127;
   /** RegularExpression Id. */
-  int Power = 128;
+  int LogDiez = 128;
   /** RegularExpression Id. */
-  int Radians = 129;
+  int Pi = 129;
   /** RegularExpression Id. */
-  int Round = 130;
+  int Power = 130;
   /** RegularExpression Id. */
-  int Sin = 131;
+  int Radians = 131;
   /** RegularExpression Id. */
-  int Sqrt = 132;
+  int Round = 132;
   /** RegularExpression Id. */
-  int Square = 133;
+  int Sin = 133;
   /** RegularExpression Id. */
-  int Tan = 134;
+  int Sqrt = 134;
   /** RegularExpression Id. */
-  int FuncionMath = 135;
+  int Square = 135;
   /** RegularExpression Id. */
-  int Parse = 136;
+  int Tan = 136;
   /** RegularExpression Id. */
-  int Try_Cast = 137;
+  int FuncionMath = 137;
   /** RegularExpression Id. */
-  int Try_Convert = 138;
+  int Parse = 138;
   /** RegularExpression Id. */
-  int Try_Parse = 139;
+  int Try_Cast = 139;
   /** RegularExpression Id. */
-  int FuncionConvert = 140;
+  int Try_Convert = 140;
   /** RegularExpression Id. */
-  int Choose = 141;
+  int Try_Parse = 141;
   /** RegularExpression Id. */
-  int Greatest = 142;
+  int FuncionConvert = 142;
   /** RegularExpression Id. */
-  int Iif = 143;
+  int Choose = 143;
   /** RegularExpression Id. */
-  int Least = 144;
+  int Greatest = 144;
   /** RegularExpression Id. */
-  int FuncionLogica = 145;
+  int Iif = 145;
   /** RegularExpression Id. */
-  int First_Value = 146;
+  int Least = 146;
   /** RegularExpression Id. */
-  int Last_Value = 147;
+  int FuncionLogica = 147;
   /** RegularExpression Id. */
-  int Lag = 148;
+  int First_Value = 148;
   /** RegularExpression Id. */
-  int Lead = 149;
+  int Last_Value = 149;
   /** RegularExpression Id. */
-  int FuncionAnalitic = 150;
+  int Lag = 150;
   /** RegularExpression Id. */
-  int Estructura = 151;
+  int Lead = 151;
   /** RegularExpression Id. */
-  int CapExcepcion = 152;
+  int FuncionAnalitic = 152;
   /** RegularExpression Id. */
-  int Namespace = 153;
+  int Estructura = 153;
   /** RegularExpression Id. */
-  int Intenta = 154;
+  int CapExcepcion = 154;
   /** RegularExpression Id. */
-  int Romper = 155;
+  int Namespace = 155;
   /** RegularExpression Id. */
-  int Base = 156;
+  int Intenta = 156;
   /** RegularExpression Id. */
-  int Checked = 157;
+  int Romper = 157;
   /** RegularExpression Id. */
-  int BackColor = 158;
+  int Base = 158;
   /** RegularExpression Id. */
-  int Font = 159;
+  int Checked = 159;
   /** RegularExpression Id. */
-  int Text = 160;
+  int BackColor = 160;
   /** RegularExpression Id. */
-  int Enabled = 161;
+  int Font = 161;
   /** RegularExpression Id. */
-  int TextAling = 162;
+  int Text = 162;
   /** RegularExpression Id. */
-  int ReadOnly = 163;
+  int Enabled = 163;
   /** RegularExpression Id. */
-  int Cursor = 164;
+  int TextAling = 164;
   /** RegularExpression Id. */
-  int TabIndex = 165;
+  int ReadOnly = 165;
   /** RegularExpression Id. */
-  int Visible = 166;
+  int Cursor = 166;
   /** RegularExpression Id. */
-  int Locked = 167;
+  int TabIndex = 167;
   /** RegularExpression Id. */
-  int Size = 168;
+  int Visible = 168;
   /** RegularExpression Id. */
-  int Opacity = 169;
+  int Locked = 169;
   /** RegularExpression Id. */
-  int Icon = 170;
+  int Size = 170;
   /** RegularExpression Id. */
-  int AcceptButton = 171;
+  int Opacity = 171;
   /** RegularExpression Id. */
-  int CancelButton = 172;
+  int Icon = 172;
   /** RegularExpression Id. */
-  int DialogResult = 173;
+  int AcceptButton = 173;
   /** RegularExpression Id. */
-  int Propiedad = 174;
+  int CancelButton = 174;
   /** RegularExpression Id. */
-  int True = 175;
+  int DialogResult = 175;
   /** RegularExpression Id. */
-  int False = 176;
+  int Lang = 176;
   /** RegularExpression Id. */
-  int ResultadoLogico = 177;
+  int Charset = 177;
   /** RegularExpression Id. */
-  int List = 178;
+  int Name = 178;
   /** RegularExpression Id. */
-  int Stack = 179;
+  int Content = 179;
   /** RegularExpression Id. */
-  int Queue = 180;
+  int Rel = 180;
   /** RegularExpression Id. */
-  int Lista = 181;
+  int Href = 181;
   /** RegularExpression Id. */
-  int Retorno = 182;
+  int AtributosEtiqueta = 182;
   /** RegularExpression Id. */
-  int Libreria = 183;
+  int Propiedad = 183;
   /** RegularExpression Id. */
-  int Colletions = 184;
+  int True = 184;
   /** RegularExpression Id. */
-  int Dynamic = 185;
+  int False = 185;
   /** RegularExpression Id. */
-  int IO = 186;
+  int ResultadoLogico = 186;
   /** RegularExpression Id. */
-  int Linq = 187;
+  int List = 187;
   /** RegularExpression Id. */
-  int Resources = 188;
+  int Stack = 188;
   /** RegularExpression Id. */
-  int Security = 189;
+  int Queue = 189;
   /** RegularExpression Id. */
-  int Threading = 190;
+  int Lista = 190;
   /** RegularExpression Id. */
-  int Diagnostic = 191;
+  int Retorno = 191;
   /** RegularExpression Id. */
-  int Drawing = 192;
+  int Libreria = 192;
   /** RegularExpression Id. */
-  int TipoLibreria = 193;
+  int Colletions = 193;
   /** RegularExpression Id. */
-  int OperadorNew = 194;
+  int Dynamic = 194;
   /** RegularExpression Id. */
-  int Mas = 195;
+  int IO = 195;
   /** RegularExpression Id. */
-  int Menos = 196;
+  int Linq = 196;
   /** RegularExpression Id. */
-  int OpAritmetico = 197;
+  int Resources = 197;
   /** RegularExpression Id. */
-  int Incremento = 198;
+  int Security = 198;
   /** RegularExpression Id. */
-  int Decremento = 199;
+  int Threading = 199;
   /** RegularExpression Id. */
-  int OpAritmeticoUnitario = 200;
+  int Diagnostic = 200;
   /** RegularExpression Id. */
-  int Multiplicacion = 201;
+  int Drawing = 201;
   /** RegularExpression Id. */
-  int Divison = 202;
+  int TipoLibreria = 202;
   /** RegularExpression Id. */
-  int Modulo = 203;
+  int Nulo = 203;
   /** RegularExpression Id. */
-  int OpAritmeticoBinario = 204;
+  int Not = 204;
   /** RegularExpression Id. */
-  int OpLogicoBoolUnitario = 205;
+  int Like = 205;
   /** RegularExpression Id. */
-  int OrLogico = 206;
+  int OperadorNew = 206;
   /** RegularExpression Id. */
-  int AndLogico = 207;
+  int Mas = 207;
   /** RegularExpression Id. */
-  int ExclusivoOrLogico = 208;
+  int Menos = 208;
   /** RegularExpression Id. */
-  int AND = 209;
+  int OpAritmetico = 209;
   /** RegularExpression Id. */
-  int OR = 210;
+  int Incremento = 210;
   /** RegularExpression Id. */
-  int OpLogicoBoolBinario = 211;
+  int Decremento = 211;
   /** RegularExpression Id. */
-  int AndCondicional = 212;
+  int OpAritmeticoUnitario = 212;
   /** RegularExpression Id. */
-  int OrCondicional = 213;
+  int Multiplicacion = 213;
   /** RegularExpression Id. */
-  int OpLogicoBoolBinarioCondicional = 214;
+  int Divison = 214;
   /** RegularExpression Id. */
-  int Select = 215;
+  int Modulo = 215;
   /** RegularExpression Id. */
-  int From = 216;
+  int OpAritmeticoBinario = 216;
   /** RegularExpression Id. */
-  int Where = 217;
+  int OpLogicoBoolUnitario = 217;
   /** RegularExpression Id. */
-  int Consulta = 218;
+  int OrLogico = 218;
   /** RegularExpression Id. */
-  int GroupBy = 219;
+  int AndLogico = 219;
   /** RegularExpression Id. */
-  int Having = 220;
+  int ExclusivoOrLogico = 220;
   /** RegularExpression Id. */
-  int OrderBy = 221;
+  int AND = 221;
   /** RegularExpression Id. */
-  int Over = 222;
+  int OR = 222;
   /** RegularExpression Id. */
-  int TipoSelect = 223;
+  int OpLogicoBoolBinario = 223;
   /** RegularExpression Id. */
-  int Inner = 224;
+  int AndCondicional = 224;
   /** RegularExpression Id. */
-  int Join = 225;
+  int OrCondicional = 225;
   /** RegularExpression Id. */
-  int Left = 226;
+  int OpLogicoBoolBinarioCondicional = 226;
   /** RegularExpression Id. */
-  int Outer = 227;
+  int Select = 227;
   /** RegularExpression Id. */
-  int Right = 228;
+  int From = 228;
   /** RegularExpression Id. */
-  int Full = 229;
+  int Where = 229;
   /** RegularExpression Id. */
-  int Cross = 230;
+  int Consulta = 230;
   /** RegularExpression Id. */
-  int Apply = 231;
+  int GroupBy = 231;
   /** RegularExpression Id. */
-  int Pivot = 232;
+  int Having = 232;
   /** RegularExpression Id. */
-  int Unpivot = 233;
+  int OrderBy = 233;
   /** RegularExpression Id. */
-  int TipoFrom = 234;
+  int Over = 234;
   /** RegularExpression Id. */
-  int TipoWhere = 235;
+  int TipoSelect = 235;
   /** RegularExpression Id. */
-  int BaseDatos = 236;
+  int Inner = 236;
   /** RegularExpression Id. */
-  int Procedimiento = 237;
+  int Join = 237;
   /** RegularExpression Id. */
-  int Table = 238;
+  int Left = 238;
   /** RegularExpression Id. */
-  int User = 239;
+  int Outer = 239;
   /** RegularExpression Id. */
-  int View = 240;
+  int Right = 240;
   /** RegularExpression Id. */
-  int TipoCreate = 241;
+  int Full = 241;
   /** RegularExpression Id. */
-  int Add = 242;
+  int Cross = 242;
   /** RegularExpression Id. */
-  int DentroDe = 243;
+  int Apply = 243;
   /** RegularExpression Id. */
-  int Valores = 244;
+  int Pivot = 244;
   /** RegularExpression Id. */
-  int Ejecutar = 245;
+  int Unpivot = 245;
   /** RegularExpression Id. */
-  int Alter = 246;
+  int TipoFrom = 246;
   /** RegularExpression Id. */
-  int Create = 247;
+  int TipoWhere = 247;
   /** RegularExpression Id. */
-  int Drop = 248;
+  int BaseDatos = 248;
   /** RegularExpression Id. */
-  int Set = 249;
+  int Procedimiento = 249;
   /** RegularExpression Id. */
-  int Use = 250;
+  int Table = 250;
   /** RegularExpression Id. */
-  int Declaracion = 251;
+  int User = 251;
   /** RegularExpression Id. */
-  int Agregar = 252;
+  int View = 252;
   /** RegularExpression Id. */
-  int Check = 253;
+  int TipoCreate = 253;
   /** RegularExpression Id. */
-  int Constraint = 254;
+  int Add = 254;
   /** RegularExpression Id. */
-  int Llave = 255;
+  int DentroDe = 255;
   /** RegularExpression Id. */
-  int Primaria = 256;
+  int Valores = 256;
   /** RegularExpression Id. */
-  int Foranea = 257;
+  int Ejecutar = 257;
   /** RegularExpression Id. */
-  int TipoLlave = 258;
+  int Alter = 258;
   /** RegularExpression Id. */
-  int Referencia = 259;
+  int Create = 259;
   /** RegularExpression Id. */
-  int Unique = 260;
+  int Drop = 260;
   /** RegularExpression Id. */
-  int Insertar = 261;
+  int Set = 261;
   /** RegularExpression Id. */
-  int Doctype = 262;
+  int Use = 262;
   /** RegularExpression Id. */
-  int Body = 263;
+  int Declaracion = 263;
   /** RegularExpression Id. */
-  int Br = 264;
+  int Agregar = 264;
   /** RegularExpression Id. */
-  int Button = 265;
+  int Check = 265;
   /** RegularExpression Id. */
-  int Center = 266;
+  int Constraint = 266;
   /** RegularExpression Id. */
-  int Col = 267;
+  int Llave = 267;
   /** RegularExpression Id. */
-  int Footer = 268;
+  int Primaria = 268;
   /** RegularExpression Id. */
-  int Frame = 269;
+  int Foranea = 269;
   /** RegularExpression Id. */
-  int H1 = 270;
+  int TipoLlave = 270;
   /** RegularExpression Id. */
-  int H2 = 271;
+  int Referencia = 271;
   /** RegularExpression Id. */
-  int H3 = 272;
+  int Unique = 272;
   /** RegularExpression Id. */
-  int H4 = 273;
+  int Insertar = 273;
   /** RegularExpression Id. */
-  int H5 = 274;
+  int Doctype = 274;
   /** RegularExpression Id. */
-  int H6 = 275;
+  int Body = 275;
   /** RegularExpression Id. */
-  int Head = 276;
+  int Br = 276;
   /** RegularExpression Id. */
-  int Header = 277;
+  int Button = 277;
   /** RegularExpression Id. */
-  int Ht = 278;
+  int Center = 278;
   /** RegularExpression Id. */
-  int Html = 279;
+  int Col = 279;
   /** RegularExpression Id. */
-  int Img = 280;
+  int Footer = 280;
   /** RegularExpression Id. */
-  int Input = 281;
+  int Frame = 281;
   /** RegularExpression Id. */
-  int Label = 282;
+  int H1 = 282;
   /** RegularExpression Id. */
-  int Etiqueta = 283;
+  int H2 = 283;
   /** RegularExpression Id. */
-  int TerminarEtiqueta = 284;
+  int H3 = 284;
+  /** RegularExpression Id. */
+  int H4 = 285;
+  /** RegularExpression Id. */
+  int H5 = 286;
+  /** RegularExpression Id. */
+  int H6 = 287;
+  /** RegularExpression Id. */
+  int Head = 288;
+  /** RegularExpression Id. */
+  int Header = 289;
+  /** RegularExpression Id. */
+  int Ht = 290;
+  /** RegularExpression Id. */
+  int Html = 291;
+  /** RegularExpression Id. */
+  int Img = 292;
+  /** RegularExpression Id. */
+  int Input = 293;
+  /** RegularExpression Id. */
+  int Label = 294;
+  /** RegularExpression Id. */
+  int Meta = 295;
+  /** RegularExpression Id. */
+  int Title = 296;
+  /** RegularExpression Id. */
+  int Etiqueta = 297;
+  /** RegularExpression Id. */
+  int Estatico = 298;
+  /** RegularExpression Id. */
+  int Main = 299;
+  /** RegularExpression Id. */
+  int Args = 300;
+  /** RegularExpression Id. */
+  int EventsArgs = 301;
+  /** RegularExpression Id. */
+  int Object = 302;
+  /** RegularExpression Id. */
+  int Sender = 303;
+  /** RegularExpression Id. */
+  int TerminarEtiqueta = 304;
+  /** RegularExpression Id. */
+  int Herencia = 305;
+  /** RegularExpression Id. */
+  int On = 306;
+  /** RegularExpression Id. */
+  int Dbo = 307;
+  /** RegularExpression Id. */
+  int Letra = 308;
+  /** RegularExpression Id. */
+  int Numero = 309;
+  /** RegularExpression Id. */
+  int IDENTIFICADOR = 310;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -583,13 +635,11 @@ public interface compConstants {
   /** Literal token values. */
   String[] tokenImage = {
     "<EOF>",
-    "<Letra>",
-    "<Numero>",
-    "<IDENTIFICADOR>",
     "<ComentC>",
     "<ComentSQLInicio>",
     "<ComentSQLFin>",
     "<ComentHTML>",
+    "<ComentPy>",
     "<Comentario>",
     "<Pregunta>",
     "<Entonces>",
@@ -627,6 +677,7 @@ public interface compConstants {
     "<LlaveIzq>",
     "<LlaveDer>",
     "<PuntoYComa>",
+    "<Gbajo>",
     "<Coma>",
     "<Puntuacion>",
     "<IgualIgual>",
@@ -637,7 +688,7 @@ public interface compConstants {
     "<MayorIgual>",
     "<Comparador>",
     "<AccesoMiembro>",
-    "<Clase>",
+    "\"class\"",
     "<Arroba>",
     "<SignoDinero>",
     "<Sustitucion>",
@@ -683,7 +734,10 @@ public interface compConstants {
     "<Next>",
     "<Replace>",
     "<Len>",
+    "<Imprimir>",
     "<Reverse>",
+    "<As>",
+    "<EchoPhp>",
     "<Format>",
     "<FuncionString>",
     "<AVG>",
@@ -756,6 +810,13 @@ public interface compConstants {
     "<AcceptButton>",
     "<CancelButton>",
     "<DialogResult>",
+    "<Lang>",
+    "<Charset>",
+    "<Name>",
+    "<Content>",
+    "<Rel>",
+    "<Href>",
+    "<AtributosEtiqueta>",
     "<Propiedad>",
     "<True>",
     "<False>",
@@ -776,6 +837,9 @@ public interface compConstants {
     "<Diagnostic>",
     "<Drawing>",
     "<TipoLibreria>",
+    "<Nulo>",
+    "<Not>",
+    "<Like>",
     "<OperadorNew>",
     "<Mas>",
     "<Menos>",
@@ -865,8 +929,22 @@ public interface compConstants {
     "<Img>",
     "<Input>",
     "<Label>",
+    "<Meta>",
+    "<Title>",
     "<Etiqueta>",
+    "<Estatico>",
+    "<Main>",
+    "<Args>",
+    "<EventsArgs>",
+    "<Object>",
+    "<Sender>",
     "<TerminarEtiqueta>",
+    "<Herencia>",
+    "<On>",
+    "<Dbo>",
+    "<Letra>",
+    "<Numero>",
+    "<IDENTIFICADOR>",
     "\" \"",
     "\"\\n\"",
     "\"\\r\"",

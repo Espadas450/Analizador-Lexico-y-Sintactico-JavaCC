@@ -12,26 +12,17 @@ class comp
 		}
 		catch(ParseException e)
 		{
-			System.err.println(e.getMessage());
+			System.err.print(e.getMessage());
 			System.out.println("\tChecker ha terminado.");
 		}
 		catch(TokenMgrError e)
 		{
-			System.err.println(e.getMessage());
+			System.err.print(e.getMessage());
 			System.out.println("\tChecker ha terminado.");
 		}
 	}
 }
 PARSER_END(comp)
-
-TOKEN:{
-	<	#Letra: ["a"-"z","A"-"Z"]	> 
-	|
-	<	Numero: ["0" - "9"]	>{
-		System.out.println("Numero");
-	}
-	| <IDENTIFICADOR : ["a"-"z","A"-"Z"](["a"-"z","A"-"Z","0"-"9","_"])*>  //49
-}
 
 /** Comentario*/
 TOKEN:{
@@ -42,6 +33,8 @@ TOKEN:{
 	<	#ComentSQLFin: (["*"]) (["/"])	>
 	|
 	<	#ComentHTML: (["!"]) (["-"]) (["-"]) >
+	|
+	<	#ComentPy: ["#"]	>
 }
 
 TOKEN:{
@@ -50,51 +43,39 @@ TOKEN:{
 	|
 	<ComentSQLInicio>
 	|
-	<ComentSQLFin>	>{
-		System.out.println("Comentario: " + image);
-	}
+	<ComentPy>
+	|
+	<ComentSQLFin>	>
 }
 
 /** Pregunta*/
 TOKEN:{
-	<	Pregunta: (["i"]|["I"]) (["f"]|["F"])	>{
-		System.out.println("Pregunta");
-	}
+	<	Pregunta: (["i"]|["I"]) (["f"]|["F"])	>
 }
 
 /** Entonces*/
 TOKEN:{
-	<	Entonces: (["t"]|["T"]) (["h"]|["H"]) (["e"]|["E"]) (["n"]|["N"])	>{
-		System.out.println("Entonces");
-	}
+	<	Entonces: (["t"]|["T"]) (["h"]|["H"]) (["e"]|["E"]) (["n"]|["N"])	>
 }
 
 /** ParenIzq*/
 TOKEN:{
-	<	ParenIzq: ["("]	>{
-		System.out.println("ParenIzq");
-	}
+	<	ParenIzq: ["("]	>
 }
 
 /** ParenDer*/
 TOKEN:{
-	<	ParenDer: [")"]	>{
-		System.out.println("ParenDer");
-	}
+	<	ParenDer: [")"]	>
 }
 
 /** CorIzq*/
 TOKEN:{
-	<	CorIzq: ["["]	>{
-		System.out.println("CorIzq");
-	}
+	<	CorIzq: ["["]	>
 }
 
 /** CorDer*/
 TOKEN:{
-	<	CorDer: ["]"]	>{
-		System.out.println("CorDer");
-	}
+	<	CorDer: ["]"]	>
 }
 
 /** Comillas*/
@@ -105,9 +86,7 @@ TOKEN:{
 }
 
 TOKEN:{
-	<	Comillas: <Comilla> | <Apost>	>{
-		System.out.println("Comillas: " + image);
-	}
+	<	Comillas: <Comilla> | <Apost>	>
 }
 
 /** TipoDato*/
@@ -205,28 +184,24 @@ TOKEN:{
 	|
 	<Money>
 	|
-	<Str>	>{
-		System.out.println("TipoDato: " + image);
-	}
+	<Str>	>
 }
 
 /** LlaveIzq*/
 TOKEN:{
-	<	LlaveIzq: ["{"]	>{
-		System.out.println("LlaveIzq");
-	}
+	<	LlaveIzq: ["{"]	>
 }
 
 /** LlaveDer*/
 TOKEN:{
-	<	LlaveDer: ["}"]	>{
-		System.out.println("LlaveDer");
-	}
+	<	LlaveDer: ["}"]	>
 }
 
 /** Puntuacion*/
 TOKEN:{
 	<	#PuntoYComa: [";"]	>
+	|
+	<	#Gbajo: ["_"]	>
 	|
 	<	#Coma: [","]	>
 }
@@ -235,9 +210,9 @@ TOKEN:{
 	<	Puntuacion:
 	<PuntoYComa>
 	|
-	<Coma>	>{
-		System.out.println("Puntuacion: " + image);
-	}
+	<Gbajo>
+	|
+	<Coma>	>
 }
 
 /** Comparador*/
@@ -267,23 +242,17 @@ TOKEN:{
 	| 
 	<MenorIgual> 
 	| 
-	<MayorIgual>  >{
-        System.out.println("Comparador: " + image);
-    }
+	<MayorIgual>  >
 }
 
 /** AccesoMiembro*/
 TOKEN:{
-	<	AccesoMiembro: ["."]	>{
-		System.out.println("AccesoMiembro");
-	}
+	<	AccesoMiembro: ["."]	>
 }
 
 /** Clase*/
 TOKEN:{
-	<	Clase: (["C"]) (["l"]) (["a"]) (["s"]) (["s"])	>{
-		System.out.println("Clase");
-	}
+	<	Clase: "class"	>
 }
 
 /** Sustitución*/
@@ -297,9 +266,7 @@ TOKEN:{
 	<	Sustitucion:
 	<Arroba>
 	|
-	<SignoDinero>	>{
-		System.out.println("Sustitucion: " + image);
-	}
+	<SignoDinero>	>
 }
 
 /** TipoAcceso*/
@@ -321,9 +288,7 @@ TOKEN:{
 	|
 	<Private>
 	|
-	<Internal>	>{
-		System.out.println("TipoAcceso: " + image);
-	}
+	<Internal>	>
 }
 
 /** Ciclo*/
@@ -345,16 +310,12 @@ TOKEN:{
 	|
 	<Foreach>
 	|
-	<While>	>{
-		System.out.println("Ciclo: " + image);
-	}
+	<While>	>
 }
 
 /** SelectivaMultiple*/
 TOKEN:{
-	<	SelectivaMultiple: (["s"]) (["w"]) (["i"]) (["t"]) (["c"]) (["h"])	>{
-		System.out.println("SelectivaMultiple");
-	}
+	<	SelectivaMultiple: (["s"]) (["w"]) (["i"]) (["t"]) (["c"]) (["h"])	>
 }
 
 /** Default*/
@@ -372,44 +333,32 @@ TOKEN:{
 	|
 	<Finally>
 	|
-	<Default>	>{
-		System.out.println("Defecto: " + image);
-	}
+	<Default>	>
 }
 
 /** Asignar*/
 TOKEN:{
-	<	Asignar: ["="]	>{
-		System.out.println("Asignar");
-	}
+	<	Asignar: ["="]	>
 }
 
 /** Case*/
 TOKEN:{
-	<	Case: (["c"]|["C"]) (["a"]|["A"]) (["s"]|["S"]) (["e"]|["E"])	>{
-		System.out.println("Case");
-	}
+	<	Case: (["c"]|["C"]) (["a"]|["A"]) (["s"]|["S"]) (["e"]|["E"])	>
 }
 
 /** Método*/
 TOKEN:{
-	<	Metodo: (["v"]) (["o"]) (["i"]) (["d"])	>{
-		System.out.println("Metodo");
-	}
+	<	Metodo: (["v"]) (["o"]) (["i"]) (["d"])	>
 }
 
 /** ClaseConsole*/
 TOKEN:{
-	<	ClaseConsole: (["C"]) (["o"]) (["n"]) (["s"]) (["o"]) (["l"]) (["e"])	>{
-		System.out.println("ClaseConsole");
-	}
+	<	ClaseConsole: (["C"]) (["o"]) (["n"]) (["s"]) (["o"]) (["l"]) (["e"])	>
 }
 
 /** Sobrecargar*/
 TOKEN:{
-	<	Sobrecargar: (["o"]) (["v"]) (["e"]) (["r"]) (["r"]) (["i"]) (["d"]) (["e"])	>{
-		System.out.println("Sobrecargar");
-	}
+	<	Sobrecargar: (["o"]) (["v"]) (["e"]) (["r"]) (["r"]) (["i"]) (["d"]) (["e"])	>
 }
 
 /** FuncionString*/
@@ -420,7 +369,7 @@ TOKEN:{
 	|
 	<	#Length: (["L"]) (["e"]) (["n"]) (["g"]) (["t"]) (["h"])	>
 	|
-	<	#Write: (["W"]) (["r"]) (["i"]) (["t"]) (["e"])	>
+	<	#Write: (["W"]|["w"]) (["r"]) (["i"]) (["t"]) (["e"])	>
 	|
 	<	#WriteLine: (["W"]) (["r"]) (["i"]) (["t"]) (["e"]) (["L"]) (["i"]) (["n"]) (["e"])	>
 	|
@@ -458,7 +407,13 @@ TOKEN:{
 	|
 	<	#Len: (["l"]|["L"]) (["e"]|["E"]) (["n"]|["N"])	>
 	|
+	<	#Imprimir: (["p"]) (["r"]) (["i"]) (["n"]) (["t"]) 	>
+	|
 	<	#Reverse: (["r"]|["R"]) (["e"]|["E"]) (["v"]|["V"]) (["e"]|["E"]) (["r"]|["R"]) (["s"]|["S"]) (["e"]|["E"])	>
+	|
+	<	#As: (["A"]|["a"]) (["S"]|["s"]) 	>
+	|
+	<	#EchoPhp: (["e"]) (["c"]) (["h"]) (["o"]) 	>
 	|
 	<	#Format: (["f"]|["F"]) (["o"]|["O"]) (["r"]|["R"]) (["m"]|["M"]) (["a"]|["A"]) (["t"]|["T"])	>
 }
@@ -467,9 +422,15 @@ TOKEN:{
 	<	FuncionString:
 	<Concat>
 	|
+	<As>
+	|
+	<EchoPhp>
+	|
 	<Concat_Ws>
 	|
 	<Length>
+	|
+	<Imprimir>
 	|
 	<Write>
 	|
@@ -513,9 +474,7 @@ TOKEN:{
 	|
 	<Reverse>
 	|
-	<Format>	>{
-		System.out.println("FuncionString: " + image);
-	}
+	<Format>	>
 }
 
 /** FuncionAgregar*/
@@ -541,9 +500,7 @@ TOKEN:{
 	|
 	<Min>
 	|
-	<Sum>	>{
-		System.out.println("FuncionAgregar: " + image);
-	}
+	<Sum>	>
 }
 
 /** FuncionDate*/
@@ -577,9 +534,7 @@ TOKEN:{
 	|
 	<Month>
 	|
-	<Year>	>{
-		System.out.println("FuncionDate: " + image);
-	}
+	<Year>	>
 }
 
 /** FuncionMath*/
@@ -653,9 +608,7 @@ TOKEN:{
 	|
 	<Square>
 	|
-	<Tan>	>{
-		System.out.println("FuncionMath: "+ image);
-	}
+	<Tan>	>
 }
 
 /** FuncionConvert*/
@@ -677,9 +630,7 @@ TOKEN:{
 	|
 	<Try_Convert>
 	|
-	<Try_Parse>	>{
-		System.out.println("FuncionConvert" + image);
-	}
+	<Try_Parse>	>
 }
 
 /** FuncionLogica*/
@@ -701,9 +652,7 @@ TOKEN:{
 	|
 	<Iif>
 	|
-	<Least>	>{
-		System.out.println("FuncionLogica: " + image);
-	}
+	<Least>	>
 }
 
 /** FuncionAnalitic*/
@@ -725,52 +674,38 @@ TOKEN:{
 	|
 	<Lag>
 	|
-	<Lead>	>{
-		System.out.println("FuncionAnalitic: " + image);
-	}
+	<Lead>	>
 }
 
 
 /** Estructura*/
 TOKEN:{
-	<	Estructura: (["s"]) (["t"]) (["r"]) (["u"]) (["c"]) (["t"])	>{
-		System.out.println("Estructura");
-	}
+	<	Estructura: (["s"]) (["t"]) (["r"]) (["u"]) (["c"]) (["t"])	>
 }
 
 /** CapExcepcion*/
 TOKEN:{
-	<	CapExcepcion: (["c"]) (["a"]) (["t"]) (["c"]) (["h"])	>{
-		System.out.println("CapExcepcion");
-	}
+	<	CapExcepcion: (["c"]) (["a"]) (["t"]) (["c"]) (["h"])	>
 }
 
 /** Namespace*/
 TOKEN:{
-	<	Namespace: (["S"]) (["y"]) (["s"]) (["t"]) (["e"]) (["m"])	>{
-		System.out.println("Namespace");
-	}
+	<	Namespace: (["S"]) (["y"]) (["s"]) (["t"]) (["e"]) (["m"])	>
 }
 
 /** Intenta*/
 TOKEN:{
-	<	Intenta: (["t"]|["T"]) (["r"]|["R"]) (["y"]|["Y"])	>{
-		System.out.println("Intenta");
-	}
+	<	Intenta: (["t"]|["T"]) (["r"]|["R"]) (["y"]|["Y"])	>
 }
 
 /** Romper*/
 TOKEN:{
-	<	Romper: (["b"]) (["r"]) (["e"]) (["a"]) (["k"])	>{
-		System.out.println("Romper");
-	}
+	<	Romper: (["b"]) (["r"]) (["e"]) (["a"]) (["k"])	>
 }
 
 /** Base*/
 TOKEN:{
-	<	Base: (["b"]) (["a"]) (["s"]) (["e"])	>{
-		System.out.println("Base");
-	}
+	<	Base: (["b"]) (["a"]) (["s"]) (["e"])	>
 }
 
 /** Propiedad*/
@@ -781,7 +716,7 @@ TOKEN:{
 	|
 	<	#Font: (["F"]) (["o"]) (["n"]) (["d"])	>
 	|
-	<	#Text: (["T"]) (["e"]) (["x"]) (["T"])	>
+	<	#Text: (["T"]) (["e"]) (["x"]) (["t"])	>
 	|
 	<	#Enabled: (["E"]) (["n"]) (["a"]) (["b"]) (["l"]) (["e"]) (["d"])	>
 	|
@@ -809,7 +744,34 @@ TOKEN:{
 	|
 	<	#DialogResult: (["D"]) (["i"]) (["a"]) (["l"]) (["o"]) (["g"]) (["R"]) (["e"]) (["s"]) (["u"]) (["l"]) (["t"])	>
 }
+TOKEN:{
+	<	#Lang: (["l"]) (["a"]) (["n"]) (["g"])	>
+	|
+	<	#Charset: (["c"]) (["h"]) (["a"]) (["r"]) (["s"]) (["e"]) (["t"])	>
+	|
+	<	#Name: (["n"]) (["a"]) (["m"]) (["e"])	>
+	|
+	<	#Content: (["c"]) (["o"]) (["n"]) (["t"]) (["e"]) (["n"]) (["t"])	>
+	|
+	<	#Rel: (["r"]) (["e"]) (["l"])	>
+	|
+	<	#Href: (["h"]) (["r"]) (["e"]) (["f"])	>
+}
 
+TOKEN:{
+	<	AtributosEtiqueta:
+	<Lang>
+	|
+	<Charset>
+	|
+	<Name>
+	|
+	<Content>
+	|
+	<Rel>
+	|
+	<Href>	>
+}
 TOKEN:{
 	<	Propiedad:
 	<Checked>
@@ -844,9 +806,7 @@ TOKEN:{
 	|
 	<CancelButton>
 	|
-	<DialogResult>	>{
-		System.out.println("Propiedad: " + image);
-	}
+	<DialogResult>	>
 }
 
 /** ResultadoLogico*/
@@ -860,9 +820,7 @@ TOKEN:{
 	<	ResultadoLogico:
 	<True>
 	|
-	<False>	>{
-		System.out.println("ResultadoLogico: " + image);
-	}
+	<False>	>
 }
 
 /** Lista*/
@@ -880,23 +838,17 @@ TOKEN:{
 	|
 	<Stack>
 	|
-	<Queue>	>{
-		System.out.println("Lista: " + image);
-	}
+	<Queue>	>
 }
 
 /** Retorno*/
 TOKEN:{
-	<	Retorno: (["r"]|["R"]) (["e"]|["E"]) (["t"]|["T"]) (["u"]|["U"]) (["r"]|["R"]) (["n"]|["N"])	>{
-		System.out.println("Retorno");
-	}
+	<	Retorno: (["r"]|["R"]) (["e"]|["E"]) (["t"]|["T"]) (["u"]|["U"]) (["r"]|["R"]) (["n"]|["N"])	>
 }
 
 /** Libreria*/
 TOKEN:{
-	<	Libreria: (["u"]|["U"]) (["s"]|["S"]) (["i"]|["I"]) (["n"]|["N"]) (["g"]|["G"])	>{
-		System.out.println("Libreria");
-	}
+	<	Libreria: (["u"]|["U"]) (["s"]|["S"]) (["i"]|["I"]) (["n"]|["N"]) (["g"]|["G"])	>
 }
 
 /** TipoLibreria*/
@@ -940,17 +892,27 @@ TOKEN:{
 	|
 	<Diagnostic>
 	|
-	<Drawing>	>{
-		System.out.println("TipoLibreria: "+ image);
-	}
+	<Drawing>	>
+}
+/** Nulo*/
+TOKEN:{
+	<	Nulo: (["n"]|["N"]) (["u"]|["U"]) (["l"]|["L"]) (["l"]|["L"])	>
+}
+
+/** Not*/
+TOKEN:{
+	<	Not: (["n"]|["N"]) (["o"]|["O"]) (["t"]|["T"])	 >
+}
+/** Like*/
+TOKEN:{
+	<	Like: (["l"]|["L"]) (["i"]|["I"]) (["k"]|["K"]) (["e"]|["E"])  	>
 }
 
 /** OperadorNew*/
 TOKEN:{
-	<	OperadorNew: (["n"]) (["e"]) (["w"])	>{
-		System.out.println("OperadorNew");
-	}
+	<	OperadorNew: (["n"]) (["e"]) (["w"])	>
 }
+
 
 /** OpAritmetico*/
 TOKEN:{
@@ -963,9 +925,7 @@ TOKEN:{
 	<	OpAritmetico:
 	<Mas>
 	|
-	<Menos>	>{
-		System.out.println("OpAritmetico: " + image);
-	}
+	<Menos>	>
 }
 
 /** OpAritmeticoUnitario*/
@@ -979,9 +939,7 @@ TOKEN:{
 	<	OpAritmeticoUnitario:
 	<Incremento>
 	|
-	<Decremento>	>{
-		System.out.println("OpAritmeticoUnitario: " + image);
-	}
+	<Decremento>	>
 }
 
 /** OpAritmeticoBinario*/
@@ -999,16 +957,12 @@ TOKEN:{
 	|
 	<Divison>
 	|
-	<Modulo>	>{
-		System.out.println("OpAritmeticoBinario: " + image);
-	}
+	<Modulo>	>
 }
 
 /** OpLogicoBoolUnitario*/
 TOKEN:{
-	<	OpLogicoBoolUnitario: ["!"]	>{
-		System.out.println("OpLogicoBoolUnitario");
-	}
+	<	OpLogicoBoolUnitario: ["!"]	>
 }
 
 /** OpLogicoBoolBinario*/
@@ -1034,9 +988,7 @@ TOKEN:{
 	|
 	<AND>
 	|
-	<OR>	>{
-		System.out.println("OpLogicoBoolBinario: " + image);
-	}
+	<OR>	>
 }
 
 /** OpLogicoBoolBinarioCondicional*/
@@ -1050,9 +1002,7 @@ TOKEN:{
 	<	OpLogicoBoolBinarioCondicional:
 	<AndCondicional>
 	|
-	<OrCondicional>	>{
-		System.out.println("OpLogicoBoolBinarioCondicional: " + image);
-	}
+	<OrCondicional>	>
 }
 
 /** Consulta*/
@@ -1070,9 +1020,7 @@ TOKEN:{
 	|
 	<From>
 	|
-	<Where>	>{
-		System.out.println("Consulta: " + image);
-	}
+	<Where>	>
 }
 
 /** TipoSelect*/
@@ -1094,9 +1042,7 @@ TOKEN:{
 	|
 	<OrderBy>
 	|
-	<Over>	>{
-		System.out.println("TipoSelect: " + image);
-	}
+	<Over>	>
 }
 
 /** TipoFrom*/
@@ -1142,16 +1088,12 @@ TOKEN:{
 	|
 	<Pivot>
 	|
-	<Unpivot>	>{
-		System.out.println("TipoFrom: " + image);
-	}
+	<Unpivot>	>
 }
 
 /** TipoWhere*/
 TOKEN:{
-	<	TipoWhere: (["m"]|["M"]) (["a"]|["A"]) (["t"]|["T"]) (["c"]|["C"]) (["h"]|["H"])	>{
-		System.out.println("TipoWhere");
-	}
+	<	TipoWhere: (["m"]|["M"]) (["a"]|["A"]) (["t"]|["T"]) (["c"]|["C"]) (["h"]|["H"])	>
 }
 
 /** TipoCreate*/
@@ -1177,37 +1119,27 @@ TOKEN:{
 	|
 	<User>
 	|
-	<View>	>{
-		System.out.println("TipoCreate: " + image);
-	}
+	<View>	>
 }
 
 /** Add*/
 TOKEN:{
-	<	Add: (["a"]|["A"]) (["d"]|["D"]) (["d"]|["D"])	>{
-		System.out.println("Add");
-	}
+	<	Add: (["a"]|["A"]) (["d"]|["D"]) (["d"]|["D"])	>
 }
 
 /** DentroDe*/
 TOKEN:{
-	<	DentroDe: (["i"]|["I"]) (["n"]|["N"]) (["t"]|["T"]) (["o"]|["O"])	>{
-		System.out.println("DentroDe");
-	}
+	<	DentroDe: (["i"]|["I"]) (["n"]|["N"]) (["t"]|["T"]) (["o"]|["O"])	>
 }
 
 /** Valores*/
 TOKEN:{
-	<	Valores: (["v"]|["V"]) (["a"]|["A"]) (["l"]|["L"]) (["u"]|["U"]) (["e"]|["E"]) (["s"]|["S"])	>{
-		System.out.println("Valores");
-	}
+	<	Valores: (["v"]|["V"]) (["a"]|["A"]) (["l"]|["L"]) (["u"]|["U"]) (["e"]|["E"]) (["s"]|["S"])	>
 }
 
 /** Ejecutar*/
 TOKEN:{
-	<	Ejecutar: (["e"]|["E"]) (["x"]|["X"]) (["e"]|["E"]) (["c"]|["C"])	>{
-		System.out.println("Exec");
-	}
+	<	Ejecutar: (["e"]|["E"]) (["x"]|["X"]) (["e"]|["E"]) (["c"]|["C"])	>
 }
 
 /** Declaracion*/
@@ -1233,37 +1165,27 @@ TOKEN:{
 	|
 	<Set>
 	|
-	<Use>	>{
-		System.out.println("Declaracion: " + image);
-	}
+	<Use>	>
 }
 
 /** Agregar*/
 TOKEN:{
-	<	Agregar: (["a"]|["A"]) (["d"]|["D"]) (["d"]|["D"])	>{
-		System.out.println("Agregar");
-	}
+	<	Agregar: (["a"]|["A"]) (["d"]|["D"]) (["d"]|["D"])	>
 }
 
 /** Check*/
 TOKEN:{
-	<	Check: (["c"]|["C"]) (["h"]|["H"]) (["e"]|["E"]) (["c"]|["C"]) (["k"]|["K"])	>{
-		System.out.println("Check");
-	}
+	<	Check: (["c"]|["C"]) (["h"]|["H"]) (["e"]|["E"]) (["c"]|["C"]) (["k"]|["K"])	>
 }
 
 /**Constraint*/
 TOKEN:{
-	<	Constraint: (["c"]|["C"]) (["o"]|["O"]) (["n"]|["N"]) (["s"]|["S"]) (["t"]|["T"]) (["r"]|["R"]) (["a"]|["A"]) (["i"]|["I"]) (["n"]|["N"]) (["t"]|["T"])	>{
-		System.out.println("Constraint");
-	}
+	<	Constraint: (["c"]|["C"]) (["o"]|["O"]) (["n"]|["N"]) (["s"]|["S"]) (["t"]|["T"]) (["r"]|["R"]) (["a"]|["A"]) (["i"]|["I"]) (["n"]|["N"]) (["t"]|["T"])	>
 }
 
 /**Llave*/
 TOKEN:{
-	<	Llave: (["k"]|["K"]) (["e"]|["E"]) (["y"]|["Y"])	>{
-		System.out.println("Llave");
-	}
+	<	Llave: (["k"]|["K"]) (["e"]|["E"]) (["y"]|["Y"])	>
 }
 
 /**TipoLlave*/
@@ -1277,30 +1199,22 @@ TOKEN:{
 	< TipoLlave:
 	<Primaria>
 	|
-	<Foranea>	>{
-		System.out.println("TipoLlave: " + image);
-	}
+	<Foranea>	>
 }
 
 /**Referencia*/
 TOKEN:{
-	<	Referencia: (["r"]|["R"]) (["e"]|["E"]) (["f"]|["F"]) (["e"]|["E"]) (["r"]|["R"]) (["e"]|["E"]) (["n"]|["N"]) (["c"]|["C"]) (["e"]|["E"]) (["s"]|["S"])	>{
-		System.out.println("Referencia");
-	}
+	<	Referencia: (["r"]|["R"]) (["e"]|["E"]) (["f"]|["F"]) (["e"]|["E"]) (["r"]|["R"]) (["e"]|["E"]) (["n"]|["N"]) (["c"]|["C"]) (["e"]|["E"]) (["s"]|["S"])	>
 }
 
 /**Unique*/
 TOKEN:{
-	<	Unique: (["u"]|["U"]) (["n"]|["N"]) (["i"]|["I"]) (["q"]|["Q"]) (["u"]|["U"]) (["e"]|["E"])	>{
-		System.out.println("Unico");
-	}
+	<	Unique: (["u"]|["U"]) (["n"]|["N"]) (["i"]|["I"]) (["q"]|["Q"]) (["u"]|["U"]) (["e"]|["E"])	>
 }
 
 /**Insertar*/
 TOKEN:{
-	<	Insertar: (["i"]|["I"]) (["n"]|["N"]) (["s"]|["S"]) (["e"]|["E"]) (["r"]|["R"]) (["t"]|["T"])	>{
-		System.out.println("Insertar");
-	}
+	<	Insertar: (["i"]|["I"]) (["n"]|["N"]) (["s"]|["S"]) (["e"]|["E"]) (["r"]|["R"]) (["t"]|["T"])	>
 }
 
 /**Etiqueta*/
@@ -1346,6 +1260,10 @@ TOKEN:{
 	<	#Input: (["i"]) (["n"]) (["p"]) (["u"]) (["t"])	>
 	|
 	<	#Label: (["l"]) (["a"]) (["b"]) (["e"]) (["l"])	>
+	|
+	<	#Meta: (["m"]) (["e"]) (["t"]) (["a"])	>
+	|
+	<	#Title: (["t"]) (["i"]) (["t"]) (["l"]) (["e"])	>
 }
 
 TOKEN:{
@@ -1390,15 +1308,55 @@ TOKEN:{
 	|
 	<Input>
 	|
-	<Label>	>{
-		System.out.println("Etiqueta: " + image);
+	<Label>
+	|
+	<Meta>
+	|
+	<Title>	>
+}
+	TOKEN:{
+		<	Estatico: (["s"]) (["t"]) (["a"]) (["t"]) (["i"]) (["c"])	>
 	}
+
+	TOKEN:{
+		<	Main: (["M"]) (["a"]) (["i"]) (["n"])	>
+	}
+
+	TOKEN:{
+		<	Args: (["a"]) (["r"]) (["g"]) (["s"])	>
+	}
+
+	TOKEN:{
+		<	EventsArgs: (["E"])(["v"])(["e"])(["n"])(["t"]) (["s"]) (["A"]) (["r"]) (["g"]) (["s"])	>
+	}
+
+	TOKEN:{
+		<	Object: (["O"]) (["b"]) (["j"]) (["e"]) (["c"]) (["t"])	>
+	}
+
+	TOKEN:{
+		<	Sender: (["s"]) (["e"]) (["n"]) (["d"]) (["e"]) (["r"])	>
+	}
+
+	TOKEN:{
+		<	TerminarEtiqueta: (["<"]) (["/"])	>
+}
+TOKEN:{
+	<	Herencia: ([":"])	>
+}
+TOKEN:{
+	<	On: (["o"]|["O"]) (["n"]|["N"])	>
 }
 
 TOKEN:{
-	<	TerminarEtiqueta: (["<"]) (["/"])	>{
-		System.out.println("TerminarEtiqueta");
-	}
+	<	Dbo: (["d"]|["D"]) (["b"]|["B"]) (["o"]|["O"])	>
+}
+TOKEN:{
+	<	#Letra: ["a"-"z","A"-"Z"]	> 
+	|
+	<	Numero: (["0" - "9"])+	>
+	| 
+	<IDENTIFICADOR : ["a"-"z","A"-"Z"](["a"-"z","A"-"Z","0"-"9","_"])*>  //49
 }
 
 SKIP: { 
@@ -1406,33 +1364,366 @@ SKIP: {
 }
 
 void Program() :
-{
+{ 
+	System.out.println("+==========================================+");
+	System.out.println("|     Token      |=====|    Atributo       |");
+	System.out.println("+==========================================+");
+	boolean flag = true;
 	int Tid;
 	String Timage;
 	List<String> ID = new ArrayList<String>();
 }
 {
-	(<Comillas> | <TipoDato> | <Comparador> | <TipoAcceso> | <SelectivaMultiple> | <OpLogicoBoolBinario> |
-	 <OpLogicoBoolBinarioCondicional> | <OpAritmeticoBinario> | <OpAritmeticoUnitario> | <OpAritmetico> |
-	 <Lista> | <ResultadoLogico> | <Propiedad> | <FuncionString> | <FuncionAgregar> | <FuncionDate> | <FuncionMath> | <FuncionConvert> | <FuncionLogica> | <FuncionAnalitic> | <Defecto> | <Pregunta> | <Entonces> | <ParenIzq> |
-	 <LlaveIzq> | <LlaveDer> | <ParenDer> | <Puntuacion> | <AccesoMiembro> | <Clase> | <Sustitucion> | 
-	 <Asignar> | <Case> | <Metodo> | 
-	 <IDENTIFICADOR>
+	(
+	<Estatico> {
+		System.out.println("  Estatico" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Main> {
+		System.out.println("  Main" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Herencia> {
+		System.out.println("  Herencia" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Args> {
+		System.out.println("  Args" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<EventsArgs> {
+		System.out.println("  EventsArgs" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Object> {
+		System.out.println("  Object" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Sender> {
+		System.out.println("  Sender" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+		<IDENTIFICADOR>
 	 {
 		Tid=token.kind;
 		Timage=token.image;
-		if(ID.indexOf(Timage)==-1){
+		if(ID.indexOf(Timage)==-1)
 			ID.add(Timage);
-			System.out.println(Tid+ " " + Timage + " [" + ID.indexOf(Timage) + "]");
-			}
-		else{
-			System.out.println(Tid+ " " + Timage + " [" + ID.indexOf(Timage) + "]");
-		}
+		System.out.println("  Identificador   \t\t[" + ID.indexOf(Timage) + "]("+Timage+")\t     ");
+		} |
+	<Comillas> {
+		System.out.println("  Comillas" + "   \t\t\t" + token.image +  "\t\t     ");
+		flag=false;
 		}| 
-	<ClaseConsole> | <Sobrecargar> | <Estructura> | <CapExcepcion> | <Namespace> | 
-	 <Intenta> | <Romper> | <Base> | <Retorno> | <OpLogicoBoolUnitario> | <Numero> | <Consulta> | <Comentario> |
-	 <CorIzq> | <CorDer> | <Declaracion> | <Agregar> | <Check> | <Constraint> | <Llave> | <TipoLlave> |
-	 <Referencia> | <Unique> | <Insertar> | <TipoSelect> | <TipoCreate> | <TipoFrom> | <TipoWhere> | 
-	 <Add> | <DentroDe> | <Valores> | <Ejecutar> | <Etiqueta> | <TerminarEtiqueta>
-	 )* <EOF>
+	<TipoDato> {
+		System.out.println("  TipoDato" + "   \t\t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<Comparador> {
+		System.out.println("  Comparador" + "   \t\t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<TipoAcceso> {
+		System.out.println("  TipoAcceso" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<SelectivaMultiple> {
+		System.out.println("  SelectivaMultiple" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<OpLogicoBoolBinario>{
+		System.out.println("  OpLogicoBoolBinario" + "   \t" + token.image +  "\t\t     ");
+		flag=false;
+		} |
+	<OpLogicoBoolBinarioCondicional> {
+		System.out.println("  OpLogicoBoolBinarioCondicional" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<OpAritmeticoBinario> {
+		System.out.println("  OpAritmeticoBinario" + "   \t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<OpAritmeticoUnitario> {
+		System.out.println("  OpAritmeticoUnitario" + "   \t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<OpAritmetico>{
+		System.out.println("  OpAritmetico" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		} |
+	<Lista> {
+		System.out.println("  Lista" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<ResultadoLogico> {
+		System.out.println("  ResultadoLogico" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<Propiedad> {
+		System.out.println("  Propiedad" + "   \t\t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<FuncionString> {
+		System.out.println("  FuncionString" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<FuncionAgregar> {
+		System.out.println("  FuncionAgregar" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<FuncionDate> {
+		System.out.println("  FuncionDate" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<FuncionMath> {
+		System.out.println("  FuncionMath" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<FuncionConvert> {
+		System.out.println("  FuncionConvert" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<FuncionLogica> {
+		System.out.println("  FuncionLogica" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<FuncionAnalitic> {
+		System.out.println("  FuncionAnalitic" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<Defecto> {
+		System.out.println("  Defecto" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<Pregunta> {
+		System.out.println("  Pregunta" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Entonces> {
+		System.out.println("  Entonces" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<ParenIzq>{
+		System.out.println("  ParenIzq" + "   \t\t\t" +  "\t\t     ");
+		flag=false;
+		} |
+	<LlaveIzq> {
+		System.out.println("  LlaveIzq" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<LlaveDer> {
+		System.out.println("  LlaveDer" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<ParenDer> {
+		System.out.println("  ParenDer" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Puntuacion> {
+		System.out.println("  Puntuacion" + "   \t\t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<AccesoMiembro> {
+		System.out.println("  AccesoMiembro" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Clase> {
+		System.out.println("  Clase" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Sustitucion> {
+		System.out.println("  Sustitucion" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<Asignar> {
+		System.out.println("  Asignar" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Case> {
+		System.out.println("  Case" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Metodo> {
+		System.out.println("  Metodo" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<ClaseConsole> {
+		System.out.println("  ClaseConsole" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Sobrecargar> {
+		System.out.println("  Sobrecargar" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Estructura> {
+		System.out.println("  Estructura" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<CapExcepcion> {
+		System.out.println("  CapExcepcion" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Namespace> {
+		System.out.println("  Namespace" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Intenta> {
+		System.out.println("  Intenta" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Romper> {
+		System.out.println("  Romper" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Base> {
+		System.out.println("  Base" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Retorno> {
+		System.out.println("  Retorno" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<OpLogicoBoolUnitario> {
+		System.out.println("  OpLogicoBoolUnitario" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Numero> {
+		System.out.println("  Numero" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Consulta> {
+		System.out.println("  Consulta" + "   \t\t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<Comentario>{
+		System.out.println("  Comentario" + "   \t\t\t" + token.image +  "\t\t     ");
+		flag=false;
+		} |
+	<CorIzq> {
+		System.out.println("  Consulta" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<CorDer> {
+		System.out.println("  Consulta" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Declaracion> {
+		System.out.println("  Declaracion" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<Agregar> {
+		System.out.println("  INSERT" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Check> {
+		System.out.println("  Check" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Constraint> {
+		System.out.println("  Constraint" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Llave> {
+		System.out.println("  Key" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<TipoLlave>{
+		System.out.println("  LlaveTipo" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		} |
+	<Referencia> {
+		System.out.println("  Referencia" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Unique> {
+		System.out.println("  Unique" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Insertar> {
+		System.out.println("  Insertar" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<TipoSelect> {
+		System.out.println("  TipoSelect" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<TipoCreate> {
+		System.out.println("  TipoCreate" + "   \t\t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<TipoFrom> {
+		System.out.println("  TipoFrom" + "   \t\t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<TipoWhere> {
+		System.out.println("  TipoWhere" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<Add> {
+		System.out.println("  ADD" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<DentroDe> {
+		System.out.println("  INTO" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Valores> {
+		System.out.println("  VALUES" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Ejecutar> {
+		System.out.println("  EXECT" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}| 
+	<Etiqueta> {
+		System.out.println("  Etiqueta" + "   \t\t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}| 
+	<TerminarEtiqueta>{
+		System.out.println("  TerminarEtiqueta" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		} |
+	<TipoLibreria>{
+		System.out.println("  TipoLibreria" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		} |
+	<Libreria>{
+		System.out.println("  Libreria" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}|
+	<Ciclo>{
+		System.out.println("  Ciclo" + "   \t\t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}|
+	<Nulo>{
+		System.out.println("  Nulo" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}|
+	<Not>{
+		System.out.println("  Not" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		}|
+	<Like>{
+		System.out.println("  Like" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		} |
+	<On>{
+		System.out.println("  ON" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		} |
+	<Dbo>{
+		System.out.println("  Dbo" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		} |
+	<OperadorNew>{
+		System.out.println("  OperadorNew" + "   \t\t" +  "\t\t     ");
+		flag=false;
+		} |
+	<AtributosEtiqueta>{
+		System.out.println("  AtributosEtiqueta" + "   \t\t" + token.image +  "\t\t     ");
+		flag=false;
+		}
+	 )* <EOF>{
+		System.out.println("+===================================================+");
+	 }
 }
