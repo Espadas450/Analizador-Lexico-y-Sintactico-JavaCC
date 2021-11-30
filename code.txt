@@ -40,13 +40,30 @@ catch (Exception e)
 }
 
 CREATE TABLE TablaEjemplo(
-
+    
 );
 
-CREATE DATABASE BaseDeDatosNueva;
+CREATE DATABASE dbo.BaseDeDatosNueva;
 
-USE BaseDeDatosNueva;
+USE dbo.BaseDeDatosNueva;
 
 INSERT INTO TablaEjemplo VALUES (1, 'Alvaro es el mejor companero del mundo')
 
-DROP TABLE TablaEjemplo123;
+DROP TABLE dbo.TablaEjemplo123;
+
+CREATE FUNCTION dbo.CalcularOperacion (@Num1 FLOAT, @Num2 FLOAT)
+RETURN FLOAT
+AS
+BEGIN
+RETURNS @Num1
+END
+
+CREATE VIEW dbo.VistaEjemplo AS SELECT * FROM TablaEjemplo
+
+[String, char].('Alvaro') (VarvarString, VarvarChar)
+[float, int].(5.3) (varFloat)
+[int].(5, 3) (Num1, Num2)
+[int].(5) (UnaVariableMas, YAquiHayOtraMas)
+[string].("Alvaro", "Es Mi Heroe") (varAlvaro, varEsMiHeroe)
+[string].("Alvaro Es Mi Heroe") (VarPalabraEjemplo)
+[float] (NuevaVariable, OtraVariable, UnaTerceraVariable)
