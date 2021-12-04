@@ -635,23 +635,27 @@ public interface compConstants {
   /** RegularExpression Id. */
   int Excepcion = 314;
   /** RegularExpression Id. */
-  int Letra = 315;
+  int Go = 315;
   /** RegularExpression Id. */
-  int Letras = 316;
+  int Letra = 316;
   /** RegularExpression Id. */
-  int NumeroDecimal = 317;
+  int Letras = 317;
   /** RegularExpression Id. */
-  int Numero = 318;
+  int NumeroDecimal = 318;
   /** RegularExpression Id. */
-  int Numeros = 319;
+  int Numero = 319;
   /** RegularExpression Id. */
-  int IDENTIFICADOR = 320;
+  int Numeros = 320;
   /** RegularExpression Id. */
-  int SQLBegin = 321;
+  int IDENTIFICADOR = 321;
   /** RegularExpression Id. */
-  int SQLEnd = 322;
+  int SQLBegin = 322;
   /** RegularExpression Id. */
-  int Caracteres = 323;
+  int SQLEnd = 323;
+  /** RegularExpression Id. */
+  int Login = 324;
+  /** RegularExpression Id. */
+  int Caracteres = 325;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -973,6 +977,7 @@ public interface compConstants {
     "<Virgulilla>",
     "\"\\u00c2\\u00a1\"",
     "\"Exception\"",
+    "<Go>",
     "<Letra>",
     "<Letras>",
     "<NumeroDecimal>",
@@ -981,6 +986,7 @@ public interface compConstants {
     "<IDENTIFICADOR>",
     "<SQLBegin>",
     "<SQLEnd>",
+    "<Login>",
     "<Caracteres>",
   };
 

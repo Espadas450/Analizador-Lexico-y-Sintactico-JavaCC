@@ -60,10 +60,19 @@ END
 
 CREATE VIEW dbo.VistaEjemplo AS SELECT * FROM TablaEjemplo
 
-[String, char].('Alvaro') (VarvarString, VarvarChar)
-[float, int].(5.3) (varFloat)
-[int].(5, 3) (Num1, Num2)
-[int].(5) (UnaVariableMas, YAquiHayOtraMas)
-[string].("Alvaro", "Es Mi Heroe") (varAlvaro, varEsMiHeroe)
-[string].("Alvaro Es Mi Heroe") (VarPalabraEjemplo)
-[float] (NuevaVariable, OtraVariable, UnaTerceraVariable)
+private static (int Var1, char Var2, float Var3) NombreProcedimiento
+|
+
+private static int (int Var1, char Var2, float Var3) NombreProcedimiento
+| VarRetorno
+
+class private
+([string, int] (VarAtrib1, VarAtrib2) )
+(int Parametro1, char Parametro2) 
+    private static (int Var1, char Var2, float Var3) NombreProcedimiento
+    |    
+    private static int (int Var1, char Var2, float Var3) NombreProcedimiento
+    | VarRetorno
+| NombreClase
+
+SajidElFurias | var1, var2

@@ -272,7 +272,7 @@ TOKEN:{
 
 /* Clase*/
 TOKEN:{
-	<	#Clase: "class"	>
+	<	Clase: "class"	>
 }
 
 /* Sustitución*/
@@ -964,7 +964,7 @@ TOKEN:{
 
 /* OpAritmeticoBinario*/
 TOKEN:{
-	<	#Multiplicacion: ["*"]	>
+	<	Multiplicacion: ["*"]	>
 	|
 	<	#Divison: ["/"]	>
 	|
@@ -987,7 +987,7 @@ TOKEN:{
 
 /* OpLogicoBoolBinario*/
 TOKEN:{
-	<	#OrLogico: ["|"]	>
+	<	OrLogico: ["|"]	>
 	|
 	<	#AndLogico: ["&"]	>
 	|
@@ -1392,6 +1392,10 @@ TOKEN:{
 }
 
 TOKEN:{
+	<	Go: "GO" | "go"	>
+}
+
+TOKEN:{
 	<	#Letra: ["a"-"z","A"-"Z"]	> 
 	|
 	<	#Letras: (<Letra>)+	>
@@ -1407,6 +1411,8 @@ TOKEN:{
 	<	SQLBegin: ("BEGIN")|("begin")	>
 	|
 	<	SQLEnd: ("END")|("end")	>
+	|
+	<	Login: ("LOGIN") | ("login") >
 	|
 	<	Caracteres: (<Letra>) ( <Letras> | <IDENTIFICADOR> )	>
 }
@@ -1426,7 +1432,7 @@ void Program() :
 	List<String> ID = new ArrayList<String>();
 }
 {
-	( 
+	(
 	SentenciaForeach(){
 		System.out.println("  SentenciaForeach" + "   \t\t" +  "\t\t     ");
 		}
@@ -1452,11 +1458,9 @@ void Program() :
 		}
 		|
 	SentenciaLlamadaMetodo(){
-		System.out.println("  SentenciaLlamadaMetodo" + "   \t\t" +  "\t\t     ");
 		}
 		|
 	SentenciaMetodo(){
-		System.out.println("  SentenciaMetodo" + "   \t\t" +  "\t\t     ");
 		}
 		|
 	SentenciaTryCatch(){
@@ -1473,6 +1477,10 @@ void Program() :
 		|
 	saDeclaracionVariables(){
 		System.out.println("  saDeclaracionVariables" + "   \t\t" +  "\t\t     ");
+		}
+		|
+	saDeclaracionClase(){
+		System.out.println("  saDeclaracionClase" + "   \t\t" +  "\t\t     ");
 		}
 	)* <EOF>{
 		System.out.println("+===================================================+");
@@ -1510,8 +1518,18 @@ void saValores():{}{
 	(Texto() | <Numero> | <NumeroDecimal>)
 }
 
-void EstructuraMetodo():{}{
+void EstructuraMetodo():{
+		System.out.println("  SentenciaMetodo" + "   \t\t" +  "\t\t     ");
+}{
 	<Caracteres> <ParenIzq> SentenciaDeclaracionParametro() <ParenDer> <LlaveIzq> (<Retorno><Caracteres><PuntoYComa>)? <LlaveDer>
+}
+
+void saEstructuraMetodo():{
+		System.out.println("  saSentenciaMetodo" + "   \t\t" +  "\t\t     ");
+}{
+	<ParenIzq> SentenciaDeclaracionParametro() <ParenDer> <Caracteres> 
+		(BloqueCodigo())? 
+	<OrLogico>
 }
 
 void SentenciaDeclaracionParametro():{}{
@@ -1536,6 +1554,34 @@ void TipoDato():{}{
 
 void BloqueCodigo():{}{
 	<Gbajo>
+}
+
+void saBloqueClase():{}{
+	(
+		(SentenciaMetodo())*
+	)
+	<OrLogico>
+}
+
+void saAtributosClase():{}{
+	<ParenIzq> 
+		saDeclaracionVariables() 
+	<ParenDer>
+}
+
+void eLlamaMetodo():
+	{
+		System.out.println("  eLlamaMetodo" + "   \t\t" +  "\t\t     ");
+	}{
+		<ParenIzq> ( <Caracteres> ( MasVariables() )* )? <ParenDer> <PuntoYComa>
+}
+
+void saLlamadaMetodo():
+	{
+		System.out.println("  saLlamadaMetodo" + "   \t\t" +  "\t\t     ");
+	}{
+	<OrLogico>
+	(<Caracteres> (MasVariables())*)?
 }
 
 /* || ============================== || [ FINALIZA COMPLEMENTOS ] || ============================== || */
@@ -1581,13 +1627,49 @@ void SentenciaComentario():{}{
 
 /* SentenciaLlamadaMetodo [Estructura #8] */
 void SentenciaLlamadaMetodo():{}{
-	<Caracteres> <ParenIzq> ( <Caracteres> ( MasVariables() )* )? <ParenDer> <PuntoYComa>
+	<Caracteres> 
+		(	(
+				eLlamaMetodo()
+			)
+			|
+			(
+				saLlamadaMetodo()
+			)
+		)
 }
 
 /* SentenciaMetodoP [Estructura #09] */
 /* SentenciaMetodoF [Estructura #10] */
+/* saMetodoProcedimientoP   [Estructura inv00] */
+/* saMetodoProcedimientoF   [Estructura inv01] */
 void SentenciaMetodo():{}{
-	InicioMetodo() ( (<Metodo> EstructuraMetodo()) | (TipoDato() EstructuraMetodo()) )
+	InicioMetodo() 
+	( 	
+		(
+			(
+				(
+					<Metodo> EstructuraMetodo()
+				)
+				|
+				(
+					saEstructuraMetodo() 
+				)
+			) 
+			| 
+			(
+				TipoDato()
+				(
+					(
+						EstructuraMetodo()
+					)
+				|
+					(
+						saEstructuraMetodo() <Caracteres>
+					)
+				)
+			)
+		)
+	)
 }
 
 /* SentenciaTryCatch  [Estructura #11] */
@@ -1611,19 +1693,27 @@ void SentenciaTryCatch():{}{
 /* SQLCreateView		[Estructura #18] */
 
 void SentenciaDeclaracion ():{}{
-	(
-		InicioDeclaracion() ( <ParenIzq> (DeclaracionParametroSQL())? <ParenDer>)?|
+		InicioDeclaracion()
+		( 
+			<ParenIzq> ( DeclaracionParametroSQL() )? <ParenDer> 
+		)?
 		(
-			<Retorno> TipoDato()
-			<As> 
-			<SQLBegin> 
-			<Retorno> <Sustitucion> <Caracteres>
-		<SQLEnd>
-	)|
-	(
-		<As> <Consulta> <OpAritmeticoBinario> <Consulta> <Caracteres>
-	)
-	)
+			(
+				<Retorno> TipoDato()
+				<As> 
+				<SQLBegin> 
+				<Retorno> <Sustitucion> <Caracteres>
+				<SQLEnd>
+			)
+			|
+			(
+				<As> ( <Go> | <Consulta> <Multiplicacion> <Consulta> <Caracteres> )
+			)
+			|
+			(	
+				<For> <Login> <Caracteres>
+			)
+		)?
 	( <PuntoYComa> )?
 }
 
@@ -1634,11 +1724,26 @@ void SentenciaInsertarEnTabla():{}{
 
 /* || ========== || [ INICIAN INVENTADAS  ] || ========== || */
 
-/* saDeclaracionVariables   [Estructura inv00] */
-void saDeclaracionVariables():{}{
+/* saDeclaracionVariables   [Estructura inv02] */
+void saDeclaracionVariables():{
+		System.out.println("  saDeclaracionVariables" + "   \t\t" +  "\t\t     ");
+}{
 	<CorIzq> TipoDato() ( <Coma> TipoDato() )* <CorDer> 
 	( <AccesoMiembro> <ParenIzq> saValores() (<Coma> saValores())* <ParenDer> )? 
 	<ParenIzq> <Caracteres> ( <Coma> <Caracteres> )* <ParenDer>
+
+}
+
+/* saDeclaracionClase   [Estructura inv03] */
+void saDeclaracionClase():{}{
+		<Clase> 
+		(<TipoAcceso>)? 
+	saAtributosClase()
+	<ParenIzq> 
+		SentenciaDeclaracionParametro() 
+	<ParenDer>
+	saBloqueClase()
+	<Caracteres>
 
 }
 /* || ========== || [ FINALIZA SINTACTICO ] || ========== || */

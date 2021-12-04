@@ -36,18 +36,18 @@ class comp implements compConstants {
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case Pregunta:
+      case ParenIzq:
       case CorIzq:
       case TipoDatoNumerico:
       case TipoDatoNoNumerico:
+      case Clase:
       case TipoAcceso:
       case Do:
       case For:
       case Foreach:
       case While:
       case Metodo:
-      case As:
       case Intenta:
-      case Retorno:
       case Declaracion:
       case Insertar:
       case Estatico:
@@ -86,20 +86,19 @@ class comp implements compConstants {
         break;
       case Caracteres:
         SentenciaLlamadaMetodo();
-                System.out.println("  SentenciaLlamadaMetodo" + "   \t\t" +  "\t\t     ");
+
         break;
+      case ParenIzq:
       case TipoAcceso:
       case Metodo:
       case Estatico:
         SentenciaMetodo();
-                System.out.println("  SentenciaMetodo" + "   \t\t" +  "\t\t     ");
+
         break;
       case Intenta:
         SentenciaTryCatch();
                 System.out.println("  SentenciaTryCatch" + "   \t\t" +  "\t\t     ");
         break;
-      case As:
-      case Retorno:
       case Declaracion:
         SentenciaDeclaracion();
                 System.out.println("  SentenciaDeclaracion" + "   \t\t" +  "\t\t     ");
@@ -111,6 +110,10 @@ class comp implements compConstants {
       case CorIzq:
         saDeclaracionVariables();
                 System.out.println("  saDeclaracionVariables" + "   \t\t" +  "\t\t     ");
+        break;
+      case Clase:
+        saDeclaracionClase();
+                System.out.println("  saDeclaracionClase" + "   \t\t" +  "\t\t     ");
         break;
       default:
         jj_la1[1] = jj_gen;
@@ -261,6 +264,7 @@ class comp implements compConstants {
   }
 
   static final public void EstructuraMetodo() throws ParseException {
+                System.out.println("  SentenciaMetodo" + "   \t\t" +  "\t\t     ");
     jj_consume_token(Caracteres);
     jj_consume_token(ParenIzq);
     SentenciaDeclaracionParametro();
@@ -279,6 +283,23 @@ class comp implements compConstants {
     jj_consume_token(LlaveDer);
   }
 
+  static final public void saEstructuraMetodo() throws ParseException {
+                System.out.println("  saSentenciaMetodo" + "   \t\t" +  "\t\t     ");
+    jj_consume_token(ParenIzq);
+    SentenciaDeclaracionParametro();
+    jj_consume_token(ParenDer);
+    jj_consume_token(Caracteres);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case Gbajo:
+      BloqueCodigo();
+      break;
+    default:
+      jj_la1[13] = jj_gen;
+      ;
+    }
+    jj_consume_token(OrLogico);
+  }
+
   static final public void SentenciaDeclaracionParametro() throws ParseException {
     Parametro();
     label_5:
@@ -288,7 +309,7 @@ class comp implements compConstants {
         ;
         break;
       default:
-        jj_la1[13] = jj_gen;
+        jj_la1[14] = jj_gen;
         break label_5;
       }
       jj_consume_token(Coma);
@@ -312,13 +333,13 @@ class comp implements compConstants {
           ;
           break;
         default:
-          jj_la1[14] = jj_gen;
+          jj_la1[15] = jj_gen;
           break label_6;
         }
       }
       break;
     default:
-      jj_la1[15] = jj_gen;
+      jj_la1[16] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -333,7 +354,7 @@ class comp implements compConstants {
         ;
         break;
       default:
-        jj_la1[16] = jj_gen;
+        jj_la1[17] = jj_gen;
         break label_7;
       }
       jj_consume_token(Coma);
@@ -350,7 +371,7 @@ class comp implements compConstants {
         ;
         break;
       default:
-        jj_la1[17] = jj_gen;
+        jj_la1[18] = jj_gen;
         break label_8;
       }
       jj_consume_token(Coma);
@@ -367,7 +388,7 @@ class comp implements compConstants {
       jj_consume_token(TipoDatoNumerico);
       break;
     default:
-      jj_la1[18] = jj_gen;
+      jj_la1[19] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -375,6 +396,85 @@ class comp implements compConstants {
 
   static final public void BloqueCodigo() throws ParseException {
     jj_consume_token(Gbajo);
+  }
+
+  static final public void saBloqueClase() throws ParseException {
+    label_9:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case ParenIzq:
+      case TipoDatoNumerico:
+      case TipoDatoNoNumerico:
+      case TipoAcceso:
+      case Metodo:
+      case Estatico:
+        ;
+        break;
+      default:
+        jj_la1[20] = jj_gen;
+        break label_9;
+      }
+      SentenciaMetodo();
+    }
+    jj_consume_token(OrLogico);
+  }
+
+  static final public void saAtributosClase() throws ParseException {
+    jj_consume_token(ParenIzq);
+    saDeclaracionVariables();
+    jj_consume_token(ParenDer);
+  }
+
+  static final public void eLlamaMetodo() throws ParseException {
+                System.out.println("  eLlamaMetodo" + "   \t\t" +  "\t\t     ");
+    jj_consume_token(ParenIzq);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case Caracteres:
+      jj_consume_token(Caracteres);
+      label_10:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case Coma:
+          ;
+          break;
+        default:
+          jj_la1[21] = jj_gen;
+          break label_10;
+        }
+        MasVariables();
+      }
+      break;
+    default:
+      jj_la1[22] = jj_gen;
+      ;
+    }
+    jj_consume_token(ParenDer);
+    jj_consume_token(PuntoYComa);
+  }
+
+  static final public void saLlamadaMetodo() throws ParseException {
+                System.out.println("  saLlamadaMetodo" + "   \t\t" +  "\t\t     ");
+    jj_consume_token(OrLogico);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case Caracteres:
+      jj_consume_token(Caracteres);
+      label_11:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case Coma:
+          ;
+          break;
+        default:
+          jj_la1[23] = jj_gen;
+          break label_11;
+        }
+        MasVariables();
+      }
+      break;
+    default:
+      jj_la1[24] = jj_gen;
+      ;
+    }
   }
 
 /* || ============================== || [ FINALIZA COMPLEMENTOS ] || ============================== || */
@@ -394,7 +494,7 @@ class comp implements compConstants {
       BloqueCodigo();
       break;
     default:
-      jj_la1[19] = jj_gen;
+      jj_la1[25] = jj_gen;
       ;
     }
     jj_consume_token(LlaveDer);
@@ -409,7 +509,7 @@ class comp implements compConstants {
       BloqueCodigo();
       break;
     default:
-      jj_la1[20] = jj_gen;
+      jj_la1[26] = jj_gen;
       ;
     }
     jj_consume_token(LlaveDer);
@@ -432,7 +532,7 @@ class comp implements compConstants {
       BloqueCodigo();
       break;
     default:
-      jj_la1[21] = jj_gen;
+      jj_la1[27] = jj_gen;
       ;
     }
     jj_consume_token(LlaveDer);
@@ -445,7 +545,7 @@ class comp implements compConstants {
     jj_consume_token(TipoDatoNumerico);
     jj_consume_token(Caracteres);
     jj_consume_token(Asignar);
-    label_9:
+    label_12:
     while (true) {
       jj_consume_token(Numero);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -453,14 +553,14 @@ class comp implements compConstants {
         ;
         break;
       default:
-        jj_la1[22] = jj_gen;
-        break label_9;
+        jj_la1[28] = jj_gen;
+        break label_12;
       }
     }
     jj_consume_token(PuntoYComa);
     jj_consume_token(Caracteres);
     jj_consume_token(Comparador);
-    label_10:
+    label_13:
     while (true) {
       jj_consume_token(Numero);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -468,8 +568,8 @@ class comp implements compConstants {
         ;
         break;
       default:
-        jj_la1[23] = jj_gen;
-        break label_10;
+        jj_la1[29] = jj_gen;
+        break label_13;
       }
     }
     jj_consume_token(PuntoYComa);
@@ -482,7 +582,7 @@ class comp implements compConstants {
       BloqueCodigo();
       break;
     default:
-      jj_la1[24] = jj_gen;
+      jj_la1[30] = jj_gen;
       ;
     }
     jj_consume_token(LlaveDer);
@@ -500,7 +600,7 @@ class comp implements compConstants {
       BloqueCodigo();
       break;
     default:
-      jj_la1[25] = jj_gen;
+      jj_la1[31] = jj_gen;
       ;
     }
     jj_consume_token(LlaveDer);
@@ -510,15 +610,15 @@ class comp implements compConstants {
   static final public void DeclaracionVariable() throws ParseException {
     TipoDato();
     jj_consume_token(Caracteres);
-    label_11:
+    label_14:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case Coma:
         ;
         break;
       default:
-        jj_la1[26] = jj_gen;
-        break label_11;
+        jj_la1[32] = jj_gen;
+        break label_14;
       }
       MasVariables();
     }
@@ -534,47 +634,62 @@ void SentenciaComentario():{}{
 /* SentenciaLlamadaMetodo [Estructura #8] */
   static final public void SentenciaLlamadaMetodo() throws ParseException {
     jj_consume_token(Caracteres);
-    jj_consume_token(ParenIzq);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case Caracteres:
-      jj_consume_token(Caracteres);
-      label_12:
-      while (true) {
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case Coma:
-          ;
-          break;
-        default:
-          jj_la1[27] = jj_gen;
-          break label_12;
-        }
-        MasVariables();
-      }
+    case ParenIzq:
+      eLlamaMetodo();
+      break;
+    case OrLogico:
+      saLlamadaMetodo();
       break;
     default:
-      jj_la1[28] = jj_gen;
-      ;
+      jj_la1[33] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
-    jj_consume_token(ParenDer);
-    jj_consume_token(PuntoYComa);
   }
 
 /* SentenciaMetodoP [Estructura #09] */
 /* SentenciaMetodoF [Estructura #10] */
+/* saMetodoProcedimientoP   [Estructura inv00] */
+/* saMetodoProcedimientoF   [Estructura inv01] */
   static final public void SentenciaMetodo() throws ParseException {
     InicioMetodo();
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case ParenIzq:
     case Metodo:
-      jj_consume_token(Metodo);
-      EstructuraMetodo();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case Metodo:
+        jj_consume_token(Metodo);
+        EstructuraMetodo();
+        break;
+      case ParenIzq:
+        saEstructuraMetodo();
+        break;
+      default:
+        jj_la1[34] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
       break;
     case TipoDatoNumerico:
     case TipoDatoNoNumerico:
       TipoDato();
-      EstructuraMetodo();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case Caracteres:
+        EstructuraMetodo();
+        break;
+      case ParenIzq:
+        saEstructuraMetodo();
+        jj_consume_token(Caracteres);
+        break;
+      default:
+        jj_la1[35] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
       break;
     default:
-      jj_la1[29] = jj_gen;
+      jj_la1[36] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -589,7 +704,7 @@ void SentenciaComentario():{}{
       BloqueCodigo();
       break;
     default:
-      jj_la1[30] = jj_gen;
+      jj_la1[37] = jj_gen;
       ;
     }
     jj_consume_token(LlaveDer);
@@ -604,7 +719,7 @@ void SentenciaComentario():{}{
       BloqueCodigo();
       break;
     default:
-      jj_la1[31] = jj_gen;
+      jj_la1[38] = jj_gen;
       ;
     }
     jj_consume_token(LlaveDer);
@@ -618,56 +733,79 @@ void SentenciaComentario():{}{
 /* SQLCreateFunction	[Estructura #17] */
 /* SQLCreateView		[Estructura #18] */
   static final public void SentenciaDeclaracion() throws ParseException {
+    InicioDeclaracion();
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case Declaracion:
-      InicioDeclaracion();
+    case ParenIzq:
+      jj_consume_token(ParenIzq);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case ParenIzq:
-        jj_consume_token(ParenIzq);
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case Sustitucion:
-        case Numero:
-          DeclaracionParametroSQL();
-          break;
-        default:
-          jj_la1[32] = jj_gen;
-          ;
-        }
-        jj_consume_token(ParenDer);
+      case Sustitucion:
+      case Numero:
+        DeclaracionParametroSQL();
         break;
       default:
-        jj_la1[33] = jj_gen;
+        jj_la1[39] = jj_gen;
         ;
       }
-      break;
-    case Retorno:
-      jj_consume_token(Retorno);
-      TipoDato();
-      jj_consume_token(As);
-      jj_consume_token(SQLBegin);
-      jj_consume_token(Retorno);
-      jj_consume_token(Sustitucion);
-      jj_consume_token(Caracteres);
-      jj_consume_token(SQLEnd);
-      break;
-    case As:
-      jj_consume_token(As);
-      jj_consume_token(Consulta);
-      jj_consume_token(OpAritmeticoBinario);
-      jj_consume_token(Consulta);
-      jj_consume_token(Caracteres);
+      jj_consume_token(ParenDer);
       break;
     default:
-      jj_la1[34] = jj_gen;
-      jj_consume_token(-1);
-      throw new ParseException();
+      jj_la1[40] = jj_gen;
+      ;
+    }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case For:
+    case As:
+    case Retorno:
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case Retorno:
+        jj_consume_token(Retorno);
+        TipoDato();
+        jj_consume_token(As);
+        jj_consume_token(SQLBegin);
+        jj_consume_token(Retorno);
+        jj_consume_token(Sustitucion);
+        jj_consume_token(Caracteres);
+        jj_consume_token(SQLEnd);
+        break;
+      case As:
+        jj_consume_token(As);
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case Go:
+          jj_consume_token(Go);
+          break;
+        case Consulta:
+          jj_consume_token(Consulta);
+          jj_consume_token(Multiplicacion);
+          jj_consume_token(Consulta);
+          jj_consume_token(Caracteres);
+          break;
+        default:
+          jj_la1[41] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        break;
+      case For:
+        jj_consume_token(For);
+        jj_consume_token(Login);
+        jj_consume_token(Caracteres);
+        break;
+      default:
+        jj_la1[42] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      break;
+    default:
+      jj_la1[43] = jj_gen;
+      ;
     }
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case PuntoYComa:
       jj_consume_token(PuntoYComa);
       break;
     default:
-      jj_la1[35] = jj_gen;
+      jj_la1[44] = jj_gen;
       ;
     }
   }
@@ -680,15 +818,15 @@ void SentenciaComentario():{}{
     jj_consume_token(Valores);
     jj_consume_token(ParenIzq);
     saValores();
-    label_13:
+    label_15:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case Coma:
         ;
         break;
       default:
-        jj_la1[36] = jj_gen;
-        break label_13;
+        jj_la1[45] = jj_gen;
+        break label_15;
       }
       jj_consume_token(Coma);
       saValores();
@@ -699,26 +837,27 @@ void SentenciaComentario():{}{
       jj_consume_token(PuntoYComa);
       break;
     default:
-      jj_la1[37] = jj_gen;
+      jj_la1[46] = jj_gen;
       ;
     }
   }
 
 /* || ========== || [ INICIAN INVENTADAS  ] || ========== || */
 
-/* saDeclaracionVariables   [Estructura inv00] */
+/* saDeclaracionVariables   [Estructura inv02] */
   static final public void saDeclaracionVariables() throws ParseException {
+                System.out.println("  saDeclaracionVariables" + "   \t\t" +  "\t\t     ");
     jj_consume_token(CorIzq);
     TipoDato();
-    label_14:
+    label_16:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case Coma:
         ;
         break;
       default:
-        jj_la1[38] = jj_gen;
-        break label_14;
+        jj_la1[47] = jj_gen;
+        break label_16;
       }
       jj_consume_token(Coma);
       TipoDato();
@@ -729,15 +868,15 @@ void SentenciaComentario():{}{
       jj_consume_token(AccesoMiembro);
       jj_consume_token(ParenIzq);
       saValores();
-      label_15:
+      label_17:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case Coma:
           ;
           break;
         default:
-          jj_la1[39] = jj_gen;
-          break label_15;
+          jj_la1[48] = jj_gen;
+          break label_17;
         }
         jj_consume_token(Coma);
         saValores();
@@ -745,25 +884,44 @@ void SentenciaComentario():{}{
       jj_consume_token(ParenDer);
       break;
     default:
-      jj_la1[40] = jj_gen;
+      jj_la1[49] = jj_gen;
       ;
     }
     jj_consume_token(ParenIzq);
     jj_consume_token(Caracteres);
-    label_16:
+    label_18:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case Coma:
         ;
         break;
       default:
-        jj_la1[41] = jj_gen;
-        break label_16;
+        jj_la1[50] = jj_gen;
+        break label_18;
       }
       jj_consume_token(Coma);
       jj_consume_token(Caracteres);
     }
     jj_consume_token(ParenDer);
+  }
+
+/* saDeclaracionClase   [Estructura inv03] */
+  static final public void saDeclaracionClase() throws ParseException {
+    jj_consume_token(Clase);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case TipoAcceso:
+      jj_consume_token(TipoAcceso);
+      break;
+    default:
+      jj_la1[51] = jj_gen;
+      ;
+    }
+    saAtributosClase();
+    jj_consume_token(ParenIzq);
+    SentenciaDeclaracionParametro();
+    jj_consume_token(ParenDer);
+    saBloqueClase();
+    jj_consume_token(Caracteres);
   }
 
   static private boolean jj_initialized_once = false;
@@ -776,7 +934,7 @@ void SentenciaComentario():{}{
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[42];
+  static final private int[] jj_la1 = new int[52];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -802,37 +960,37 @@ void SentenciaComentario():{}{
       jj_la1_init_10();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x1100,0x1100,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x10000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x400,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_0 = new int[] {0x1500,0x1500,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x10000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x400,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x400,0x400,0x400,0x400,0x0,0x0,0x0,0x400,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x300,0x300,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4000,0x0,0x10000000,0x4000,0x4000,0x300,0x2000,0x2000,0x2000,0x0,0x0,0x2000,0x2000,0x4000,0x4000,0x0,0x300,0x2000,0x2000,0x10000000,0x0,0x0,0x1000,0x4000,0x1000,0x4000,0x4000,0x800000,0x4000,};
+      jj_la1_1 = new int[] {0x2000300,0x2000300,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x2000,0x4000,0x0,0x10000000,0x4000,0x4000,0x300,0x300,0x4000,0x0,0x4000,0x0,0x2000,0x2000,0x2000,0x0,0x0,0x2000,0x2000,0x4000,0x0,0x0,0x0,0x300,0x2000,0x2000,0x10000000,0x0,0x0,0x0,0x0,0x1000,0x4000,0x1000,0x4000,0x4000,0x800000,0x4000,0x0,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x403e,0x403e,0x0,0x0,0x0,0x0,0x2,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_2 = new int[] {0x403e,0x403e,0x0,0x0,0x0,0x0,0x2,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4002,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4000,0x0,0x4000,0x0,0x0,0x0,0x0,0x0,0x8,0x8,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x2,};
    }
    private static void jj_la1_init_3() {
-      jj_la1_3 = new int[] {0x200,0x200,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x200,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_3 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x200,0x200,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_4() {
-      jj_la1_4 = new int[] {0x80000000,0x80000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_4 = new int[] {0x80000000,0x80000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_5() {
-      jj_la1_5 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_5 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_6() {
-      jj_la1_6 = new int[] {0x4,0x4,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_6 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x20000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4,0x4,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_7() {
-      jj_la1_7 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_7 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x200,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_8() {
-      jj_la1_8 = new int[] {0x200800,0x200800,0x0,0x0,0x0,0x0,0x0,0x0,0x2,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x800,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_8 = new int[] {0x200800,0x200800,0x0,0x0,0x0,0x0,0x0,0x0,0x2,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_9() {
-      jj_la1_9 = new int[] {0x4000,0x4000,0x40000000,0x40000000,0x40000000,0x40000000,0x0,0x4000,0x0,0x800000,0x0,0x60000000,0x0,0x0,0x40000000,0x40000000,0x0,0x0,0x0,0x0,0x0,0x0,0x40000000,0x40000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_9 = new int[] {0x4000,0x4000,0x80000000,0x80000000,0x80000000,0x80000000,0x0,0x4000,0x0,0x800000,0x0,0xc0000000,0x0,0x0,0x0,0x80000000,0x80000000,0x0,0x0,0x0,0x4000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x80000000,0x80000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x80000000,0x0,0x8000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_10() {
-      jj_la1_10 = new int[] {0x8,0x8,0x0,0x8,0x0,0x8,0x0,0x0,0x0,0x0,0x8,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_10 = new int[] {0x20,0x20,0x0,0x20,0x0,0x20,0x0,0x0,0x0,0x0,0x20,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x20,0x0,0x20,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x20,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
 
   /** Constructor with InputStream. */
@@ -853,7 +1011,7 @@ void SentenciaComentario():{}{
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 42; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -867,7 +1025,7 @@ void SentenciaComentario():{}{
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 42; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -884,7 +1042,7 @@ void SentenciaComentario():{}{
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 42; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -894,7 +1052,7 @@ void SentenciaComentario():{}{
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 42; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -910,7 +1068,7 @@ void SentenciaComentario():{}{
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 42; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -919,7 +1077,7 @@ void SentenciaComentario():{}{
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 42; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 52; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -970,12 +1128,12 @@ void SentenciaComentario():{}{
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[324];
+    boolean[] la1tokens = new boolean[326];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 42; i++) {
+    for (int i = 0; i < 52; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -1014,7 +1172,7 @@ void SentenciaComentario():{}{
         }
       }
     }
-    for (int i = 0; i < 324; i++) {
+    for (int i = 0; i < 326; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
