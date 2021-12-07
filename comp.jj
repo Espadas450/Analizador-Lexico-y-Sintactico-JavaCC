@@ -234,9 +234,9 @@ TOKEN:{
 TOKEN:{
 	<	#IgualIgual: (["="]) (["="])	>
 	|
-	<	#MenorQue: ["<"]	>
+	<	MenorQue: ["<"]	>
 	|
-	<	#MayorQue: [">"]	>
+	<	MayorQue: [">"]	>
 	|
 	<	#DiferenteDe: (["!"]) (["="])	>
 	|
@@ -405,7 +405,7 @@ TOKEN:{
 	|
 	<	#Delete: (["D"]) (["e"]) (["l"]) (["e"]) (["t"]) (["e"])	>
 	|
-	<	#Include: (["I"]) (["n"]) (["c"]) (["l"]) (["u"]) (["d"]) (["e"])	>
+	<	Include: (["I"]) (["n"]) (["c"]) (["l"]) (["u"]) (["d"]) (["e"])	>
 	|
 	<	#Substring: (["s"]|["S"]) (["u"]|["U"]) (["b"]|["B"]) (["s"]|["S"]) (["t"]|["T"]) (["r"]|["R"]) (["i"]|["I"]) (["n"]|["N"]) (["g"]|["G"])	>
 	|
@@ -439,7 +439,7 @@ TOKEN:{
 }
 
 TOKEN:{
-	<	#FuncionString:
+	<	FuncionString:
 	<Concat>
 	|
 	<As>
@@ -982,7 +982,7 @@ TOKEN:{
 
 /* OpLogicoBoolUnitario*/
 TOKEN:{
-	<	#OpLogicoBoolUnitario: ["!"]	>
+	<	OpLogicoBoolUnitario: ["!"]	>
 }
 
 /* OpLogicoBoolBinario*/
@@ -1482,6 +1482,22 @@ void Program() :
 	saDeclaracionClase(){
 		System.out.println("  saDeclaracionClase" + "   \t\t" +  "\t\t     ");
 		}
+		|
+	saFuncionString(){
+		System.out.println("  saFuncionString" + "   \t\t" +  "\t\t     ");
+		}
+		|
+	saConstructorClase(){
+		System.out.println("  saConstructorClase" + "   \t\t" +  "\t\t     ");
+		}
+		|
+	saDestructorClase(){
+		System.out.println("  saDestructorClase" + "   \t\t" +  "\t\t     ");
+		}
+		|
+	saProgram(){
+		System.out.println("  saProgram" + "   \t\t" +  "\t\t     ");
+		}
 	)* <EOF>{
 		System.out.println("+===================================================+");
 	}
@@ -1507,7 +1523,7 @@ void InicioMetodo():{}{
 }
 
 void InicioDeclaracion():{}{
-	<Declaracion> (<TipoCreate>)? (<Dbo> <AccesoMiembro>)? <Caracteres>
+	<Declaracion> (<TipoCreate>)? (<Dbo> <AccesoMiembro>)? (<Sustitucion>)? <Caracteres> ( <Asignar> saValores() )?
 }
 
 void Texto():{}{
@@ -1528,7 +1544,7 @@ void saEstructuraMetodo():{
 		System.out.println("  saSentenciaMetodo" + "   \t\t" +  "\t\t     ");
 }{
 	<ParenIzq> SentenciaDeclaracionParametro() <ParenDer> <Caracteres> 
-		(BloqueCodigo())? 
+		BloqueCodigo()
 	<OrLogico>
 }
 
@@ -1552,15 +1568,29 @@ void TipoDato():{}{
 	(<TipoDatoNoNumerico> | <TipoDatoNumerico>)
 }
 
-void BloqueCodigo():{}{
-	<Gbajo>
+void BloqueCodigo():{
+	System.out.println("Contiene un bloque de code");
+}{
+	(
+	(SentenciaForeach())|
+	(SentenciaDoWhile())|
+	(SentenciaWhile())|
+	(SentenciaFor())|
+	(SentenciaIf())|
+	(DeclaracionVariable())|
+	(SentenciaLlamadaMetodo())|
+	(SentenciaMetodo())|
+	(SentenciaTryCatch())|
+	(SentenciaDeclaracion())|
+	(SentenciaInsertarEnTabla())|
+	(saDeclaracionVariables())
+	)*
 }
 
 void saBloqueClase():{}{
 	(
 		(SentenciaMetodo())*
 	)
-	<OrLogico>
 }
 
 void saAtributosClase():{}{
@@ -1584,21 +1614,25 @@ void saLlamadaMetodo():
 	(<Caracteres> (MasVariables())*)?
 }
 
+void saInicioMetodoRes():{}{
+	<FuncionString> <AccesoMiembro>
+}
+
 /* || ============================== || [ FINALIZA COMPLEMENTOS ] || ============================== || */
 
 /* SentenciaForeach [Estructura #1] */
 void SentenciaForeach():{}{
-	<Foreach> <ParenIzq> TipoDato() <Caracteres> <In> <Caracteres> <ParenDer> <LlaveIzq> (BloqueCodigo())? <LlaveDer>
+	<Foreach> <ParenIzq> TipoDato() <Caracteres> <In> <Caracteres> <ParenDer> <LlaveIzq> BloqueCodigo() <LlaveDer>
 }
 
 /* SentenciaDoWhile [Estructura #2] */
 void SentenciaDoWhile():{}{
-	<Do> <LlaveIzq> (BloqueCodigo())? <LlaveDer> <While> <ParenIzq> Condicion() <ParenDer> <PuntoYComa>
+	<Do> <LlaveIzq> BloqueCodigo() <LlaveDer> <While> <ParenIzq> Condicion() <ParenDer> <PuntoYComa>
 }
 
 /* SentenciaWhile [Estructura #3] */
 void SentenciaWhile():{}{
-	<While> <ParenIzq> Condicion() <ParenDer> <LlaveIzq> (BloqueCodigo())? <LlaveDer>
+	<While> <ParenIzq> Condicion() <ParenDer> <LlaveIzq> BloqueCodigo() <LlaveDer>
 }
 
 
@@ -1606,12 +1640,12 @@ void SentenciaWhile():{}{
 void SentenciaFor():{}{
 	<For> <ParenIzq> <TipoDatoNumerico> <Caracteres> <Asignar> (<Numero>)+ <PuntoYComa> <Caracteres> <Comparador> (<Numero>)+ <PuntoYComa> <Caracteres> <OpAritmeticoUnitario> <ParenDer> 
 		<LlaveIzq> 
-			(BloqueCodigo())?
+			BloqueCodigo()
 		<LlaveDer>
 }
 /* SentenciaIf [Estructura #5] */
 void SentenciaIf():{}{
-	<Pregunta> <ParenIzq> Condicion() <ParenDer> <LlaveIzq> (BloqueCodigo())? <LlaveDer>
+	<Pregunta> <ParenIzq> Condicion() <ParenDer> <LlaveIzq> BloqueCodigo() <LlaveDer>
 }
 
 /* DeclaracionVariable [Estructura #6] */
@@ -1628,14 +1662,14 @@ void SentenciaComentario():{}{
 /* SentenciaLlamadaMetodo [Estructura #8] */
 void SentenciaLlamadaMetodo():{}{
 	<Caracteres> 
-		(	(
-				eLlamaMetodo()
-			)
-			|
-			(
-				saLlamadaMetodo()
-			)
+	(	(
+			eLlamaMetodo()
 		)
+		|
+		(
+			saLlamadaMetodo()
+		)
+	)
 }
 
 /* SentenciaMetodoP [Estructura #09] */
@@ -1675,11 +1709,11 @@ void SentenciaMetodo():{}{
 /* SentenciaTryCatch  [Estructura #11] */
 void SentenciaTryCatch():{}{
 	<Intenta> 
-		<LlaveIzq> (BloqueCodigo())? 
+		<LlaveIzq> BloqueCodigo() 
 	<LlaveDer> 
 	<CapExcepcion> <ParenIzq> <Excepcion> <Caracteres> <ParenDer>
 	<LlaveIzq> 
-		(BloqueCodigo())? 
+		BloqueCodigo() 
 	<LlaveDer>
 }
 
@@ -1724,6 +1758,14 @@ void SentenciaInsertarEnTabla():{}{
 
 /* || ========== || [ INICIAN INVENTADAS  ] || ========== || */
 
+
+/* saBloqueClass    [Estructura inv03] */
+void saBloqueClass():{}{
+	(saConstructorClase())?
+		(saBloqueClase())
+	(saDestructorClase())?
+}
+
 /* saDeclaracionVariables   [Estructura inv02] */
 void saDeclaracionVariables():{
 		System.out.println("  saDeclaracionVariables" + "   \t\t" +  "\t\t     ");
@@ -1734,6 +1776,22 @@ void saDeclaracionVariables():{
 
 }
 
+
+/* saFuncionString    [Estructura inv03] */
+void saFuncionString():{
+}{
+	saInicioMetodoRes() (saInicioMetodoRes())* <Caracteres> ( <Virgulilla> <Caracteres> )?
+}
+
+/* saConstructorClase    [Estructura inv03] */
+void saConstructorClase():{}{
+	<Virgulilla> <ParenIzq> <ParenDer> <Caracteres> BloqueCodigo() <OrLogico>
+}
+
+/* saDestructorClase    [Estructura inv03] */
+void saDestructorClase():{}{
+	<OpLogicoBoolUnitario> (saConstructorClase())
+}
 /* saDeclaracionClase   [Estructura inv03] */
 void saDeclaracionClase():{}{
 		<Clase> 
@@ -1742,8 +1800,22 @@ void saDeclaracionClase():{}{
 	<ParenIzq> 
 		SentenciaDeclaracionParametro() 
 	<ParenDer>
-	saBloqueClase()
+		saBloqueClass()
+	<OrLogico>
 	<Caracteres>
-
 }
+
+/* saDestructorClase    [Estructura inv03] */
+void saProgram():{
+	System.out.println("Programa creado satisfactoriamente");
+}{
+	<MenorQue>
+		BloqueCodigo()
+	<MayorQue>
+	(
+		<Include> <Caracteres> <PuntoYComa>
+	)*
+	(saDeclaracionClase())*
+}
+
 /* || ========== || [ FINALIZA SINTACTICO ] || ========== || */

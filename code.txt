@@ -1,78 +1,14 @@
-foreach (string Valores in Arreglo_Nombres){
+<
+>
 
-}
-
-do
-{
-   
-} while (Num1 < Num2);
-
-while ( num1 < num2 ){
-
-}
-
-if(num1>num2){
-
-}
-
-float VariableFloat1, Num2, Num3;
-
-double VariablePrueba4;
-
-Sumar(Numero1, Numero2, Resultado1);
-
-private static void Sumar(int Num1, int Num2, int Resultado){
-
-}
-
-public static int Sumar(int Num1, int Num2, int Resultado){
-
-    return Sajid1;
-}
-
-try
-{
-    
-}
-catch (Exception e)
-{
-    
-}
-
-CREATE TABLE TablaEjemplo(
-    
-);
-
-CREATE DATABASE dbo.BaseDeDatosNueva;
-
-USE dbo.BaseDeDatosNueva;
-
-INSERT INTO TablaEjemplo VALUES (1, 'Alvaro es el mejor companero del mundo')
-
-DROP TABLE dbo.TablaEjemplo123;
-
-CREATE FUNCTION dbo.CalcularOperacion (@Num1 FLOAT, @Num2 FLOAT)
-RETURN FLOAT
-AS
-BEGIN
-RETURNS @Num1
-END
-
-CREATE VIEW dbo.VistaEjemplo AS SELECT * FROM TablaEjemplo
-
-private static (int Var1, char Var2, float Var3) NombreProcedimiento
-|
-
-private static int (int Var1, char Var2, float Var3) NombreProcedimiento
-| VarRetorno
+INCLUDE (Lib1);
+INCLUDE (Lib2);
 
 class private
 ([string, int] (VarAtrib1, VarAtrib2) )
 (int Parametro1, char Parametro2) 
     private static (int Var1, char Var2, float Var3) NombreProcedimiento
-    |    
+    |
     private static int (int Var1, char Var2, float Var3) NombreProcedimiento
     | VarRetorno
 | NombreClase
-
-SajidElFurias | var1, var2
