@@ -1434,27 +1434,21 @@ void Program() :
 {
 	(
 	SentenciaForeach(){
-		System.out.println("  SentenciaForeach" + "   \t\t" +  "\t\t     ");
 		}
 		|
 	SentenciaDoWhile(){
-		System.out.println("  SentenciaDoWhile" + "   \t\t" +  "\t\t     ");
 		}
 		|
 	SentenciaWhile(){
-		System.out.println("  SentenciaWhile" + "   \t\t" +  "\t\t     ");
 		}
 		|
 	SentenciaFor(){
-		System.out.println("  SentenciaFor" + "   \t\t" +  "\t\t     ");
 		}
 		|
 	SentenciaIf(){
-		System.out.println("  SentenciaIf" + "   \t\t" +  "\t\t     ");
 		}
 		|
 	DeclaracionVariable(){
-		System.out.println("  DeclaracionVariable" + "   \t\t" +  "\t\t     ");
 		}
 		|
 	SentenciaLlamadaMetodo(){
@@ -1464,35 +1458,27 @@ void Program() :
 		}
 		|
 	SentenciaTryCatch(){
-		System.out.println("  SentenciaTryCatch" + "   \t\t" +  "\t\t     ");
 		}
 		|
 	SentenciaDeclaracion(){
-		System.out.println("  SentenciaDeclaracion" + "   \t\t" +  "\t\t     ");
 		}
 		|
 	SentenciaInsertarEnTabla(){
-		System.out.println("  SentenciaInsertarEnTabla" + "   \t\t" +  "\t\t     ");
 		}
 		|
 	saDeclaracionVariables(){
-		System.out.println("  saDeclaracionVariables" + "   \t\t" +  "\t\t     ");
 		}
 		|
 	saDeclaracionClase(){
-		System.out.println("  saDeclaracionClase" + "   \t\t" +  "\t\t     ");
 		}
 		|
 	saFuncionString(){
-		System.out.println("  saFuncionString" + "   \t\t" +  "\t\t     ");
 		}
 		|
 	saConstructorClase(){
-		System.out.println("  saConstructorClase" + "   \t\t" +  "\t\t     ");
 		}
 		|
 	saDestructorClase(){
-		System.out.println("  saDestructorClase" + "   \t\t" +  "\t\t     ");
 		}
 		|
 	saProgram(){
@@ -1526,8 +1512,12 @@ void InicioDeclaracion():{}{
 	<Declaracion> (<TipoCreate>)? (<Dbo> <AccesoMiembro>)? (<Sustitucion>)? <Caracteres> ( <Asignar> saValores() )?
 }
 
+void Palabras():{}{
+	<Caracteres> (<Caracteres>)*
+}
+
 void Texto():{}{
-	<Comillas> <Caracteres> (<Caracteres>)* <Comillas>
+	<Comillas> Palabras() <Comillas>
 }
 
 void saValores():{}{
@@ -1535,13 +1525,11 @@ void saValores():{}{
 }
 
 void EstructuraMetodo():{
-		System.out.println("  SentenciaMetodo" + "   \t\t" +  "\t\t     ");
 }{
 	<Caracteres> <ParenIzq> SentenciaDeclaracionParametro() <ParenDer> <LlaveIzq> (<Retorno><Caracteres><PuntoYComa>)? <LlaveDer>
 }
 
 void saEstructuraMetodo():{
-		System.out.println("  saSentenciaMetodo" + "   \t\t" +  "\t\t     ");
 }{
 	<ParenIzq> SentenciaDeclaracionParametro() <ParenDer> <Caracteres> 
 		BloqueCodigo()
@@ -1569,7 +1557,6 @@ void TipoDato():{}{
 }
 
 void BloqueCodigo():{
-	System.out.println("Contiene un bloque de code");
 }{
 	(
 	(SentenciaForeach())|
@@ -1601,14 +1588,12 @@ void saAtributosClase():{}{
 
 void eLlamaMetodo():
 	{
-		System.out.println("  eLlamaMetodo" + "   \t\t" +  "\t\t     ");
 	}{
 		<ParenIzq> ( <Caracteres> ( MasVariables() )* )? <ParenDer> <PuntoYComa>
 }
 
 void saLlamadaMetodo():
 	{
-		System.out.println("  saLlamadaMetodo" + "   \t\t" +  "\t\t     ");
 	}{
 	<OrLogico>
 	(<Caracteres> (MasVariables())*)?
@@ -1768,7 +1753,6 @@ void saBloqueClass():{}{
 
 /* saDeclaracionVariables   [Estructura inv02] */
 void saDeclaracionVariables():{
-		System.out.println("  saDeclaracionVariables" + "   \t\t" +  "\t\t     ");
 }{
 	<CorIzq> TipoDato() ( <Coma> TipoDato() )* <CorDer> 
 	( <AccesoMiembro> <ParenIzq> saValores() (<Coma> saValores())* <ParenDer> )? 

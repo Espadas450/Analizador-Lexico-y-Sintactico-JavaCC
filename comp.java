@@ -65,28 +65,28 @@ class comp implements compConstants {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case Foreach:
         SentenciaForeach();
-                System.out.println("  SentenciaForeach" + "   \t\t" +  "\t\t     ");
+
         break;
       case Do:
         SentenciaDoWhile();
-                System.out.println("  SentenciaDoWhile" + "   \t\t" +  "\t\t     ");
+
         break;
       case While:
         SentenciaWhile();
-                System.out.println("  SentenciaWhile" + "   \t\t" +  "\t\t     ");
+
         break;
       case For:
         SentenciaFor();
-                System.out.println("  SentenciaFor" + "   \t\t" +  "\t\t     ");
+
         break;
       case Pregunta:
         SentenciaIf();
-                System.out.println("  SentenciaIf" + "   \t\t" +  "\t\t     ");
+
         break;
       case TipoDatoNumerico:
       case TipoDatoNoNumerico:
         DeclaracionVariable();
-                System.out.println("  DeclaracionVariable" + "   \t\t" +  "\t\t     ");
+
         break;
       case Caracteres:
         SentenciaLlamadaMetodo();
@@ -101,35 +101,35 @@ class comp implements compConstants {
         break;
       case Intenta:
         SentenciaTryCatch();
-                System.out.println("  SentenciaTryCatch" + "   \t\t" +  "\t\t     ");
+
         break;
       case Declaracion:
         SentenciaDeclaracion();
-                System.out.println("  SentenciaDeclaracion" + "   \t\t" +  "\t\t     ");
+
         break;
       case Insertar:
         SentenciaInsertarEnTabla();
-                System.out.println("  SentenciaInsertarEnTabla" + "   \t\t" +  "\t\t     ");
+
         break;
       case CorIzq:
         saDeclaracionVariables();
-                System.out.println("  saDeclaracionVariables" + "   \t\t" +  "\t\t     ");
+
         break;
       case Clase:
         saDeclaracionClase();
-                System.out.println("  saDeclaracionClase" + "   \t\t" +  "\t\t     ");
+
         break;
       case FuncionString:
         saFuncionString();
-                System.out.println("  saFuncionString" + "   \t\t" +  "\t\t     ");
+
         break;
       case Virgulilla:
         saConstructorClase();
-                System.out.println("  saConstructorClase" + "   \t\t" +  "\t\t     ");
+
         break;
       case OpLogicoBoolUnitario:
         saDestructorClase();
-                System.out.println("  saDestructorClase" + "   \t\t" +  "\t\t     ");
+
         break;
       case MenorQue:
         saProgram();
@@ -264,8 +264,7 @@ class comp implements compConstants {
     }
   }
 
-  static final public void Texto() throws ParseException {
-    jj_consume_token(Comillas);
+  static final public void Palabras() throws ParseException {
     jj_consume_token(Caracteres);
     label_4:
     while (true) {
@@ -279,6 +278,11 @@ class comp implements compConstants {
       }
       jj_consume_token(Caracteres);
     }
+  }
+
+  static final public void Texto() throws ParseException {
+    jj_consume_token(Comillas);
+    Palabras();
     jj_consume_token(Comillas);
   }
 
@@ -301,7 +305,6 @@ class comp implements compConstants {
   }
 
   static final public void EstructuraMetodo() throws ParseException {
-                System.out.println("  SentenciaMetodo" + "   \t\t" +  "\t\t     ");
     jj_consume_token(Caracteres);
     jj_consume_token(ParenIzq);
     SentenciaDeclaracionParametro();
@@ -321,7 +324,6 @@ class comp implements compConstants {
   }
 
   static final public void saEstructuraMetodo() throws ParseException {
-                System.out.println("  saSentenciaMetodo" + "   \t\t" +  "\t\t     ");
     jj_consume_token(ParenIzq);
     SentenciaDeclaracionParametro();
     jj_consume_token(ParenDer);
@@ -425,7 +427,6 @@ class comp implements compConstants {
   }
 
   static final public void BloqueCodigo() throws ParseException {
-        System.out.println("Contiene un bloque de code");
     label_9:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -527,7 +528,6 @@ class comp implements compConstants {
   }
 
   static final public void eLlamaMetodo() throws ParseException {
-                System.out.println("  eLlamaMetodo" + "   \t\t" +  "\t\t     ");
     jj_consume_token(ParenIzq);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case Caracteres:
@@ -554,7 +554,6 @@ class comp implements compConstants {
   }
 
   static final public void saLlamadaMetodo() throws ParseException {
-                System.out.println("  saLlamadaMetodo" + "   \t\t" +  "\t\t     ");
     jj_consume_token(OrLogico);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case Caracteres:
@@ -925,7 +924,6 @@ void SentenciaComentario():{}{
 
 /* saDeclaracionVariables   [Estructura inv02] */
   static final public void saDeclaracionVariables() throws ParseException {
-                System.out.println("  saDeclaracionVariables" + "   \t\t" +  "\t\t     ");
     jj_consume_token(CorIzq);
     TipoDato();
     label_17:
