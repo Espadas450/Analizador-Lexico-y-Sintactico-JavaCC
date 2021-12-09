@@ -41,6 +41,16 @@ while ( num1 == num2 ){
 
 }
 
+for ( int i = 0 ; i == 3 ; i --){
+
+    for ( int i = 0 ; i == 3 ; i --){
+        
+        for ( int i = 0 ; i == 3 ; i --){
+
+        }
+    }
+}
+
 if(num1 == num2){
     INSERT INTO TablaEjemplo VALUES (1, 'Alvaro es el mejor companero del mundo');
 }
@@ -50,15 +60,6 @@ float VariableFloat1, Num2, Num3;
 double VariablePrueba4;
 
 Sumar(Numero1, Numero2, Resultado1);
-
-private static void Sumar(int Num1, int Num2, int Resultado){
-
-}
-
-public static int Sumar(int Num1, int Num2, int Resultado){
-
-    return Sajid1;
-}
 
 try
 {
@@ -102,13 +103,14 @@ GO
 
 CREATE VIEW dbo.VistaEjemplo AS SELECT * FROM TablaEjemplo
 
+>
+
 private static (int Var1, char Var2, float Var3) NombreProcedimiento
 |
 
 private static int (int Var1, char Var2, float Var3) NombreProcedimiento
 | VarRetorno
 
->
 
 class private
 ([string, int] (VarAtrib1, VarAtrib2) )

@@ -950,7 +950,7 @@ TOKEN:{
 
 /* OpAritmeticoUnitario*/
 TOKEN:{
-	<	Incremento: (["+"]) (["+"])	>
+	<	#Incremento: (["+"]) (["+"])	>
 	|
 	<	#Decremento: (["-"]) (["-"])	>
 }
@@ -1559,7 +1559,6 @@ void BloqueCodigo():{
 	(SentenciaIf())|
 	(DeclaracionVariable())|
 	(SentenciaLlamadaMetodo())|
-	(SentenciaMetodo())|
 	(SentenciaTryCatch())|
 	(SentenciaDeclaracion())|
 	(sqlSentenciaMDA())|
@@ -1869,6 +1868,7 @@ void saProgram():{
 	(
 		<Include> <Caracteres> <PuntoYComa>
 	)*
+	(SentenciaMetodo())*
 	(saDeclaracionClase())*
 }
 
