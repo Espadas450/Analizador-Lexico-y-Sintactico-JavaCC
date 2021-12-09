@@ -335,7 +335,7 @@ TOKEN:{
 
 /* SelectivaMultiple*/
 TOKEN:{
-	<	#SelectivaMultiple: (["s"]) (["w"]) (["i"]) (["t"]) (["c"]) (["h"])	>
+	<	SelectivaMultiple: (["s"]) (["w"]) (["i"]) (["t"]) (["c"]) (["h"])	>
 }
 
 /* Default*/
@@ -344,7 +344,7 @@ TOKEN:{
 	|
 	<	#Finally: (["f"]) (["i"]) (["n"]) (["a"]) (["l"]) (["l"]) (["y"])	>
 	|
-	<	#Default: (["d"]|["D"]) (["e"]|["E"]) (["f"]|["F"]) (["a"]|["A"]) (["u"]|["U"]) (["l"]|["L"]) (["t"]|["T"])	>
+	<	Default: (["d"]|["D"]) (["e"]|["E"]) (["f"]|["F"]) (["a"]|["A"]) (["u"]|["U"]) (["l"]|["L"]) (["t"]|["T"])	>
 }
 
 TOKEN:{
@@ -363,7 +363,7 @@ TOKEN:{
 
 /* Case*/
 TOKEN:{
-	<	#Case: (["c"]|["C"]) (["a"]|["A"]) (["s"]|["S"]) (["e"]|["E"])	>
+	<	Case: (["c"]|["C"]) (["a"]|["A"]) (["s"]|["S"]) (["e"]|["E"])	>
 }
 
 /* Método*/
@@ -511,7 +511,7 @@ TOKEN:{
 }
 
 TOKEN:{
-	<	#FuncionAgregar:
+	<	FuncionAgregar:
 	<AVG>
 	|
 	<Count>
@@ -541,7 +541,7 @@ TOKEN:{
 }
 
 TOKEN:{
-	<	#FuncionDate:
+	<	FuncionDate:
 	<DateDiff>
 	|
 	<DateAdd>
@@ -595,7 +595,7 @@ TOKEN:{
 }
 
 TOKEN:{
-	<	#FuncionMath:
+	<	FuncionMath:
 	<Abs>
 	|
 	<Acos>
@@ -720,7 +720,7 @@ TOKEN:{
 
 /* Romper*/
 TOKEN:{
-	<	#Romper: (["b"]) (["r"]) (["e"]) (["a"]) (["k"])	>
+	<	Romper: (["b"]) (["r"]) (["e"]) (["a"]) (["k"])	>
 }
 
 /* Base*/
@@ -1027,9 +1027,9 @@ TOKEN:{
 
 /* Consulta*/
 TOKEN:{
-	<	#Select: (["s"]|["S"]) (["e"]|["E"]) (["l"]|["L"]) (["e"]|["E"]) (["c"]|["C"]) (["t"]|["T"])	>
+	<	Select: (["s"]|["S"]) (["e"]|["E"]) (["l"]|["L"]) (["e"]|["E"]) (["c"]|["C"]) (["t"]|["T"])	>
 	|
-	<	#From: (["f"]|["F"]) (["r"]|["R"]) (["o"]|["O"]) (["m"]|["M"])	>
+	<	From: (["f"]|["F"]) (["r"]|["R"]) (["o"]|["O"]) (["m"]|["M"])	>
 	|
 	<	#Where: (["w"]|["W"]) (["h"]|["H"]) (["e"]|["E"]) (["r"]|["R"]) (["e"]|["E"])	>
 }
@@ -1128,7 +1128,9 @@ TOKEN:{
 	|
 	<	#View: (["v"]|["V"]) (["i"]|["I"]) (["e"]|["E"]) (["w"]|["W"])	>
 	|
-	<	#Function: (["f"]|["F"]) (["u"]|["U"] (["n"]|["N"]) (["c"]|["C"]) (["t"]|["T"]) (["i"]|["I"]) (["o"]|["O"]) (["n"]|["N"]) )	>
+	<	#Function: (["f"]|["F"]) (["u"]|["U"]) (["n"]|["N"]) (["c"]|["C"]) (["t"]|["T"]) (["i"]|["I"]) (["o"]|["O"]) (["n"]|["N"])	>
+	|
+	<	#Trigger: (["t"]|["T"]) (["r"]|["R"]) (["i"]|["I"]) (["g"]|["G"]) (["g"]|["G"]) (["e"]|["E"]) (["r"]|["R"])	>
 }
 
 TOKEN:{
@@ -1142,6 +1144,8 @@ TOKEN:{
 	<User>
 	|
 	<View>
+	|
+	<Trigger>
 	|
 	<Function>	>
 }
@@ -1400,9 +1404,9 @@ TOKEN:{
 	|
 	<	#Letras: (<Letra>)+	>
 	|
-	<	NumeroDecimal: (<Numero>)+ ( <AccesoMiembro> (<Numero>)+)?	>
+	<	NumeroDecimal: <Numeros> <AccesoMiembro> <Numeros>	>
 	|
-	<	Numero: ["0"-"9"]	>
+	<	#Numero: ["0"-"9"]	>
 	|
 	<	Numeros: (<Numero>)+	>
 	| 
@@ -1465,6 +1469,10 @@ void Program() :
 		|
 	saDestructorClase(){}
 		|
+	SentenciaSwitch(){}
+		|
+	sqlSentenciaMDA(){}
+		|
 	saProgram(){
 		System.out.println("  saProgram" + "   \t\t" +  "\t\t     ");
 		}
@@ -1476,7 +1484,7 @@ void Program() :
 /* || ============================== || [ INICIA COMPLEMENTOS ] || ============================== || */
 
 void Condicion():{}{
-	((<Numero>)+|<Caracteres>) (<Comparador>) ((<Numero>)+|<Caracteres>)
+	(<Numeros>|<Caracteres>) (<Comparador>) (<Numeros>|<Caracteres>)
 }
 
 void MasVariables():{}{
@@ -1505,7 +1513,7 @@ void Texto():{}{
 }
 
 void saValores():{}{
-	(Texto() | <Numero> | <NumeroDecimal>)
+	(Texto() | <Numeros> | <NumeroDecimal>)
 }
 
 void EstructuraMetodo():{
@@ -1525,7 +1533,7 @@ void SentenciaDeclaracionParametro():{}{
 }
 
 void ParametroSQL():{}{
-	(<Sustitucion> <Caracteres> TipoDato())|(<Numero>)+
+	(<Sustitucion> <Caracteres> TipoDato())|<Numeros>
 }
 
 void DeclaracionParametroSQL():{}{
@@ -1547,12 +1555,14 @@ void BloqueCodigo():{
 	(SentenciaDoWhile())|
 	(SentenciaWhile())|
 	(SentenciaFor())|
+	(SentenciaSwitch())|
 	(SentenciaIf())|
 	(DeclaracionVariable())|
 	(SentenciaLlamadaMetodo())|
 	(SentenciaMetodo())|
 	(SentenciaTryCatch())|
 	(SentenciaDeclaracion())|
+	(sqlSentenciaMDA())|
 	(SentenciaInsertarEnTabla())|
 	(saDeclaracionVariables())
 	)*
@@ -1587,6 +1597,18 @@ void saInicioMetodoRes():{}{
 	<FuncionString> <AccesoMiembro>
 }
 
+void BloqueCase():{}{
+	<Case> ((<Numeros>)|(Texto())) <Herencia>
+		BloqueCodigo()
+	<Romper><PuntoYComa>
+}
+
+void BloqueDefaul():{}{
+	<Default> <Herencia>
+		BloqueCodigo()
+	<Romper><PuntoYComa>
+}
+
 /* || ============================== || [ FINALIZA COMPLEMENTOS ] || ============================== || */
 
 /* SentenciaForeach [Estructura #1] */
@@ -1607,7 +1629,7 @@ void SentenciaWhile():{}{
 
 /* SentenciaFor [Estructura #4] */
 void SentenciaFor():{}{
-	<For> <ParenIzq> <TipoDatoNumerico> <Caracteres> <Asignar> (<Numero>)+ <PuntoYComa> <Caracteres> <Comparador> (<Numero>)+ <PuntoYComa> <Caracteres> <OpAritmeticoUnitario> <ParenDer> 
+	<For> <ParenIzq> <TipoDatoNumerico> <Caracteres> <Asignar> <Numeros> <PuntoYComa> <Caracteres> <Comparador> <Numeros> <PuntoYComa> <Caracteres> <OpAritmeticoUnitario> <ParenDer> 
 		<LlaveIzq> 
 			BloqueCodigo()
 		<LlaveDer>
@@ -1704,7 +1726,23 @@ void SentenciaDeclaracion ():{}{
 			)
 			|
 			(
-				<As> ( <Go> | <Consulta> <Multiplicacion> <Consulta> <Caracteres> )
+			<As> 
+				(	
+					( 
+						<Select> <Multiplicacion> <From> <Caracteres> 
+					)
+					|
+					(
+						<SQLBegin> 
+							BloqueCodigo()
+						<SQLEnd>
+					)
+					|
+					(
+						BloqueCodigo()
+					)
+				)
+			(<Go>)?
 			)
 			|
 			(	
@@ -1718,6 +1756,60 @@ void SentenciaDeclaracion ():{}{
 void SentenciaInsertarEnTabla():{}{
 	<Insertar> <DentroDe> <Caracteres> <Valores> <ParenIzq> ( saValores() ) (<Coma> saValores() )* <ParenDer> ( <PuntoYComa> )?
 }
+
+/* SentenciaInsertarEnTabla   [Estructura #19] */
+void SentenciaSwitch():{}{
+	<SelectivaMultiple><ParenIzq> <Caracteres> <ParenDer>
+	<LlaveIzq>
+		(BloqueCase())*
+		(BloqueDefaul())?
+	<LlaveDer>
+}
+
+/* SentenciasMath   [Estructura #19] */
+void sqlSentenciaMDA():{}{
+	<Select> 
+	(
+		(
+			<FuncionAgregar>
+		)
+		|
+		(
+			<FuncionDate>
+		)
+		|
+		(
+			<FuncionMath>
+		)
+	)
+	(
+		<ParenIzq> 
+		(
+			(
+				<Caracteres>
+			)
+			|
+			(
+				Texto()
+			)
+			|
+			(
+				(
+					(<Numeros>)
+					|
+					(<NumeroDecimal>)
+				)
+			)
+			|
+			(
+				<FuncionDate>
+				<ParenIzq>
+				<ParenDer>
+			)
+		)?
+	<ParenDer>) (<PuntoYComa>)?
+}
+
 
 /* || ========== || [ INICIAN INVENTADAS  ] || ========== || */
 
@@ -1734,7 +1826,7 @@ void saDeclaracionVariables():{
 }{
 	( <CorIzq> TipoDato() ( <Coma> TipoDato() )* <CorDer> 
 	( <AccesoMiembro> <ParenIzq> saValores() (<Coma> saValores())* <ParenDer> )? 
-	<ParenIzq> <Caracteres> ( <Coma> <Caracteres> )* <ParenDer> ) ( <Virgulilla> <CorIzq> ((<Numero>)+ | <NumeroDecimal> ) <CorDer> )?
+	<ParenIzq> <Caracteres> ( <Coma> <Caracteres> )* <ParenDer> ) ( <Virgulilla> <CorIzq> (<Numeros> | <NumeroDecimal> ) <CorDer> )?
 
 }
 
