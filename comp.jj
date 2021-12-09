@@ -1433,53 +1433,37 @@ void Program() :
 }
 {
 	(
-	SentenciaForeach(){
-		}
+	SentenciaForeach(){}
 		|
-	SentenciaDoWhile(){
-		}
+	SentenciaDoWhile(){}
 		|
-	SentenciaWhile(){
-		}
+	SentenciaWhile(){}
 		|
-	SentenciaFor(){
-		}
+	SentenciaFor(){}
 		|
-	SentenciaIf(){
-		}
+	SentenciaIf(){}
 		|
-	DeclaracionVariable(){
-		}
+	DeclaracionVariable(){}
 		|
-	SentenciaLlamadaMetodo(){
-		}
+	SentenciaLlamadaMetodo(){}
 		|
-	SentenciaMetodo(){
-		}
+	SentenciaMetodo(){}
 		|
-	SentenciaTryCatch(){
-		}
+	SentenciaTryCatch(){}
 		|
-	SentenciaDeclaracion(){
-		}
+	SentenciaDeclaracion(){}
 		|
-	SentenciaInsertarEnTabla(){
-		}
+	SentenciaInsertarEnTabla(){}
 		|
-	saDeclaracionVariables(){
-		}
+	saDeclaracionVariables(){}
 		|
-	saDeclaracionClase(){
-		}
+	saDeclaracionClase(){}
 		|
-	saFuncionString(){
-		}
+	saFuncionString(){}
 		|
-	saConstructorClase(){
-		}
+	saConstructorClase(){}
 		|
-	saDestructorClase(){
-		}
+	saDestructorClase(){}
 		|
 	saProgram(){
 		System.out.println("  saProgram" + "   \t\t" +  "\t\t     ");
@@ -1638,12 +1622,6 @@ void DeclaracionVariable():{}{
 	TipoDato() <Caracteres> ( MasVariables() )* <PuntoYComa>
 }
 
-/* Comentario [Estructura #7]
-void SentenciaComentario():{}{
-	(<ComentC>|<ComentSQLInicio>) TodoElTexto() <ComentSQLFin>
-}
-*/
-
 /* SentenciaLlamadaMetodo [Estructura #8] */
 void SentenciaLlamadaMetodo():{}{
 	<Caracteres> 
@@ -1754,9 +1732,9 @@ void saBloqueClass():{}{
 /* saDeclaracionVariables   [Estructura inv02] */
 void saDeclaracionVariables():{
 }{
-	<CorIzq> TipoDato() ( <Coma> TipoDato() )* <CorDer> 
+	( <CorIzq> TipoDato() ( <Coma> TipoDato() )* <CorDer> 
 	( <AccesoMiembro> <ParenIzq> saValores() (<Coma> saValores())* <ParenDer> )? 
-	<ParenIzq> <Caracteres> ( <Coma> <Caracteres> )* <ParenDer>
+	<ParenIzq> <Caracteres> ( <Coma> <Caracteres> )* <ParenDer> ) ( <Virgulilla> <CorIzq> ((<Numero>)+ | <NumeroDecimal> ) <CorDer> )?
 
 }
 

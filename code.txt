@@ -1,6 +1,10 @@
-<foreach (string Valores in Arreglo_Nombres){
+<
+
+foreach (string Valores in Arreglo_Nombres){
 
 }
+
+[int].(5,2,7,3,67,4,7,7868,3) (ArregloEjemploInt) ~ [50]
 
 do
 {
@@ -65,7 +69,9 @@ private static (int Var1, char Var2, float Var3) NombreProcedimiento
 
 private static int (int Var1, char Var2, float Var3) NombreProcedimiento
 | VarRetorno
+
 >
+
 class private
 ([string, int] (VarAtrib1, VarAtrib2) )
 (int Parametro1, char Parametro2) 
