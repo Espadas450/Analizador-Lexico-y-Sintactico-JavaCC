@@ -12,17 +12,27 @@ SELECT Square (Tabla1);
 SELECT Log (Tabla1);
 SELECT Sin (Tabla1);
 
-SELECT GETDATE (DAY());
+NombreDelMetodo | Var1, Var2
+
+ToUpper.ToString.VarInt123
+
+Reverse.VarStringABC ~ VariableEjemplo
 
 switch(Var1)
 {
     Case 'HolaSajid':
-    foreach (string Valores in Arreglo_Nombres){}
+        foreach (string Valores in Arreglo_Nombres){}
     break;
+
     Case 2:
-    foreach (string Valores in Arreglo_Nombres){}
+        foreach (string Valores in Arreglo_Nombres){}
     break;
+
     default:
+        do
+        {
+
+        } while (Num1 == Num2);
     break;
 }
 
@@ -46,7 +56,7 @@ for ( int i = 0 ; i == 3 ; i --){
     for ( int i = 0 ; i == 3 ; i --){
         
         for ( int i = 0 ; i == 3 ; i --){
-
+            ToUpper.ToString.VarInt123
         }
     }
 }
@@ -54,12 +64,6 @@ for ( int i = 0 ; i == 3 ; i --){
 if(num1 == num2){
     INSERT INTO TablaEjemplo VALUES (1, 'Alvaro es el mejor companero del mundo');
 }
-
-float VariableFloat1, Num2, Num3;
-
-double VariablePrueba4;
-
-Sumar(Numero1, Numero2, Resultado1);
 
 try
 {
@@ -104,6 +108,9 @@ GO
 CREATE VIEW dbo.VistaEjemplo AS SELECT * FROM TablaEjemplo
 
 >
+
+Include (Libreria1);
+Include (Libreria2);
 
 private static (int Var1, char Var2, float Var3) NombreProcedimiento
 |

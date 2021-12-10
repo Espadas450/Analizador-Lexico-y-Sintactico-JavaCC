@@ -1447,11 +1447,9 @@ void Program() :
 		|
 	SentenciaIf(){}
 		|
-	DeclaracionVariable(){}
-		|
 	SentenciaLlamadaMetodo(){}
 		|
-	SentenciaMetodo(){}
+	saSentenciaMetodo(){}
 		|
 	SentenciaTryCatch(){}
 		|
@@ -1463,7 +1461,7 @@ void Program() :
 		|
 	saDeclaracionClase(){}
 		|
-	saFuncionString(){}
+	saMetodosReservados(){}
 		|
 	saConstructorClase(){}
 		|
@@ -1471,7 +1469,7 @@ void Program() :
 		|
 	SentenciaSwitch(){}
 		|
-	sqlSentenciaMDA(){}
+	SentenciaMathAgregar(){}
 		|
 	saProgram(){
 		System.out.println("  saProgram" + "   \t\t" +  "\t\t     ");
@@ -1494,7 +1492,6 @@ void MasVariables():{}{
 void Parametro():{}{
 	TipoDato() <Caracteres>
 }
-
 
 void InicioMetodo():{}{
 	(<TipoAcceso>)? (<Estatico>)? 
@@ -1557,19 +1554,19 @@ void BloqueCodigo():{
 	(SentenciaFor())|
 	(SentenciaSwitch())|
 	(SentenciaIf())|
-	(DeclaracionVariable())|
 	(SentenciaLlamadaMetodo())|
 	(SentenciaTryCatch())|
 	(SentenciaDeclaracion())|
-	(sqlSentenciaMDA())|
+	(SentenciaMathAgregar())|
 	(SentenciaInsertarEnTabla())|
-	(saDeclaracionVariables())
+	(saDeclaracionVariables())|
+	(saMetodosReservados())
 	)*
 }
 
 void saBloqueClase():{}{
 	(
-		(SentenciaMetodo())*
+		(saSentenciaMetodo())*
 	)
 }
 
@@ -1579,17 +1576,8 @@ void saAtributosClase():{}{
 	<ParenDer>
 }
 
-void eLlamaMetodo():
-	{
-	}{
-		<ParenIzq> ( <Caracteres> ( MasVariables() )* )? <ParenDer> <PuntoYComa>
-}
-
-void saLlamadaMetodo():
-	{
-	}{
-	<OrLogico>
-	(<Caracteres> (MasVariables())*)?
+void saLlamadaMetodo():{}{
+	<OrLogico> (<Caracteres> (MasVariables())*)?
 }
 
 void saInicioMetodoRes():{}{
@@ -1638,59 +1626,27 @@ void SentenciaIf():{}{
 	<Pregunta> <ParenIzq> Condicion() <ParenDer> <LlaveIzq> BloqueCodigo() <LlaveDer>
 }
 
-/* DeclaracionVariable [Estructura #6] */
-void DeclaracionVariable():{}{
-	TipoDato() <Caracteres> ( MasVariables() )* <PuntoYComa>
-}
-
-/* SentenciaLlamadaMetodo [Estructura #8] */
+/* SentenciaLlamadaMetodo [Estructura inventada #1] */
 void SentenciaLlamadaMetodo():{}{
-	<Caracteres> 
-	(	(
-			eLlamaMetodo()
-		)
-		|
-		(
-			saLlamadaMetodo()
-		)
-	)
+	<Caracteres> saLlamadaMetodo()
 }
 
-/* SentenciaMetodoP [Estructura #09] */
-/* SentenciaMetodoF [Estructura #10] */
-/* saMetodoProcedimientoP   [Estructura inv00] */
-/* saMetodoProcedimientoF   [Estructura inv01] */
-void SentenciaMetodo():{}{
+/* saMetodoProcedimiento   [Estructura inventada #2] */
+/* saMetodoFuncion   [Estructura inventada #3] */
+void saSentenciaMetodo():{}{
 	InicioMetodo() 
 	( 	
 		(
-			(
-				(
-					<Metodo> EstructuraMetodo()
-				)
-				|
-				(
-					saEstructuraMetodo() 
-				)
-			) 
+			saEstructuraMetodo()  
 			| 
 			(
-				TipoDato()
-				(
-					(
-						EstructuraMetodo()
-					)
-				|
-					(
-						saEstructuraMetodo() <Caracteres>
-					)
-				)
+				TipoDato() saEstructuraMetodo() <Caracteres>
 			)
 		)
 	)
 }
 
-/* SentenciaTryCatch  [Estructura #11] */
+/* SentenciaTryCatch  [Estructura #6] */
 void SentenciaTryCatch():{}{
 	<Intenta> 
 		<LlaveIzq> BloqueCodigo() 
@@ -1702,14 +1658,18 @@ void SentenciaTryCatch():{}{
 }
 
 
-/* SQLCreateTable 		[Estructura #12] */
-/* SQLCreateDataBase 	[Estructura #13] */
-/* SQLUse 				[Estructura #14] */
-/* SQLInsertInto 		[Estructura #15] */
-/* SQLDropTable 		[Estructura #16] */
-/* SQLCreateFunction	[Estructura #17] */
-/* SQLCreateView		[Estructura #18] */
-
+/* SQLCreateTable 		[Estructura #7] */
+/* SQLCreateDataBase 	[Estructura #8] */
+/* SQLUse 				[Estructura #9] */
+/* SQLInsertInto 		[Estructura #10] */
+/* SQLDropTable 		[Estructura #11] */
+/* SQLCreateFunction	[Estructura #12] */
+/* SQLCreateView		[Estructura #13] */
+/* SQLAlterTable		[Estructura #14] */
+/* SQLSet				[Estructura #15] */
+/* SQLCreateProcedure	[Estructura #16] */
+/* SQLCreateUser		[Estructura #17] */
+/* SQLCreateTrigger		[Estructura #18] */
 void SentenciaDeclaracion ():{}{
 		InicioDeclaracion()
 		( 
@@ -1756,7 +1716,7 @@ void SentenciaInsertarEnTabla():{}{
 	<Insertar> <DentroDe> <Caracteres> <Valores> <ParenIzq> ( saValores() ) (<Coma> saValores() )* <ParenDer> ( <PuntoYComa> )?
 }
 
-/* SentenciaInsertarEnTabla   [Estructura #19] */
+/* SentenciaSwitch   [Estructura #20] */
 void SentenciaSwitch():{}{
 	<SelectivaMultiple><ParenIzq> <Caracteres> <ParenDer>
 	<LlaveIzq>
@@ -1765,16 +1725,13 @@ void SentenciaSwitch():{}{
 	<LlaveDer>
 }
 
-/* SentenciasMath   [Estructura #19] */
-void sqlSentenciaMDA():{}{
+/* SentenciasMath   	[Estructura #21] */
+/* SentenciasAgregar	[Estructura #22] */
+void SentenciaMathAgregar():{}{
 	<Select> 
 	(
 		(
 			<FuncionAgregar>
-		)
-		|
-		(
-			<FuncionDate>
 		)
 		|
 		(
@@ -1799,12 +1756,6 @@ void sqlSentenciaMDA():{}{
 					(<NumeroDecimal>)
 				)
 			)
-			|
-			(
-				<FuncionDate>
-				<ParenIzq>
-				<ParenDer>
-			)
 		)?
 	<ParenDer>) (<PuntoYComa>)?
 }
@@ -1813,14 +1764,14 @@ void sqlSentenciaMDA():{}{
 /* || ========== || [ INICIAN INVENTADAS  ] || ========== || */
 
 
-/* saBloqueClass    [Estructura inv03] */
+/* saBloqueClass    [Estructura inventada #4] */
 void saBloqueClass():{}{
 	(saConstructorClase())?
 		(saBloqueClase())
 	(saDestructorClase())?
 }
 
-/* saDeclaracionVariables   [Estructura inv02] */
+/* saDeclaracionVariables   [Estructura inventada #5] */
 void saDeclaracionVariables():{
 }{
 	( <CorIzq> TipoDato() ( <Coma> TipoDato() )* <CorDer> 
@@ -1830,35 +1781,34 @@ void saDeclaracionVariables():{
 }
 
 
-/* saFuncionString    [Estructura inv03] */
-void saFuncionString():{
+/* saMetodosReservados    [Estructura inventada #6] */
+void saMetodosReservados():{
 }{
 	saInicioMetodoRes() (saInicioMetodoRes())* <Caracteres> ( <Virgulilla> <Caracteres> )?
 }
 
-/* saConstructorClase    [Estructura inv03] */
+/* saConstructorClase    [Estructura inventada #7] */
 void saConstructorClase():{}{
 	<Virgulilla> <ParenIzq> <ParenDer> <Caracteres> BloqueCodigo() <OrLogico>
 }
 
-/* saDestructorClase    [Estructura inv03] */
+/* saDestructorClase    [Estructura inventada #8] */
 void saDestructorClase():{}{
 	<OpLogicoBoolUnitario> (saConstructorClase())
 }
-/* saDeclaracionClase   [Estructura inv03] */
+
+/* saDeclaracionClase   [Estructura inventada #9] */
 void saDeclaracionClase():{}{
-		<Clase> 
-		(<TipoAcceso>)? 
-	saAtributosClase()
+	<Clase> (<TipoAcceso>)? 
+		saAtributosClase()
 	<ParenIzq> 
 		SentenciaDeclaracionParametro() 
 	<ParenDer>
 		saBloqueClass()
-	<OrLogico>
-	<Caracteres>
+	<OrLogico> <Caracteres>
 }
 
-/* saDestructorClase    [Estructura inv03] */
+/* saProgram   [Estructura inventada #10] */
 void saProgram():{
 	System.out.println("Programa creado satisfactoriamente");
 }{
@@ -1866,9 +1816,9 @@ void saProgram():{
 		BloqueCodigo()
 	<MayorQue>
 	(
-		<Include> <Caracteres> <PuntoYComa>
+		<Include> <ParenIzq> <Caracteres> <ParenDer> <PuntoYComa>
 	)*
-	(SentenciaMetodo())*
+	(saSentenciaMetodo())*
 	(saDeclaracionClase())*
 }
 
